@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run build:storefront && npm run build:admin",
+    "build:storefront": "tsc -b && vite build",
+    "build:admin": "cd anvi-admin && npm install && npm run build",
     "lint": "oxlint",
     "preview": "vite preview"
   },

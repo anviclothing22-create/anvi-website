@@ -6,7 +6,10 @@ export const APP_CONFIG = {
   location: 'Coimbatore, Tamil Nadu',
   // Production storefront URL — set VITE_APP_URL in hosting env. Falls back to local dev.
   liveStoreUrl:
-    (import.meta.env.VITE_APP_URL as string | undefined)?.replace(/\/$/, '') || 'http://localhost:5173',
+    (import.meta.env.VITE_APP_URL as string | undefined)?.replace(/\/$/, '') ||
+    (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+      ? window.location.origin
+      : 'http://localhost:5173'),
   supportEmail: 'anviclothing22@gmail.com',
   supportPhone: '+91 99948 37459',
 };
