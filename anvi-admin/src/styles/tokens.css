@@ -1,0 +1,27 @@
+/**
+ * ANVI Command - Design System Tokens
+ */
+:root {
+  --color-anvi-maroon: #5B1727;
+  --color-anvi-maroon-hover: #48111E;
+  --color-anvi-maroon-light: #7A2237;
+  --color-anvi-maroon-soft: #FBF2F4;
+
+  --color-anvi-gold: #9E7D3B;
+  --color-anvi-gold-light: #D4B27C;
+  --color-anvi-gold-soft: #FDF9F0;
+
+  --color-anvi-charcoal: #161314;
+  --color-anvi-charcoal-surface: #221D1E;
+  --color-anvi-charcoal-text: #2F2B2B;
+  --color-anvi-charcoal-muted: #706B6B;
+
+  --color-anvi-linen: #F8F6F1;
+  --color-anvi-linen-card: #FFFFFF;
+  --color-anvi-linen-border: #E8E2D9;
+  --color-anvi-linen-subtle: #F1ECE4;
+
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 72px;
+  --header-height: 68px;
+}

@@ -1,0 +1,581 @@
+/* ==========================================================================
+   ANVI CART DRAWER COMPONENT STYLES
+   Desktop: Refined right side drawer (460px)
+   Mobile: Full-height dedicated drawer experience (100% viewport)
+   ========================================================================== */
+
+/* 1. Backdrop Overlay */
+.anvi-cart-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(22, 16, 18, 0.65);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 1050;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.anvi-cart-backdrop--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 2. Drawer Panel */
+.anvi-cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
+  height: 100dvh;
+  background-color: var(--color-ivory, #FAF7F2);
+  color: var(--color-charcoal, #2F2B2B);
+  box-shadow: -10px 0 35px rgba(22, 16, 18, 0.22);
+  z-index: 1060;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.anvi-cart-drawer--open {
+  transform: translateX(0);
+}
+
+/* 3. Header Section */
+.anvi-cart-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  background-color: #FFFFFF;
+}
+
+.anvi-cart-header-title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.anvi-cart-header-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-maroon, #5B1727);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.anvi-cart-header-count {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: rgba(47, 43, 43, 0.6);
+  font-weight: 400;
+}
+
+.anvi-cart-close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-charcoal, #2F2B2B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  border-radius: 50%;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.anvi-cart-close-btn:hover {
+  background-color: rgba(47, 43, 43, 0.06);
+  color: var(--color-maroon, #5B1727);
+}
+
+/* 4. Added Success Banner */
+.anvi-cart-success-banner {
+  background-color: #F4ECE1;
+  border-bottom: 1px solid #E4D5C2;
+  padding: 0.625rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: anviFadeIn 250ms ease;
+}
+
+.anvi-cart-success-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-cart-success-dismiss {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.6);
+  text-decoration: underline;
+  padding: 0;
+}
+
+.anvi-cart-success-dismiss:hover {
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+/* 5. Free Shipping Indicator */
+.anvi-cart-shipping-bar {
+  padding: 0.875rem 1.5rem;
+  background-color: #FAF5EE;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.06);
+}
+
+.anvi-cart-shipping-text {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.anvi-cart-shipping-text strong {
+  color: var(--color-maroon, #5B1727);
+  font-weight: 600;
+}
+
+.anvi-cart-progress-track {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(47, 43, 43, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.anvi-cart-progress-fill {
+  height: 100%;
+  background-color: var(--color-maroon, #5B1727);
+  transition: width 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 2px;
+}
+
+.anvi-cart-progress-fill--complete {
+  background-color: #2F6F4E;
+}
+
+/* 6. Scrollable Items Area */
+.anvi-cart-items-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.25rem 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.anvi-cart-items-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.anvi-cart-items-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.anvi-cart-items-container::-webkit-scrollbar-thumb {
+  background-color: rgba(47, 43, 43, 0.15);
+  border-radius: 3px;
+}
+
+/* Empty State */
+.anvi-cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  height: 100%;
+}
+
+.anvi-cart-empty-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: rgba(91, 23, 39, 0.06);
+  color: var(--color-maroon, #5B1727);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.anvi-cart-empty-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-maroon, #5B1727);
+  margin: 0 0 0.5rem 0;
+}
+
+.anvi-cart-empty-text {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(47, 43, 43, 0.65);
+  max-width: 280px;
+  margin: 0 0 1.75rem 0;
+}
+
+.anvi-cart-empty-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.anvi-cart-empty-btn:hover {
+  background-color: var(--color-maroon-dark, #43101C);
+}
+
+/* Item Row */
+.anvi-cart-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  position: relative;
+  transition: background-color 200ms ease;
+}
+
+.anvi-cart-item--highlight {
+  animation: anviItemPulse 1.8s ease-out;
+}
+
+@keyframes anviItemPulse {
+  0% {
+    background-color: rgba(212, 178, 124, 0.25);
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+  100% {
+    background-color: transparent;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.anvi-cart-item-img-wrap {
+  width: 80px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: #F1E8DC;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 2px;
+  display: block;
+}
+
+.anvi-cart-item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 300ms ease;
+}
+
+.anvi-cart-item-img-wrap:hover .anvi-cart-item-img {
+  transform: scale(1.04);
+}
+
+.anvi-cart-item-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.anvi-cart-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.anvi-cart-item-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.anvi-cart-item-title {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 0.25rem 0;
+  transition: color 150ms ease;
+}
+
+.anvi-cart-item-title:hover {
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-cart-item-variant {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.6);
+  margin: 0 0 0.35rem 0;
+}
+
+.anvi-cart-item-price {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+  white-space: nowrap;
+}
+
+.anvi-cart-item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+}
+
+/* Stepper */
+.anvi-cart-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(47, 43, 43, 0.16);
+  border-radius: 2px;
+  background-color: #FFFFFF;
+}
+
+.anvi-cart-stepper-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-charcoal, #2F2B2B);
+  font-size: 0.9375rem;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.anvi-cart-stepper-btn:hover {
+  background-color: rgba(47, 43, 43, 0.05);
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-cart-stepper-value {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  min-width: 24px;
+  text-align: center;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+/* Remove button */
+.anvi-cart-remove-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.55);
+  text-decoration: underline;
+  padding: 0.25rem 0.5rem;
+  transition: color 150ms ease;
+}
+
+.anvi-cart-remove-btn:hover {
+  color: #B3261E;
+}
+
+/* 7. Footer / Checkout Area */
+.anvi-cart-footer {
+  padding: 1.25rem 1.5rem;
+  background-color: #FFFFFF;
+  border-top: 1px solid rgba(47, 43, 43, 0.08);
+  box-shadow: 0 -4px 15px rgba(22, 16, 18, 0.04);
+}
+
+.anvi-cart-subtotal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.35rem;
+}
+
+.anvi-cart-subtotal-label {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+.anvi-cart-subtotal-value {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-cart-tax-notice {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.6);
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+
+/* CTA Buttons */
+.anvi-cart-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.anvi-cart-checkout-btn {
+  width: 100%;
+  height: 48px;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+  border: 1px solid var(--color-maroon, #5B1727);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 200ms ease, transform 150ms ease;
+}
+
+.anvi-cart-checkout-btn:hover {
+  background-color: var(--color-maroon-dark, #43101C);
+  border-color: var(--color-maroon-dark, #43101C);
+}
+
+.anvi-cart-view-bag-btn {
+  width: 100%;
+  height: 44px;
+  background-color: transparent;
+  color: var(--color-maroon, #5B1727);
+  border: 1px solid rgba(91, 23, 39, 0.3);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 150ms ease, border-color 150ms ease;
+  text-decoration: none;
+}
+
+.anvi-cart-view-bag-btn:hover {
+  background-color: rgba(91, 23, 39, 0.04);
+  border-color: var(--color-maroon, #5B1727);
+}
+
+.anvi-cart-continue-link {
+  display: block;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.6);
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.35rem;
+  margin-top: 0.25rem;
+  transition: color 150ms ease;
+}
+
+.anvi-cart-continue-link:hover {
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+.anvi-cart-security-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  color: rgba(47, 43, 43, 0.5);
+  margin-top: 0.75rem;
+}
+
+/* 8. Mobile Responsiveness */
+@media (max-width: 640px) {
+  .anvi-cart-drawer {
+    max-width: 100%;
+    width: 100vw;
+  }
+
+  .anvi-cart-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .anvi-cart-shipping-bar {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .anvi-cart-items-container {
+    padding: 1rem 1.25rem;
+  }
+
+  .anvi-cart-footer {
+    padding: 1rem 1.25rem;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@keyframes anviFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

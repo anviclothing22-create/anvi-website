@@ -1,0 +1,468 @@
+/**
+ * ANVI CLOTHING — V2 HOMEPAGE HERO SECTION
+ * Ultra-Luxury Fashion Campaign Carousel
+ * Minimalist text, maximum editorial glamour, radiant photography.
+ */
+
+.anvi-hero {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 104px);
+  max-height: 860px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #141011;
+  color: var(--color-ivory);
+}
+
+/* Background Media & Radiant Scrim */
+.anvi-hero-media-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.anvi-hero-slide-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+  opacity: 0;
+  transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1), transform 9000ms ease-out;
+  transform: scale(1.04);
+}
+
+.anvi-hero-slide-image--active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Subtle Cinematic Scrim — Keeps photography vibrant while ensuring text clarity */
+.anvi-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgba(16, 12, 13, 0.85) 0%,
+    rgba(16, 12, 13, 0.6) 38%,
+    rgba(16, 12, 13, 0.15) 70%,
+    rgba(16, 12, 13, 0.35) 100%
+  );
+  pointer-events: none;
+}
+
+/* Main Content Container */
+.anvi-hero-content-container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: var(--space-48) var(--space-32);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.anvi-hero-text-block {
+  max-width: 580px;
+  animation: anviHeroFadeUp 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Haute Couture Eyebrow Badge */
+.anvi-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(18, 14, 15, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 178, 124, 0.35);
+  border-radius: 999px;
+  padding: 6px 16px;
+  margin-bottom: var(--space-16);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.anvi-hero-badge-sparkle {
+  color: #D4B27C;
+  font-size: 10px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.anvi-hero-badge-text {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #E6CA9C;
+}
+
+/* Editorial Headline */
+.anvi-hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(44px, 5.6vw, 76px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-12) 0;
+  color: #FAF7F2;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
+}
+
+.anvi-hero-word-tradition {
+  color: #E6CA9C;
+  font-style: italic;
+  font-weight: 400;
+  margin-right: 8px;
+  text-shadow: 0 2px 24px rgba(212, 178, 124, 0.25);
+}
+
+.anvi-hero-word-reimagined {
+  color: #FAF7F2;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Minimalist Editorial Tagline */
+.anvi-hero-tagline {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  color: rgba(250, 247, 242, 0.88);
+  margin: 0 0 var(--space-28) 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
+}
+
+/* Actions Group */
+.anvi-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  flex-wrap: wrap;
+}
+
+/* Primary Button: Champagne Gold Pill */
+.anvi-hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #DFBE89 0%, #C8A367 100%);
+  color: #171313;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 178, 124, 0.2);
+  transition: 
+    background 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 250ms ease,
+    box-shadow 300ms ease;
+}
+
+.anvi-hero-btn-primary:hover {
+  background: linear-gradient(135deg, #EBD09E 0%, #D4B27C 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 28px rgba(212, 178, 124, 0.35);
+}
+
+.anvi-hero-btn-arrow {
+  transition: transform 250ms ease;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.anvi-hero-btn-primary:hover .anvi-hero-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Secondary Button: Glass Pill */
+.anvi-hero-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(22, 18, 19, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #FAF7F2;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid rgba(250, 247, 242, 0.35);
+  transition: 
+    background-color 250ms ease,
+    border-color 250ms ease,
+    color 250ms ease,
+    transform 250ms ease;
+}
+
+.anvi-hero-btn-secondary:hover {
+  background: rgba(250, 247, 242, 0.15);
+  border-color: rgba(212, 178, 124, 0.8);
+  color: #E6CA9C;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   BOTTOM SLIDER NAVIGATION CONTROLS
+   ============================================================ */
+.anvi-hero-bottom-controls {
+  position: absolute;
+  bottom: var(--space-28);
+  left: 0;
+  width: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.anvi-hero-bottom-inner {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-32);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* Left: Slider progress dash indicators */
+.anvi-hero-indicators {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.anvi-hero-indicator-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 3px;
+  display: flex;
+  align-items: center;
+}
+
+.anvi-hero-indicator-bar {
+  display: inline-block;
+  height: 3px;
+  border-radius: 2px;
+  background-color: rgba(250, 247, 242, 0.35);
+  transition: 
+    width 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 400ms ease;
+}
+
+.anvi-hero-indicator-bar--active {
+  width: 34px;
+  background-color: #E6CA9C;
+  box-shadow: 0 0 10px rgba(212, 178, 124, 0.4);
+}
+
+.anvi-hero-indicator-bar--inactive {
+  width: 8px;
+}
+
+.anvi-hero-indicator-btn:hover .anvi-hero-indicator-bar--inactive {
+  background-color: rgba(250, 247, 242, 0.65);
+}
+
+/* Right: Slide Counter & Paginated Arrows */
+.anvi-hero-pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  pointer-events: auto;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: rgba(250, 247, 242, 0.85);
+}
+
+.anvi-hero-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.anvi-hero-counter-active {
+  color: #E6CA9C;
+  font-weight: 600;
+}
+
+.anvi-hero-nav-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  background: transparent;
+  color: var(--color-ivory);
+  border: 1px solid transparent;
+  border-radius: var(--radius-subtle);
+  cursor: pointer;
+  padding: 0;
+  transition: 
+    color 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease;
+}
+
+.anvi-hero-nav-arrow:hover {
+  color: #E6CA9C;
+}
+
+.anvi-hero-nav-arrow--boxed {
+  border-color: rgba(212, 178, 124, 0.5);
+  background: rgba(24, 19, 20, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.anvi-hero-nav-arrow--boxed:hover {
+  border-color: #E6CA9C;
+  background: rgba(212, 178, 124, 0.18);
+  box-shadow: 0 0 16px rgba(212, 178, 124, 0.25);
+}
+
+/* Entrance Animation */
+@keyframes anviHeroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE COMPOSITION FOR MOBILE (< 768px: 390px, 430px)
+   ============================================================ */
+@media (max-width: 768px) {
+  .anvi-hero {
+    min-height: calc(100svh - 96px);
+    max-height: 700px;
+    align-items: flex-end;
+    padding-bottom: 64px;
+  }
+
+  .anvi-hero-slide-image {
+    object-position: center 20%;
+  }
+
+  /* Scrim on mobile: Radiant top for model's portrait, gentle bottom gradient for actions */
+  .anvi-hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(16, 12, 13, 0.08) 0%,
+      rgba(16, 12, 13, 0.0) 30%,
+      rgba(16, 12, 13, 0.4) 60%,
+      rgba(16, 12, 13, 0.78) 82%,
+      rgba(16, 12, 13, 0.92) 100%
+    );
+  }
+
+  .anvi-hero-content-container {
+    padding: 0 var(--space-16) var(--space-12);
+  }
+
+  .anvi-hero-badge {
+    margin-bottom: 10px;
+    padding: 5px 13px;
+  }
+
+  .anvi-hero-badge-text {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+
+  .anvi-hero-headline {
+    font-size: clamp(32px, 9.5vw, 42px);
+    line-height: 1.05;
+    margin-bottom: 6px;
+  }
+
+  .anvi-hero-tagline {
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  /* Side-by-side compact sleek pill buttons */
+  .anvi-hero-actions {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .anvi-hero-btn-primary,
+  .anvi-hero-btn-secondary {
+    flex: 1;
+    min-height: 42px;
+    padding: 11px 8px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  .anvi-hero-btn-arrow {
+    display: none;
+  }
+
+  .anvi-hero-bottom-controls {
+    bottom: max(12px, env(safe-area-inset-bottom, 12px));
+  }
+
+  .anvi-hero-bottom-inner {
+    padding: 0 var(--space-16);
+  }
+}
+
+@media (max-width: 360px) {
+  .anvi-hero-btn-primary,
+  .anvi-hero-btn-secondary {
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    padding: 10px 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anvi-hero-text-block {
+    animation: none;
+    opacity: 1;
+  }
+  .anvi-hero-slide-image {
+    transition: none;
+    transform: none;
+  }
+}

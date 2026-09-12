@@ -1,0 +1,154 @@
+/**
+ * ANVI CLOTHING — V2 CANONICAL CATEGORY CARD
+ * Editorial Catalogue Navigation Card
+ * Minimalist typography, maximum garment visibility.
+ */
+
+.anvi-category-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background-color: #1a1617;
+  border-radius: var(--radius-subtle);
+  overflow: hidden;
+  height: 100%;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Featured variation (e.g. Sarees) */
+.anvi-category-card--featured {
+  grid-column: span 5;
+  min-height: 520px;
+}
+
+.anvi-category-card--standard {
+  min-height: 246px;
+}
+
+/* Image Wrapper */
+.anvi-category-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  overflow: hidden;
+}
+
+.anvi-category-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle, gentle gradient at the bottom — keeps 70%+ of the photography fully radiant */
+.anvi-category-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 50%,
+    rgba(18, 14, 15, 0.25) 75%,
+    rgba(18, 14, 15, 0.78) 100%
+  );
+  transition: background 300ms ease;
+  z-index: 2;
+}
+
+@media (hover: hover) {
+  .anvi-category-card:hover .anvi-category-img {
+    transform: scale(1.04);
+  }
+
+  .anvi-category-card:hover .anvi-category-overlay {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(18, 14, 15, 0.35) 70%,
+      rgba(18, 14, 15, 0.88) 100%
+    );
+  }
+}
+
+/* Content Plate at Bottom of Image */
+.anvi-category-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: var(--space-20);
+  color: var(--color-ivory);
+}
+
+.anvi-category-card--featured .anvi-category-content {
+  padding: var(--space-28);
+}
+
+.anvi-category-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+.anvi-category-name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: #FAF7F2;
+  margin: 0;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+  transition: color var(--transition-fast);
+}
+
+.anvi-category-card--featured .anvi-category-name {
+  font-size: 32px;
+}
+
+/* Elegant Micro Arrow */
+.anvi-category-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--color-ivory);
+  font-size: 14px;
+  transition: 
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.anvi-category-card:hover .anvi-category-name {
+  color: var(--color-champagne-gold);
+}
+
+.anvi-category-card:hover .anvi-category-arrow {
+  transform: translateX(4px);
+  background-color: var(--color-champagne-gold);
+  border-color: var(--color-champagne-gold);
+  color: #171313;
+}
+
+/* Accessibility focus visible */
+.anvi-category-card:focus-visible {
+  outline: 2px solid var(--color-champagne-gold);
+  outline-offset: 4px;
+}

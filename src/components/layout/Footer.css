@@ -1,0 +1,336 @@
+/**
+ * ANVI CLOTHING — V2 COMPLETE ECOMMERCE FOOTER
+ * Background: Deep Maroon #5B1727
+ * Groups: SHOP, COLLECTIONS, DISCOVER, ABOUT, HELP
+ * Legal Navigation & Mobile Expandable Accordions
+ * Elegant • High Contrast • Zero Overload
+ */
+
+.anvi-footer {
+  width: 100%;
+  background-color: var(--color-deep-maroon);
+  background: linear-gradient(
+    180deg,
+    #4E1321 0%,
+    #410E1B 60%,
+    #330A14 100%
+  );
+  color: var(--color-ivory);
+  border-top: 1px solid rgba(212, 178, 124, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.anvi-footer-container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: var(--space-80) var(--space-32) var(--space-48);
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   TOP BRAND IDENTITY BLOCK
+   ============================================================ */
+.anvi-footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-48);
+  margin-bottom: var(--space-48);
+  border-bottom: 1px solid rgba(212, 178, 124, 0.15);
+  flex-wrap: wrap;
+  gap: var(--space-24);
+}
+
+.anvi-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.anvi-footer-logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.anvi-footer-logo-link:hover {
+  opacity: 0.85;
+}
+
+.anvi-footer-logo-img {
+  height: 38px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
+  display: block;
+}
+
+.anvi-footer-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  color: rgba(250, 247, 242, 0.85);
+  letter-spacing: 0.02em;
+}
+
+.anvi-footer-origin {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-champagne-gold);
+}
+
+/* Social Link Icon Buttons */
+.anvi-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.anvi-footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 178, 124, 0.35);
+  background-color: rgba(250, 247, 242, 0.04);
+  color: var(--color-champagne-gold);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.anvi-footer-social-link:hover {
+  background-color: rgba(212, 178, 124, 0.18);
+  border-color: var(--color-champagne-gold);
+  color: var(--color-ivory);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.anvi-footer-social-link svg {
+  display: block;
+  transition: transform var(--transition-fast);
+}
+
+.anvi-footer-social-link:hover svg {
+  transform: scale(1.1);
+}
+
+/* ============================================================
+   NAVIGATION GROUPS GRID (DESKTOP: 5 COLUMNS)
+   ============================================================ */
+.anvi-footer-nav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 36px;
+  margin-bottom: var(--space-64);
+}
+
+.anvi-footer-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Desktop Group Title */
+.anvi-footer-title {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-champagne-gold);
+  margin: 0 0 var(--space-20) 0;
+}
+
+/* Mobile Accordion Toggle Button (Hidden on Desktop) */
+.anvi-footer-accordion-btn {
+  display: none;
+}
+
+/* Links List */
+.anvi-footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.anvi-footer-link {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(250, 247, 242, 0.72);
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-block;
+}
+
+.anvi-footer-link:hover {
+  color: #FFFFFF;
+  transform: translateX(2px);
+}
+
+.anvi-footer-link:focus-visible {
+  outline: 2px solid var(--color-champagne-gold);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   BOTTOM LEGAL & COPYRIGHT BAR
+   ============================================================ */
+.anvi-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-32);
+  border-top: 1px solid rgba(212, 178, 124, 0.15);
+  flex-wrap: wrap;
+  gap: var(--space-20);
+}
+
+.anvi-footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(250, 247, 242, 0.55);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.anvi-footer-legal-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+  flex-wrap: wrap;
+}
+
+.anvi-footer-legal-link {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(250, 247, 242, 0.65);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.anvi-footer-legal-link:hover {
+  color: var(--color-champagne-gold);
+}
+
+/* ============================================================
+   RESPONSIVE COMPOSITION & MOBILE ACCORDIONS (< 768px)
+   ============================================================ */
+@media (max-width: 992px) {
+  .anvi-footer-nav {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .anvi-footer-container {
+    padding: var(--space-48) var(--space-20) var(--space-36);
+  }
+
+  .anvi-footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: var(--space-32);
+    margin-bottom: var(--space-16);
+    gap: var(--space-20);
+  }
+
+  .anvi-footer-socials {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* Mobile Accordion Mode */
+  .anvi-footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: var(--space-40);
+    border-top: 1px solid rgba(212, 178, 124, 0.12);
+  }
+
+  .anvi-footer-group {
+    border-bottom: 1px solid rgba(212, 178, 124, 0.12);
+  }
+
+  .anvi-footer-title {
+    display: none; /* Hide static title on mobile */
+  }
+
+  /* Interactive Expandable Accordion Header */
+  .anvi-footer-accordion-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: var(--space-16) 0;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-champagne-gold);
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .anvi-footer-accordion-icon {
+    font-size: 14px;
+    color: var(--color-champagne-gold);
+    transition: transform var(--transition-fast);
+  }
+
+  .anvi-footer-accordion-btn[aria-expanded="true"] .anvi-footer-accordion-icon {
+    transform: rotate(45deg);
+  }
+
+  /* Accordion Content Collapse */
+  .anvi-footer-list {
+    display: none;
+    padding: 0 0 var(--space-16) 0;
+    gap: var(--space-10);
+  }
+
+  .anvi-footer-list.anvi-footer-list--expanded {
+    display: flex;
+  }
+
+  .anvi-footer-link {
+    font-size: 14px;
+    padding: 8px 0;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .anvi-footer-bottom {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: var(--space-16);
+    padding-bottom: max(0px, env(safe-area-inset-bottom, 0px));
+  }
+
+  .anvi-footer-legal-nav {
+    gap: var(--space-12) var(--space-16);
+  }
+
+  .anvi-footer-legal-link {
+    padding: 6px 0;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+  }
+}

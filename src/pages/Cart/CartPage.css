@@ -1,0 +1,525 @@
+/* ==========================================================================
+   ANVI CART PAGE STYLES
+   Minimalist, editorial luxury shopping bag experience.
+   ========================================================================== */
+
+.anvi-cart-page {
+  background-color: var(--color-ivory, #FAF7F2);
+  min-height: 80vh;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+.anvi-cart-page-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* 1. Breadcrumb */
+.anvi-cart-page-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.55);
+  margin-bottom: 2rem;
+}
+
+.anvi-cart-page-breadcrumb a {
+  color: inherit;
+  transition: color 150ms ease;
+}
+
+.anvi-cart-page-breadcrumb a:hover {
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-cart-page-breadcrumb-sep {
+  opacity: 0.4;
+}
+
+.anvi-cart-page-breadcrumb-current {
+  color: var(--color-charcoal, #2F2B2B);
+  font-weight: 500;
+}
+
+/* 2. Page Header */
+.anvi-cart-page-header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  padding-bottom: 1.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.anvi-cart-page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--color-maroon, #5B1727);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.anvi-cart-page-item-count {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: rgba(47, 43, 43, 0.6);
+}
+
+/* 3. Empty State */
+.anvi-cart-page-empty {
+  text-align: center;
+  padding: 5rem 1.5rem;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.anvi-cart-page-empty-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-maroon, #5B1727);
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.01em;
+}
+
+.anvi-cart-page-empty-text {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(47, 43, 43, 0.7);
+  margin: 0 0 2.5rem 0;
+}
+
+.anvi-cart-page-empty-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background-color 200ms ease, transform 150ms ease;
+}
+
+.anvi-cart-page-empty-btn:hover {
+  background-color: var(--color-maroon-darker, #420F1B);
+  transform: translateY(-1px);
+}
+
+.anvi-cart-page-empty-curations {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(47, 43, 43, 0.08);
+}
+
+.anvi-cart-page-empty-curations-title {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.5);
+  margin-bottom: 1rem;
+}
+
+.anvi-cart-page-empty-curations-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.anvi-cart-page-empty-curations-links a {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-maroon, #5B1727);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 150ms ease;
+}
+
+.anvi-cart-page-empty-curations-links a:hover {
+  opacity: 0.75;
+}
+
+/* 4. Active Cart Grid Layout */
+.anvi-cart-page-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* 5. Items Column */
+.anvi-cart-page-items {
+  width: 100%;
+}
+
+.anvi-cart-table-head {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1.2fr 1fr;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.1);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.55);
+}
+
+.anvi-cart-table-head-right {
+  text-align: right;
+}
+
+.anvi-cart-page-item-row {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1.2fr 1fr;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  align-items: center;
+}
+
+/* Product Info Cell */
+.anvi-cart-product-cell {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.anvi-cart-product-thumb {
+  width: 84px;
+  aspect-ratio: 3 / 4;
+  background-color: #F1E8DC;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.anvi-cart-product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 300ms ease;
+}
+
+.anvi-cart-product-thumb:hover img {
+  transform: scale(1.05);
+}
+
+.anvi-cart-product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.anvi-cart-product-name {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 0.35rem 0;
+  transition: color 150ms ease;
+}
+
+.anvi-cart-product-name:hover {
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-cart-product-variant {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: rgba(47, 43, 43, 0.6);
+  margin: 0 0 0.5rem 0;
+}
+
+.anvi-cart-product-remove-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.55);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  align-self: flex-start;
+  transition: color 150ms ease;
+}
+
+.anvi-cart-product-remove-btn:hover {
+  color: #B3261E;
+}
+
+/* Price Cell */
+.anvi-cart-price-cell {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+/* Quantity Cell */
+.anvi-cart-qty-cell {
+  display: flex;
+  align-items: center;
+}
+
+.anvi-cart-page-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(47, 43, 43, 0.16);
+  border-radius: 2px;
+  background-color: #FFFFFF;
+}
+
+.anvi-cart-page-stepper-btn {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-charcoal, #2F2B2B);
+  font-size: 1rem;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.anvi-cart-page-stepper-btn:hover {
+  background-color: rgba(47, 43, 43, 0.05);
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-cart-page-stepper-value {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-width: 30px;
+  text-align: center;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+/* Line Total Cell */
+.anvi-cart-total-cell {
+  text-align: right;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+}
+
+/* 6. Order Summary Card (Right Column) */
+.anvi-cart-page-summary {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 2px;
+  padding: 2rem 1.75rem;
+  position: sticky;
+  top: 100px;
+  box-shadow: 0 4px 20px rgba(22, 16, 18, 0.03);
+}
+
+.anvi-cart-summary-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 1.5rem 0;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  padding-bottom: 1rem;
+}
+
+.anvi-cart-summary-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.anvi-cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: rgba(47, 43, 43, 0.75);
+}
+
+.anvi-cart-summary-row--highlight {
+  color: #2F6F4E;
+  font-weight: 500;
+}
+
+.anvi-cart-summary-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid rgba(47, 43, 43, 0.1);
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.anvi-cart-summary-total-label {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+.anvi-cart-summary-total-val {
+  font-family: var(--font-serif);
+  font-size: 1.625rem;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-cart-summary-taxes-note {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.55);
+  margin: 0.35rem 0 1.5rem 0;
+  line-height: 1.4;
+}
+
+/* Checkout CTA */
+.anvi-cart-summary-checkout-btn {
+  width: 100%;
+  height: 52px;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+  border: 1px solid var(--color-maroon, #5B1727);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 200ms ease, transform 150ms ease;
+  margin-bottom: 1rem;
+}
+
+.anvi-cart-summary-checkout-btn:hover {
+  background-color: var(--color-maroon-darker, #420F1B);
+  transform: translateY(-1px);
+}
+
+.anvi-cart-summary-continue-link {
+  display: block;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-maroon, #5B1727);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 150ms ease;
+}
+
+.anvi-cart-summary-continue-link:hover {
+  opacity: 0.75;
+}
+
+/* 7. Information Accordion / Card */
+.anvi-cart-page-info-box {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(47, 43, 43, 0.08);
+}
+
+.anvi-cart-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  margin-bottom: 0.875rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.7);
+  line-height: 1.45;
+}
+
+.anvi-cart-info-glyph {
+  color: var(--color-gold, #D4B27C);
+  flex-shrink: 0;
+}
+
+/* 8. Mobile & Responsive Behavior */
+@media (max-width: 900px) {
+  .anvi-cart-page-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .anvi-cart-page-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .anvi-cart-page {
+    padding: 1.5rem 1rem calc(4rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .anvi-cart-table-head {
+    display: none;
+  }
+
+  .anvi-cart-page-item-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    position: relative;
+  }
+
+  .anvi-cart-product-cell {
+    width: 100%;
+  }
+
+  .anvi-cart-price-cell {
+    display: none;
+  }
+
+  .anvi-cart-qty-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .anvi-cart-page-stepper-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .anvi-cart-product-remove-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 0;
+  }
+
+  .anvi-cart-total-cell {
+    text-align: left;
+    font-size: 1.0625rem;
+  }
+
+  .anvi-cart-summary-checkout-btn {
+    min-height: 52px;
+  }
+}
+

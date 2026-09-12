@@ -1,0 +1,43 @@
+@import './tokens.css';
+@import './typography.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-anvi-linen text-anvi-charcoal-text font-body;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F1ECE4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D4B27C;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9E7D3B;
+  }
+}
+
+@layer components {
+  .anvi-card {
+    @apply bg-white rounded-lg border border-anvi-linen-border shadow-card transition-shadow;
+  }
+  
+  .anvi-table-header {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-anvi-charcoal-muted bg-[#FAF7F2] border-b border-anvi-linen-border;
+  }
+
+  .anvi-table-cell {
+    @apply px-4 py-3.5 text-sm border-b border-anvi-linen-border/70;
+  }
+}

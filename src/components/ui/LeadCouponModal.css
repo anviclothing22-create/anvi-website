@@ -1,0 +1,612 @@
+/* ANVI Haute Couture Lead Capture & Privilege Coupon Dialog */
+
+.anvi-lead-dialog {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: 880px;
+  width: calc(100vw - 32px);
+  margin: auto;
+  border-radius: 16px;
+  box-shadow: 0 25px 60px -15px rgba(47, 20, 27, 0.45), 0 0 0 1px rgba(212, 178, 124, 0.35);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.95) translateY(15px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), overlay 0.35s allow-discrete, display 0.35s allow-discrete;
+}
+
+.anvi-lead-dialog[open] {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+@starting-style {
+  .anvi-lead-dialog[open] {
+    opacity: 0;
+    transform: scale(0.95) translateY(15px);
+  }
+}
+
+.anvi-lead-dialog::backdrop {
+  background: rgba(30, 12, 17, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.35s ease-out, overlay 0.35s allow-discrete, display 0.35s allow-discrete;
+}
+
+.anvi-lead-dialog[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  .anvi-lead-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+/* Modal Content Card */
+.anvi-lead-modal-card {
+  position: relative;
+  background-color: var(--color-ivory);
+  color: var(--color-charcoal);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+@media (min-width: 768px) {
+  .anvi-lead-modal-card {
+    flex-direction: row;
+    min-height: 520px;
+  }
+}
+
+/* Close Button */
+.anvi-lead-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 20;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(47, 43, 43, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.anvi-lead-close-btn:hover {
+  background: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  border-color: var(--color-champagne-gold);
+  transform: rotate(90deg);
+}
+
+/* Left Image Banner (Desktop) */
+.anvi-lead-image-pane {
+  position: relative;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .anvi-lead-image-pane {
+    display: block;
+    width: 42%;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-deep-maroon);
+  }
+}
+
+.anvi-lead-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: brightness(0.88);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.anvi-lead-modal-card:hover .anvi-lead-banner-img {
+  transform: scale(1.04);
+}
+
+.anvi-lead-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(91, 23, 39, 0.15) 0%, rgba(47, 15, 23, 0.8) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 24px;
+  color: var(--color-ivory);
+  pointer-events: none;
+}
+
+.anvi-lead-image-seal {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-champagne-gold);
+  margin-bottom: 4px;
+}
+
+.anvi-lead-image-quote {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-style: italic;
+  color: rgba(250, 247, 242, 0.9);
+  line-height: 1.4;
+}
+
+/* Right Content Column */
+.anvi-lead-content-pane {
+  flex: 1;
+  padding: 36px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: radial-gradient(circle at top right, rgba(212, 178, 124, 0.09), transparent 70%), var(--color-ivory);
+}
+
+@media (min-width: 768px) {
+  .anvi-lead-content-pane {
+    padding: 40px 36px 32px;
+  }
+}
+
+/* Header & Typography */
+.anvi-lead-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-primary-maroon);
+  margin-bottom: 8px;
+}
+
+.anvi-lead-kicker svg {
+  color: var(--color-champagne-gold);
+}
+
+.anvi-lead-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--color-deep-maroon);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .anvi-lead-title {
+    font-size: 30px;
+  }
+}
+
+.anvi-lead-desc {
+  font-size: 13.5px;
+  color: rgba(47, 43, 43, 0.75);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Form Elements */
+.anvi-lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.anvi-lead-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.anvi-lead-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+}
+
+.anvi-lead-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.anvi-lead-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  background: #ffffff;
+  border: 1px solid rgba(47, 43, 43, 0.18);
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  transition: all 0.2s ease;
+}
+
+.anvi-lead-input:focus {
+  outline: none;
+  border-color: var(--color-primary-maroon);
+  box-shadow: 0 0 0 3px rgba(124, 36, 58, 0.12);
+}
+
+.anvi-lead-input-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--color-champagne-gold);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.anvi-lead-input-with-icon {
+  padding-left: 36px;
+}
+
+.anvi-lead-input::placeholder {
+  color: rgba(47, 43, 43, 0.4);
+}
+
+/* Interest Pills */
+.anvi-lead-interests-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-charcoal);
+  margin-bottom: 6px;
+}
+
+.anvi-lead-interests-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.anvi-lead-pill {
+  padding: 5px 11px;
+  font-size: 11.5px;
+  font-weight: 500;
+  border-radius: 999px;
+  border: 1px solid rgba(47, 43, 43, 0.14);
+  background: #ffffff;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.anvi-lead-pill:hover {
+  border-color: var(--color-champagne-gold);
+  background: rgba(212, 178, 124, 0.1);
+}
+
+.anvi-lead-pill.active {
+  background: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  border-color: var(--color-deep-maroon);
+}
+
+/* Submit Action Button */
+.anvi-lead-submit-btn {
+  margin-top: 6px;
+  height: 46px;
+  background: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  border: 1px solid rgba(212, 178, 124, 0.4);
+  box-shadow: 0 4px 14px rgba(91, 23, 39, 0.25);
+}
+
+.anvi-lead-submit-btn:hover:not(:disabled) {
+  background: var(--color-primary-maroon);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(91, 23, 39, 0.32);
+}
+
+.anvi-lead-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.anvi-lead-error {
+  font-size: 12px;
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+/* Footer & Dismissal */
+.anvi-lead-footer {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.anvi-lead-privacy {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: rgba(47, 43, 43, 0.55);
+}
+
+.anvi-lead-dismiss-link {
+  font-size: 11.5px;
+  color: rgba(47, 43, 43, 0.5);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+.anvi-lead-dismiss-link:hover {
+  color: var(--color-charcoal);
+}
+
+/* SUCCESS / VOUCHER UNLOCKED STATE */
+.anvi-lead-success-pane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 24px;
+  animation: anviFadeIn 0.35s ease-out;
+}
+
+@keyframes anviFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anvi-lead-success-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fcf9f2 20%, #edd8b4 100%);
+  border: 2px solid var(--color-champagne-gold);
+  color: var(--color-deep-maroon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 16px rgba(212, 178, 124, 0.4);
+}
+
+.anvi-lead-success-title {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  color: var(--color-deep-maroon);
+  margin-bottom: 6px;
+}
+
+.anvi-lead-success-subtitle {
+  font-size: 13.5px;
+  color: rgba(47, 43, 43, 0.7);
+  max-width: 420px;
+  line-height: 1.45;
+  margin-bottom: 22px;
+}
+
+/* Luxury Voucher Ticket */
+.anvi-voucher-ticket {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px dashed var(--color-champagne-gold);
+  border-radius: 12px;
+  padding: 20px 28px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 24px rgba(212, 178, 124, 0.15);
+  margin-bottom: 22px;
+}
+
+.anvi-voucher-tagline {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary-maroon);
+  margin-bottom: 8px;
+}
+
+.anvi-voucher-code-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(250, 247, 242, 0.85);
+  border: 1px solid rgba(212, 178, 124, 0.35);
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 10px;
+}
+
+.anvi-voucher-code-text {
+  font-family: 'Courier New', monospace;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--color-deep-maroon);
+}
+
+.anvi-voucher-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--color-champagne-gold);
+  color: var(--color-charcoal);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.anvi-voucher-copy-btn:hover {
+  background: #c5a166;
+  color: #ffffff;
+}
+
+.anvi-voucher-copy-btn.copied {
+  background: #15803d;
+  color: #ffffff;
+}
+
+.anvi-voucher-terms {
+  font-size: 11px;
+  color: rgba(47, 43, 43, 0.6);
+}
+
+.anvi-voucher-applied-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #15803d;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-top: 6px;
+}
+
+/* Success Actions */
+.anvi-voucher-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.anvi-voucher-shop-btn {
+  height: 44px;
+  background: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  border: 1px solid var(--color-champagne-gold);
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(91, 23, 39, 0.2);
+}
+
+.anvi-voucher-shop-btn:hover {
+  background: var(--color-primary-maroon);
+  transform: translateY(-1px);
+}
+
+.anvi-voucher-continue-btn {
+  font-size: 12.5px;
+  color: rgba(47, 43, 43, 0.6);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.anvi-voucher-continue-btn:hover {
+  color: var(--color-charcoal);
+  text-decoration: underline;
+}
+
+/* Subtle Floating Reminder Badge (Bottom Left) */
+.anvi-lead-floating-badge {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-ivory);
+  color: var(--color-deep-maroon);
+  border: 1px solid var(--color-champagne-gold);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 12.5px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(212, 178, 124, 0.2);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: anviBadgeFloat 0.5s ease-out;
+}
+
+@keyframes anviBadgeFloat {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anvi-lead-floating-badge:hover {
+  background: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(91, 23, 39, 0.25);
+}
+
+.anvi-lead-floating-code {
+  font-family: 'Courier New', monospace;
+  background: rgba(212, 178, 124, 0.25);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}

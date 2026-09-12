@@ -1,0 +1,323 @@
+/**
+ * ANVI CLOTHING — V2 CANONICAL PRODUCT CARD
+ * Visually Quiet, Product-Focused Fashion Catalogue Display
+ * Supports: Hover, Wishlist, Loading, Out-of-Stock, Sale, and Optional Second Image
+ */
+
+.anvi-product-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  background: transparent;
+  text-decoration: none;
+  border: none;
+}
+
+/* ============================================================
+   IMAGE CONTAINER (Fixed 3:4 Aspect Ratio, Dominates Card)
+   ============================================================ */
+.anvi-product-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--color-warm-beige);
+  border-radius: var(--radius-subtle);
+  display: block;
+}
+
+.anvi-product-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: 
+    opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.anvi-product-img--primary {
+  opacity: 1;
+  z-index: 1;
+}
+
+.anvi-product-img--secondary {
+  opacity: 0;
+  z-index: 2;
+}
+
+/* Desktop Hover States: Subtle zoom & smooth second-image crossfade */
+@media (hover: hover) {
+  .anvi-product-card:not(.anvi-product-card--out-of-stock):hover .anvi-product-img--primary {
+    transform: scale(1.025);
+  }
+
+  .anvi-product-card:not(.anvi-product-card--out-of-stock):hover .anvi-product-img--has-secondary.anvi-product-img--primary {
+    opacity: 0;
+  }
+
+  .anvi-product-card:not(.anvi-product-card--out-of-stock):hover .anvi-product-img--secondary {
+    opacity: 1;
+    transform: scale(1.025);
+  }
+}
+
+/* ============================================================
+   WISHLIST CONTROL
+   ============================================================ */
+.anvi-product-wishlist-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-charcoal);
+  padding: 0;
+  transition: 
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Touch target expansion (min 44x44px accessible tap area) */
+.anvi-product-wishlist-btn::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+}
+
+.anvi-product-wishlist-btn:hover {
+  transform: scale(1.06);
+  color: var(--color-primary-maroon);
+  background: #FFFFFF;
+}
+
+.anvi-product-wishlist-btn--active {
+  color: var(--color-primary-maroon);
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(124, 36, 58, 0.15);
+}
+
+.anvi-product-wishlist-btn:focus-visible {
+  outline: 2px solid var(--color-primary-maroon);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   OUT-OF-STOCK STATE
+   ============================================================ */
+.anvi-product-card--out-of-stock .anvi-product-img {
+  opacity: 0.65;
+  filter: grayscale(25%);
+}
+
+.anvi-product-stock-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 4;
+  background: rgba(47, 43, 43, 0.85);
+  backdrop-filter: blur(4px);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-subtle);
+}
+
+/* ============================================================
+   CARD INFORMATION BLOCK (Quiet, Understated Typography)
+   ============================================================ */
+.anvi-product-info {
+  padding-top: var(--space-12);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.anvi-product-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.anvi-product-category {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.55);
+}
+
+/* Restrained Sale & Availability indicator */
+.anvi-product-quiet-badge {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary-maroon);
+}
+
+.anvi-product-title-link {
+  text-decoration: none;
+  display: block;
+}
+
+.anvi-product-title {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--color-charcoal);
+  margin: 2px 0 3px 0;
+  transition: color var(--transition-fast);
+}
+
+.anvi-product-card:hover .anvi-product-title {
+  color: var(--color-primary-maroon);
+}
+
+/* ============================================================
+   PRICE DISPLAY (INR & SALE STATE)
+   ============================================================ */
+.anvi-product-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-8);
+}
+
+.anvi-product-price {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-charcoal);
+}
+
+.anvi-product-price--sale {
+  color: var(--color-primary-maroon);
+}
+
+.anvi-product-original-price {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(47, 43, 43, 0.4);
+  text-decoration: line-through;
+}
+
+/* Focus visibility */
+.anvi-product-card:focus-visible {
+  outline: 2px solid var(--color-primary-maroon);
+  outline-offset: 4px;
+  border-radius: var(--radius-subtle);
+}
+
+/* ============================================================
+   LOADING SKELETON STATE (Zero Layout Shifts)
+   ============================================================ */
+.anvi-product-card--loading {
+  pointer-events: none;
+}
+
+.anvi-skeleton-pulse {
+  background: linear-gradient(
+    90deg,
+    rgba(241, 232, 220, 0.6) 0%,
+    rgba(250, 247, 242, 0.9) 50%,
+    rgba(241, 232, 220, 0.6) 100%
+  );
+  background-size: 200% 100%;
+  animation: anviSkeletonShimmer 1600ms infinite ease-in-out;
+}
+
+.anvi-skeleton-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-subtle);
+}
+
+.anvi-skeleton-line {
+  height: 12px;
+  border-radius: var(--radius-subtle);
+  margin-top: 6px;
+}
+
+.anvi-skeleton-line--meta {
+  width: 45%;
+  height: 10px;
+}
+
+.anvi-skeleton-line--title {
+  width: 80%;
+  height: 16px;
+}
+
+.anvi-skeleton-line--price {
+  width: 35%;
+  height: 14px;
+}
+
+@keyframes anviSkeletonShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE COMPOSITION FOR MOBILE (< 640px: 390px, 430px)
+   ============================================================ */
+@media (max-width: 640px) {
+  .anvi-product-info {
+    padding-top: var(--space-8);
+    gap: 2px;
+  }
+
+  .anvi-product-category {
+    font-size: 10px;
+  }
+
+  .anvi-product-title {
+    font-size: clamp(14px, 3.8vw, 15px);
+    line-height: 1.25;
+    margin: 1px 0 2px 0;
+  }
+
+  .anvi-product-price {
+    font-size: 13px;
+  }
+
+  .anvi-product-original-price {
+    font-size: 11px;
+  }
+
+  .anvi-product-wishlist-btn {
+    top: 8px;
+    right: 8px;
+  }
+}
+

@@ -1,0 +1,916 @@
+/* ==========================================================================
+   ANVI Flagship Contact & Studio Visit Page
+   Editorial Layout, Mobile Immediate Access Bar, Luxury Coimbatore Presence
+   Palette: Deep Maroon #5B1727, Ivory #FAF7F2, Gold #D4B27C, Warm Beige #F1E8DC
+   ========================================================================== */
+
+.anvi-contact-page {
+  background-color: var(--color-ivory);
+  min-height: 100vh;
+  color: var(--color-charcoal);
+  padding-bottom: 80px;
+}
+
+.anvi-contact-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-24);
+}
+
+/* ==========================================================================
+   Mobile Sticky Quick-Action Bar (Immediate Accessibility)
+   ========================================================================== */
+.anvi-contact-mobile-actionbar {
+  display: none; /* Desktop hidden */
+}
+
+@media (max-width: 768px) {
+  .anvi-contact-mobile-actionbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(250, 247, 242, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(91, 23, 39, 0.12);
+    padding: 10px 14px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+    box-shadow: 0 -4px 20px rgba(47, 43, 43, 0.08);
+  }
+
+  .anvi-mobile-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    flex: 1;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  .anvi-mobile-btn--whatsapp {
+    background-color: #1e6d42;
+    color: #ffffff;
+    flex: 1.4;
+  }
+
+  .anvi-mobile-btn--call {
+    background-color: var(--color-deep-maroon);
+    color: var(--color-ivory);
+  }
+
+  .anvi-mobile-btn--directions {
+    background-color: var(--color-warm-beige);
+    color: var(--color-deep-maroon);
+    border: 1px solid #dfd4c5;
+  }
+
+  /* Add padding bottom to page on mobile so content isn't obscured */
+  .anvi-contact-page {
+    padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ==========================================================================
+   Breadcrumbs
+   ========================================================================== */
+.anvi-contact-breadcrumbs-wrap {
+  background-color: #f7f3ec;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding: 12px 0;
+}
+
+.anvi-contact-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7a736e;
+}
+
+.anvi-contact-breadcrumbs a {
+  color: #7a736e;
+  transition: color var(--transition-fast);
+}
+
+.anvi-contact-breadcrumbs a:hover {
+  color: var(--color-deep-maroon);
+}
+
+.anvi-contact-breadcrumbs .current {
+  color: var(--color-deep-maroon);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Editorial Hero Header
+   ========================================================================== */
+.anvi-contact-hero {
+  padding: 56px 0 36px 0;
+  text-align: center;
+}
+
+.anvi-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-primary-maroon);
+  background-color: #f7ede3;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.anvi-contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+  font-weight: 400;
+  color: var(--color-deep-maroon);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.anvi-contact-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #5c544e;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Storefront Visual Spread
+   ========================================================================== */
+.anvi-contact-storefront-section {
+  margin-bottom: 48px;
+}
+
+.anvi-storefront-card {
+  position: relative;
+  width: 100%;
+  height: clamp(260px, 34vw, 420px);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(47, 43, 43, 0.08);
+}
+
+.anvi-storefront-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+.anvi-storefront-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(0deg, rgba(30, 10, 15, 0.88) 0%, rgba(30, 10, 15, 0.45) 60%, transparent 100%);
+  padding: 32px 36px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.anvi-storefront-meta {
+  color: #ffffff;
+}
+
+.anvi-storefront-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: var(--color-champagne-gold);
+  margin-bottom: 6px;
+}
+
+.anvi-storefront-name {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.anvi-storefront-caption {
+  font-size: 0.86rem;
+  color: #e5ded7;
+  max-width: 580px;
+}
+
+.anvi-storefront-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-ivory);
+  color: var(--color-deep-maroon);
+  padding: 10px 18px;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: all var(--transition-fast);
+}
+
+.anvi-storefront-map-btn:hover {
+  background-color: var(--color-champagne-gold);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Main Grid: Info Column vs Stationery Form Column
+   ========================================================================== */
+.anvi-contact-main {
+  margin-bottom: 64px;
+}
+
+.anvi-contact-grid-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+/* Left Column: Info Blocks */
+.anvi-contact-info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.anvi-info-block {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 24px 28px;
+  box-shadow: 0 2px 10px rgba(47, 43, 43, 0.02);
+}
+
+.anvi-info-icon-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.anvi-info-icon-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f7efe6;
+  color: var(--color-primary-maroon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.anvi-info-heading {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-deep-maroon);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.anvi-info-subtext {
+  font-size: 0.8rem;
+  color: #8c827a;
+  letter-spacing: 0.02em;
+}
+
+.anvi-address-text {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #423b37;
+  margin-bottom: 14px;
+}
+
+.anvi-valet-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #faf5ee;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  color: #5c544e;
+  border: 1px solid #ebd9c8;
+}
+
+.anvi-hours-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.anvi-hours-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--color-border-subtle);
+}
+
+.anvi-hours-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.anvi-hours-list .day {
+  font-weight: 500;
+  color: var(--color-charcoal);
+}
+
+.anvi-hours-list .time {
+  color: #5c544e;
+}
+
+.anvi-hours-list .time-highlight {
+  color: var(--color-primary-maroon);
+  font-weight: 600;
+}
+
+.anvi-walkin-note {
+  font-size: 0.82rem;
+  color: #7a716a;
+  line-height: 1.5;
+  background-color: #faf6f0;
+  padding: 10px 14px;
+  border-radius: 4px;
+}
+
+/* Channels List */
+.anvi-channels-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.anvi-channel-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #fbf9f5;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.anvi-channel-row:hover {
+  background-color: #f6eee3;
+  border-color: var(--color-champagne-gold);
+}
+
+.anvi-channel-row--whatsapp {
+  border-left: 3px solid #1e6d42;
+}
+
+.anvi-channel-row--static {
+  background-color: #ffffff;
+  cursor: default;
+}
+
+.anvi-channel-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-label {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8c827a;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.channel-value {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--color-deep-maroon);
+}
+
+.channel-hint {
+  font-size: 0.76rem;
+  color: #1e6d42;
+  font-weight: 500;
+}
+
+.channel-action {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--color-primary-maroon);
+}
+
+.email-links {
+  font-size: 0.9rem;
+  color: var(--color-deep-maroon);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.email-links a {
+  text-decoration: underline;
+}
+
+.email-links .divider {
+  color: #b8aea5;
+}
+
+/* In-Person Amenities Box */
+.anvi-amenities-box {
+  background: linear-gradient(135deg, #f6eee3 0%, #f7f2ea 100%);
+  border: 1px solid #ebd9c8;
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.anvi-amenities-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--color-deep-maroon);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.anvi-amenities-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.anvi-amenities-bullets li {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #524a44;
+}
+
+.anvi-amenities-bullets strong {
+  color: var(--color-deep-maroon);
+}
+
+/* ==========================================================================
+   Right Column: Stationery Form
+   ========================================================================== */
+.anvi-stationery-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  border-top: 4px solid var(--color-deep-maroon);
+  border-radius: 4px;
+  padding: 40px 36px;
+  box-shadow: 0 4px 20px rgba(47, 43, 43, 0.03);
+}
+
+.anvi-stationery-header {
+  margin-bottom: 28px;
+}
+
+.anvi-stationery-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-primary-maroon);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.anvi-stationery-title {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  color: var(--color-deep-maroon);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.anvi-stationery-subtitle {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #6a625c;
+}
+
+.anvi-editorial-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.anvi-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.anvi-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.anvi-field-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-charcoal);
+}
+
+.anvi-field-label .req {
+  color: var(--color-primary-maroon);
+  margin-left: 2px;
+}
+
+.anvi-field-input,
+.anvi-field-select,
+.anvi-field-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  background-color: #fdfbf7;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 3px;
+  font-size: 0.92rem;
+  color: var(--color-charcoal);
+  font-family: inherit;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.anvi-field-input:focus,
+.anvi-field-select:focus,
+.anvi-field-textarea:focus {
+  border-color: var(--color-champagne-gold);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(212, 178, 124, 0.15);
+}
+
+.anvi-field-textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+/* Channel Pills Selection */
+.anvi-channel-pills {
+  display: flex;
+  gap: 6px;
+}
+
+.anvi-channel-pill {
+  flex: 1;
+  padding: 9px 10px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+  background-color: #fdfbf7;
+  border: 1px solid var(--color-border-subtle);
+  color: #635b55;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.anvi-channel-pill.active {
+  background-color: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  border-color: var(--color-deep-maroon);
+}
+
+.anvi-channel-pill:hover:not(.active) {
+  background-color: #f7efe6;
+  color: var(--color-deep-maroon);
+}
+
+.anvi-btn-submit-editorial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  padding: 15px 32px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: 8px;
+}
+
+.anvi-btn-submit-editorial:hover {
+  background-color: var(--color-primary-maroon);
+  box-shadow: 0 6px 18px rgba(91, 23, 39, 0.2);
+  transform: translateY(-1px);
+}
+
+.anvi-btn-submit-editorial:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.anvi-form-reassurance {
+  font-size: 0.78rem;
+  color: #8c827a;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* Form Success State */
+.anvi-success-editorial {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.anvi-success-seal {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #e8f5e9;
+  color: #1e6d42;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 4px 14px rgba(30, 109, 66, 0.15);
+}
+
+.anvi-success-eyebrow {
+  display: block;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-primary-maroon);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.anvi-success-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--color-deep-maroon);
+  margin-bottom: 12px;
+}
+
+.anvi-success-body {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: #524a44;
+  max-width: 480px;
+  margin: 0 auto 20px auto;
+}
+
+.anvi-appointment-receipt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #faf5ee;
+  border: 1px solid #ebd9c8;
+  padding: 10px 18px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  color: var(--color-charcoal);
+  margin-bottom: 24px;
+}
+
+.anvi-btn-send-another {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-deep-maroon);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Map & Arrival Guide Section
+   ========================================================================== */
+.anvi-contact-map-section {
+  background-color: #f7f2ea;
+  border-top: 1px solid #e8dfd4;
+  border-bottom: 1px solid #e8dfd4;
+  padding: 64px 0;
+}
+
+.anvi-arrival-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.anvi-arrival-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-primary-maroon);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.anvi-arrival-title {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--color-deep-maroon);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.anvi-arrival-subtitle {
+  font-size: 0.94rem;
+  color: #6a625c;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.anvi-arrival-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 36px;
+  align-items: stretch;
+}
+
+.anvi-map-container {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(47, 43, 43, 0.03);
+}
+
+.anvi-map-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 8px 6px 8px;
+  flex-wrap: wrap;
+}
+
+.anvi-map-pin-detail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #635b55;
+}
+
+.anvi-map-direct-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-deep-maroon);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: color var(--transition-fast);
+}
+
+.anvi-map-direct-link:hover {
+  color: var(--color-primary-maroon);
+  text-decoration: underline;
+}
+
+/* Transit Guide */
+.anvi-transit-guide {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 4px 16px rgba(47, 43, 43, 0.03);
+}
+
+.anvi-transit-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--color-deep-maroon);
+  font-weight: 500;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: 12px;
+}
+
+.anvi-transit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.anvi-transit-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #f7efe6;
+  color: var(--color-primary-maroon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.transit-heading {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-deep-maroon);
+  margin-bottom: 4px;
+}
+
+.transit-body {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #5c544e;
+}
+
+.anvi-transit-callout {
+  margin-top: auto;
+  background-color: #faf5ee;
+  border-left: 3px solid var(--color-champagne-gold);
+  padding: 12px 16px;
+  border-radius: 2px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #544c46;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 992px) {
+  .anvi-contact-grid-wrapper {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .anvi-arrival-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .anvi-field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .anvi-stationery-card {
+    padding: 28px 20px;
+  }
+
+  .anvi-storefront-overlay {
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .anvi-storefront-map-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

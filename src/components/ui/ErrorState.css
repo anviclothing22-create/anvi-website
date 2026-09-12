@@ -1,0 +1,315 @@
+/* ==========================================================================
+   ANVI Unified Error States System
+   Clear, human, actionable, visually consistent with luxury Indian aesthetic.
+   Palette: Deep Maroon #5B1727, Ivory #FAF7F2, Gold #D4B27C, Warm Beige #F1E8DC
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Full-Page Error State
+   ========================================================================== */
+.anvi-error-full-page {
+  background-color: var(--color-ivory);
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px var(--space-24);
+  text-align: center;
+}
+
+.anvi-error-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.anvi-error-icon-seal {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f7efe6 0%, #fceedd 100%);
+  border: 1px solid #ebd9c8;
+  color: var(--color-primary-maroon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(91, 23, 39, 0.06);
+}
+
+.anvi-error-eyebrow {
+  display: inline-block;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-primary-maroon);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.anvi-error-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 400;
+  color: var(--color-deep-maroon);
+  line-height: 1.18;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+.anvi-error-message {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #5d554f;
+  margin-bottom: 36px;
+  max-width: 480px;
+}
+
+.anvi-error-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.anvi-error-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.anvi-error-btn--primary {
+  background-color: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  border: 1px solid var(--color-deep-maroon);
+}
+
+.anvi-error-btn--primary:hover {
+  background-color: var(--color-primary-maroon);
+  border-color: var(--color-primary-maroon);
+  box-shadow: 0 4px 14px rgba(91, 23, 39, 0.2);
+  transform: translateY(-1px);
+}
+
+.anvi-error-btn--secondary {
+  background-color: transparent;
+  color: var(--color-deep-maroon);
+  border: 1px solid #d4c8b8;
+}
+
+.anvi-error-btn--secondary:hover {
+  background-color: #f3ece1;
+  border-color: var(--color-deep-maroon);
+}
+
+.anvi-error-concierge-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #7a716a;
+  background-color: #faf5ee;
+  border: 1px solid #ede3d4;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.anvi-error-concierge-hint a {
+  color: var(--color-deep-maroon);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   2. Card / Section-Level Error State (e.g. Inside Catalog, Cart, Account)
+   ========================================================================== */
+.anvi-error-card {
+  background-color: #ffffff;
+  border: 1px solid #ebd9c8;
+  border-top: 3px solid var(--color-primary-maroon);
+  border-radius: 4px;
+  padding: 40px 32px;
+  text-align: center;
+  max-width: 580px;
+  margin: 32px auto;
+  box-shadow: 0 4px 16px rgba(47, 43, 43, 0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.anvi-error-card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #faf2ea;
+  color: var(--color-primary-maroon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.anvi-error-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: var(--color-deep-maroon);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.anvi-error-card-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #5c544e;
+  margin-bottom: 24px;
+  max-width: 440px;
+}
+
+/* ==========================================================================
+   3. Inline / Compact Error Notice (e.g. Inside Checkout or Drawer)
+   ========================================================================== */
+.anvi-error-inline {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background-color: #fcf6f4;
+  border: 1px solid #f1d3cb;
+  border-left: 3px solid var(--color-primary-maroon);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  text-align: left;
+}
+
+.anvi-error-inline-icon {
+  color: var(--color-primary-maroon);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.anvi-error-inline-content {
+  flex: 1;
+}
+
+.anvi-error-inline-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-deep-maroon);
+  margin-bottom: 4px;
+}
+
+.anvi-error-inline-desc {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #594f4a;
+}
+
+.anvi-error-inline-action {
+  background: none;
+  border: none;
+  color: var(--color-primary-maroon);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0;
+  margin-top: 6px;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.anvi-error-inline-action:hover {
+  color: var(--color-maroon-darker);
+}
+
+/* ==========================================================================
+   4. Banner Error (Full-width dismissed or sticky strip)
+   ========================================================================== */
+.anvi-error-banner {
+  background-color: #5B1727;
+  color: var(--color-ivory);
+  padding: 12px var(--space-24);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.85rem;
+}
+
+.anvi-error-banner-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.anvi-error-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.anvi-btn-banner-retry {
+  background-color: var(--color-champagne-gold);
+  color: #2F2B2B;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 2px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.anvi-btn-banner-retry:hover {
+  opacity: 0.9;
+}
+
+.anvi-btn-banner-dismiss {
+  background: none;
+  border: none;
+  color: rgba(250, 247, 242, 0.75);
+  cursor: pointer;
+  font-size: 0.82rem;
+  text-decoration: underline;
+}
+
+.anvi-btn-banner-dismiss:hover {
+  color: var(--color-ivory);
+}
+
+@media (max-width: 640px) {
+  .anvi-error-actions {
+    flex-direction: column;
+  }
+
+  .anvi-error-btn {
+    width: 100%;
+  }
+
+  .anvi-error-card {
+    padding: 28px 20px;
+  }
+}

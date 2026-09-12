@@ -1,0 +1,374 @@
+/* ==========================================================================
+   ANVI Unified Luxury Loading & Skeleton System
+   Quiet, restrained, zero Cumulative Layout Shift (CLS).
+   Warm Linen & Champagne Gold shimmer with smooth cubic-bezier easing.
+   ========================================================================== */
+
+/* Base Skeleton Shimmer Primitive */
+.anvi-skeleton {
+  background-color: #f0e8dc;
+  background-image: linear-gradient(
+    90deg,
+    #efe7da 0%,
+    #faf5ed 35%,
+    #efe7da 70%
+  );
+  background-size: 200% 100%;
+  animation: anvi-shimmer 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  display: block;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes anvi-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Specific Aspect Ratio Helpers for Zero Layout Shift */
+.anvi-skeleton--aspect-portrait {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+}
+
+.anvi-skeleton--aspect-editorial {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+}
+
+.anvi-skeleton--circle {
+  border-radius: 50% !important;
+}
+
+.anvi-skeleton--pill {
+  border-radius: 9999px !important;
+}
+
+/* ==========================================================================
+   1. Product Grid Skeleton (Preserves exact ProductCard dimensions)
+   ========================================================================== */
+.anvi-product-grid-skeleton {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols, 4), 1fr);
+  gap: 32px 24px;
+  width: 100%;
+}
+
+.anvi-product-card-skeleton {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.anvi-card-skeleton-image-wrap {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 3px;
+  margin-bottom: 14px;
+}
+
+.anvi-card-skeleton-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.anvi-card-skeleton-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .anvi-product-grid-skeleton {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .anvi-product-grid-skeleton {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 12px;
+  }
+}
+
+/* ==========================================================================
+   2. Product Detail Page Skeleton (Preserves Desktop 2-Col Gallery & Info)
+   ========================================================================== */
+.anvi-pdp-skeleton {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px var(--space-24) 80px var(--space-24);
+}
+
+.anvi-pdp-skeleton-breadcrumbs {
+  margin-bottom: 28px;
+}
+
+.anvi-pdp-skeleton-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 56px;
+  align-items: flex-start;
+}
+
+/* Gallery Column */
+.anvi-pdp-skeleton-gallery {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.anvi-pdp-skeleton-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.anvi-pdp-skeleton-thumb-item {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 2px;
+}
+
+.anvi-pdp-skeleton-main-img {
+  flex: 1;
+  aspect-ratio: 3 / 4;
+  border-radius: 4px;
+}
+
+/* Info Column */
+.anvi-pdp-skeleton-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.anvi-pdp-skeleton-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.anvi-pdp-skeleton-sizes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.anvi-pdp-skeleton-pills-row {
+  display: flex;
+  gap: 10px;
+}
+
+.anvi-pdp-skeleton-ctas {
+  display: flex;
+  gap: 12px;
+}
+
+.anvi-pdp-skeleton-accordions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+@media (max-width: 900px) {
+  .anvi-pdp-skeleton-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .anvi-pdp-skeleton-gallery {
+    flex-direction: column-reverse;
+  }
+
+  .anvi-pdp-skeleton-thumbs {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .anvi-pdp-skeleton-thumb-item {
+    width: 70px;
+  }
+}
+
+/* ==========================================================================
+   3. Search Skeleton (Search modal results state)
+   ========================================================================== */
+.anvi-search-skeleton {
+  width: 100%;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.anvi-search-skeleton-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.anvi-search-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .anvi-search-skeleton-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+/* ==========================================================================
+   4. Collections / Shop Page Skeleton
+   ========================================================================== */
+.anvi-collections-skeleton {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 32px var(--space-24) 80px var(--space-24);
+}
+
+.anvi-collections-skeleton-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 40px 0;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.anvi-collections-skeleton-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ==========================================================================
+   5. Account Suite Skeleton
+   ========================================================================== */
+.anvi-account-skeleton {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 40px var(--space-24) 80px var(--space-24);
+}
+
+.anvi-account-skeleton-hero {
+  background: linear-gradient(135deg, #f7efe6 0%, var(--color-ivory) 100%);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.anvi-account-skeleton-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  overflow-x: auto;
+}
+
+.anvi-account-skeleton-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.anvi-account-skeleton-card-item {
+  background: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ==========================================================================
+   6. Cart Skeleton (Page & Drawer)
+   ========================================================================== */
+.anvi-cart-skeleton-page {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px var(--space-24) 80px var(--space-24);
+}
+
+.anvi-cart-skeleton-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.anvi-cart-skeleton-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.anvi-cart-skeleton-item-row {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.anvi-cart-skeleton-summary-box {
+  background: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Drawer Cart Skeleton */
+.anvi-cart-skeleton-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0;
+  width: 100%;
+}
+
+@media (max-width: 860px) {
+  .anvi-cart-skeleton-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}

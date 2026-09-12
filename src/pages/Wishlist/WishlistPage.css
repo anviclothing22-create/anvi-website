@@ -1,0 +1,227 @@
+/* ==========================================================================
+   ANVI WISHLIST PAGE STYLES
+   Minimalist, luxury editorial saved-items experience.
+   ========================================================================== */
+
+.anvi-wishlist-page {
+  background-color: var(--color-ivory, #FAF7F2);
+  min-height: 75vh;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+.anvi-wishlist-container {
+  max-width: var(--max-content-width, 1360px);
+  margin: 0 auto;
+}
+
+/* 1. Breadcrumb */
+.anvi-wishlist-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.55);
+  margin-bottom: 2rem;
+}
+
+.anvi-wishlist-breadcrumb a {
+  color: inherit;
+  transition: color 150ms ease;
+}
+
+.anvi-wishlist-breadcrumb a:hover {
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-wishlist-breadcrumb-sep {
+  opacity: 0.4;
+}
+
+.anvi-wishlist-breadcrumb-current {
+  color: var(--color-charcoal, #2F2B2B);
+  font-weight: 500;
+}
+
+/* 2. Page Header */
+.anvi-wishlist-header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  padding-bottom: 1.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.anvi-wishlist-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--color-maroon, #5B1727);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.anvi-wishlist-count {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: rgba(47, 43, 43, 0.6);
+}
+
+/* 3. Empty State */
+.anvi-wishlist-empty {
+  text-align: center;
+  padding: 6rem 1.5rem;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.anvi-wishlist-empty-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-maroon, #5B1727);
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.01em;
+}
+
+.anvi-wishlist-empty-text {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(47, 43, 43, 0.7);
+  margin: 0 0 2.5rem 0;
+}
+
+.anvi-wishlist-empty-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9375rem 2.5rem;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background-color 200ms ease, transform 150ms ease;
+}
+
+.anvi-wishlist-empty-btn:hover {
+  background-color: var(--color-maroon-darker, #420F1B);
+  transform: translateY(-1px);
+}
+
+.anvi-wishlist-demo-btn {
+  margin-top: 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(91, 23, 39, 0.25);
+  color: var(--color-maroon, #5B1727);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 150ms ease;
+}
+
+.anvi-wishlist-demo-btn:hover {
+  background-color: rgba(91, 23, 39, 0.04);
+}
+
+/* 4. Product Grid */
+.anvi-wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 2rem;
+  row-gap: 3rem;
+}
+
+/* 5. Card Actions Slot */
+.anvi-wishlist-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.875rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(47, 43, 43, 0.06);
+}
+
+.anvi-wishlist-add-btn {
+  width: 100%;
+  min-height: 42px;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 150ms ease;
+}
+
+.anvi-wishlist-add-btn:hover {
+  background-color: var(--color-maroon-darker, #420F1B);
+}
+
+.anvi-wishlist-remove-link {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.55);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-align: center;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0;
+  transition: color 150ms ease;
+}
+
+.anvi-wishlist-remove-link:hover {
+  color: #B3261E;
+}
+
+/* 6. Responsive Breakpoints */
+@media (max-width: 1100px) {
+  .anvi-wishlist-grid {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1.5rem;
+    row-gap: 2.5rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .anvi-wishlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1rem;
+    row-gap: 2rem;
+  }
+
+  .anvi-wishlist-page {
+    padding: 1.5rem 1rem 4rem;
+  }
+
+  .anvi-wishlist-empty {
+    padding: 4rem 1rem;
+  }
+}

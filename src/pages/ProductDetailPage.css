@@ -1,0 +1,772 @@
+/**
+ * ANVI CLOTHING — V2 PRODUCT DETAIL PAGE (PDP)
+ * High-End Luxury Fashion Monograph Architecture
+ * Dominant Image Gallery • Sticky Information Panel • Editorial Accordions • Canonical Recommendations
+ */
+
+.anvi-pdp {
+  width: 100%;
+  background-color: var(--color-ivory);
+  min-height: 100vh;
+  padding: var(--space-40) 0 var(--space-120);
+  box-sizing: border-box;
+}
+
+.anvi-pdp-container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-32);
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   1. BREADCRUMB
+   ============================================================ */
+.anvi-pdp-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.55);
+  margin-bottom: var(--space-36);
+  flex-wrap: wrap;
+}
+
+.anvi-pdp-breadcrumb a {
+  color: rgba(47, 43, 43, 0.65);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.anvi-pdp-breadcrumb a:hover {
+  color: var(--color-primary-maroon);
+}
+
+.anvi-pdp-breadcrumb-sep {
+  color: rgba(47, 43, 43, 0.35);
+  font-size: 10px;
+}
+
+.anvi-pdp-breadcrumb-current {
+  color: var(--color-charcoal);
+  font-weight: 600;
+}
+
+/* ============================================================
+   2. MAIN PRODUCT HERO SPREAD (GALLERY 56% : INFO 44%)
+   ============================================================ */
+.anvi-pdp-spread {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 64px;
+  align-items: start;
+  margin-bottom: var(--space-96);
+}
+
+/* ============================================================
+   3. DOMINANT IMAGE GALLERY (LEFT)
+   ============================================================ */
+.anvi-pdp-gallery-wrap {
+  display: flex;
+  gap: var(--space-20);
+  position: relative;
+}
+
+/* Vertical Thumbnail Strip (Desktop) */
+.anvi-pdp-thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  width: 76px;
+  flex-shrink: 0;
+}
+
+.anvi-pdp-thumb-btn {
+  position: relative;
+  width: 76px;
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  border: 1px solid rgba(47, 43, 43, 0.12);
+  border-radius: var(--radius-subtle);
+  background: var(--color-warm-beige);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.anvi-pdp-thumb-btn:hover {
+  border-color: var(--color-primary-maroon);
+}
+
+.anvi-pdp-thumb-btn--active {
+  border-color: var(--color-primary-maroon);
+  box-shadow: 0 0 0 1px var(--color-primary-maroon);
+}
+
+.anvi-pdp-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Primary Main Image Frame */
+.anvi-pdp-main-frame {
+  position: relative;
+  flex-grow: 1;
+  aspect-ratio: 3 / 4;
+  background-color: var(--color-warm-beige);
+  border-radius: var(--radius-subtle);
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+  cursor: crosshair;
+}
+
+.anvi-pdp-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 180ms ease-out;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Zoom Indicator Badge */
+.anvi-pdp-zoom-badge {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background-color: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-charcoal);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+}
+
+/* Mobile Gallery Pagination Counter */
+.anvi-pdp-mobile-counter {
+  display: none;
+}
+
+/* ============================================================
+   4. PRODUCT INFORMATION PANEL (RIGHT - STICKY)
+   ============================================================ */
+.anvi-pdp-info-panel {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+
+.anvi-pdp-category-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary-maroon);
+  margin: 0;
+}
+
+.anvi-pdp-title {
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 3.4vw, 42px);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--color-charcoal);
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* Price & Availability Row */
+.anvi-pdp-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-12);
+  margin-top: 2px;
+}
+
+.anvi-pdp-price {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.anvi-pdp-original-price {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: rgba(47, 43, 43, 0.45);
+  text-decoration: line-through;
+}
+
+.anvi-pdp-discount-tag {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #9B1C1C;
+  background-color: #FDE8E8;
+  padding: 3px 8px;
+  border-radius: var(--radius-subtle);
+  text-transform: uppercase;
+}
+
+.anvi-pdp-tax-note {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: rgba(47, 43, 43, 0.5);
+  margin: -6px 0 0 0;
+}
+
+/* Availability Badge */
+.anvi-pdp-availability-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.anvi-pdp-availability-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #0E9F6E; /* in stock green */
+}
+
+.anvi-pdp-availability-dot--limited {
+  background-color: #D97706; /* amber for limited */
+}
+
+.anvi-pdp-availability-dot--soldout {
+  background-color: #9B1C1C; /* red */
+}
+
+/* Narrative Storytelling */
+.anvi-pdp-description {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(47, 43, 43, 0.8);
+  margin: 0;
+}
+
+/* Size / Variant Selector */
+.anvi-pdp-variant-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  padding: var(--space-16) 0;
+  border-top: 1px solid rgba(47, 43, 43, 0.08);
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+}
+
+.anvi-pdp-variant-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.anvi-pdp-variant-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+}
+
+.anvi-pdp-size-guide-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: underline;
+  color: var(--color-primary-maroon);
+  cursor: pointer;
+  padding: 0;
+}
+
+.anvi-pdp-size-guide-btn:hover {
+  color: var(--color-deep-maroon);
+}
+
+.anvi-pdp-variant-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.anvi-pdp-variant-pill {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 14px;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.2);
+  border-radius: var(--radius-subtle);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-charcoal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.anvi-pdp-variant-pill:hover {
+  border-color: var(--color-primary-maroon);
+}
+
+.anvi-pdp-variant-pill--active {
+  background-color: var(--color-charcoal);
+  border-color: var(--color-charcoal);
+  color: var(--color-ivory);
+}
+
+/* Quantity & Action CTAs */
+.anvi-pdp-actions-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  margin-top: var(--space-8);
+}
+
+/* Quantity Stepper */
+.anvi-pdp-qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(47, 43, 43, 0.2);
+  border-radius: var(--radius-subtle);
+  background-color: #FFFFFF;
+  height: 48px;
+}
+
+.anvi-pdp-qty-btn {
+  background: none;
+  border: none;
+  min-width: 44px;
+  height: 100%;
+  font-size: 16px;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.anvi-pdp-qty-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.anvi-pdp-qty-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 28px;
+  text-align: center;
+}
+
+/* Primary CTA: ADD TO BAG */
+.anvi-pdp-add-btn {
+  flex-grow: 1;
+  height: 48px;
+  background-color: var(--color-primary-maroon);
+  color: var(--color-ivory);
+  border: 1px solid var(--color-primary-maroon);
+  border-radius: var(--radius-subtle);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  box-shadow: 0 6px 18px rgba(124, 36, 58, 0.25);
+  transition: 
+    background-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.anvi-pdp-add-btn:hover:not(:disabled) {
+  background-color: var(--color-deep-maroon);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(91, 23, 39, 0.35);
+}
+
+.anvi-pdp-add-btn:disabled {
+  background-color: rgba(47, 43, 43, 0.2);
+  border-color: transparent;
+  color: rgba(47, 43, 43, 0.5);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Secondary CTA: WISHLIST */
+.anvi-pdp-wishlist-btn {
+  width: 48px;
+  height: 48px;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.2);
+  border-radius: var(--radius-subtle);
+  color: var(--color-charcoal);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.anvi-pdp-wishlist-btn:hover {
+  border-color: var(--color-primary-maroon);
+  color: var(--color-primary-maroon);
+}
+
+.anvi-pdp-wishlist-btn--active {
+  color: var(--color-primary-maroon);
+  border-color: var(--color-primary-maroon);
+  background-color: #FDF2F4;
+}
+
+/* Studio Trust Badges Strip */
+.anvi-pdp-trust-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: var(--space-16);
+  border-top: 1px solid rgba(47, 43, 43, 0.08);
+}
+
+.anvi-pdp-trust-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(47, 43, 43, 0.72);
+}
+
+.anvi-pdp-trust-glyph {
+  font-size: 10px;
+  color: var(--color-champagne-gold);
+}
+
+/* ============================================================
+   5. EDITORIAL ACCORDIONS SECTION (BELOW PRIMARY INFO)
+   ============================================================ */
+.anvi-pdp-details-section {
+  max-width: 860px;
+  margin: 0 auto var(--space-96);
+  border-top: 1px solid rgba(47, 43, 43, 0.12);
+}
+
+.anvi-pdp-accordion-item {
+  border-bottom: 1px solid rgba(47, 43, 43, 0.1);
+}
+
+.anvi-pdp-accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: var(--space-24) 0;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  text-align: left;
+}
+
+.anvi-pdp-accordion-icon {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  color: var(--color-champagne-gold);
+  transition: transform var(--transition-fast);
+}
+
+.anvi-pdp-accordion-trigger[aria-expanded="true"] .anvi-pdp-accordion-icon {
+  transform: rotate(45deg);
+}
+
+.anvi-pdp-accordion-content {
+  display: none;
+  padding-bottom: var(--space-28);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(47, 43, 43, 0.8);
+}
+
+.anvi-pdp-accordion-content.anvi-pdp-accordion-content--open {
+  display: block;
+}
+
+.anvi-pdp-details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.anvi-pdp-details-list-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-8);
+}
+
+.anvi-pdp-details-list-bullet {
+  font-size: 8px;
+  color: var(--color-champagne-gold);
+}
+
+/* ============================================================
+   6. RECOMMENDATIONS: RELATED PRODUCTS & YOU MAY ALSO LIKE
+   ============================================================ */
+.anvi-pdp-recs-section {
+  margin-bottom: var(--space-96);
+  border-top: 1px solid rgba(47, 43, 43, 0.1);
+  padding-top: var(--space-80);
+}
+
+.anvi-pdp-recs-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--space-48);
+}
+
+.anvi-pdp-recs-eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary-maroon);
+  margin-bottom: var(--space-8);
+}
+
+.anvi-pdp-recs-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.4vw, 38px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+  margin: 0;
+}
+
+.anvi-pdp-recs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ============================================================
+   7. SIZE GUIDE MODAL
+   ============================================================ */
+.anvi-pdp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(22, 16, 18, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24);
+}
+
+.anvi-pdp-modal {
+  background-color: var(--color-ivory);
+  border-radius: var(--radius-subtle);
+  max-width: 640px;
+  width: 100%;
+  padding: var(--space-32);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(212, 178, 124, 0.3);
+}
+
+.anvi-pdp-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-20);
+  border-bottom: 1px solid rgba(47, 43, 43, 0.1);
+  padding-bottom: var(--space-12);
+}
+
+.anvi-pdp-modal-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: var(--color-charcoal);
+  margin: 0;
+}
+
+.anvi-pdp-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--color-charcoal);
+}
+
+.anvi-pdp-size-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  margin-top: var(--space-16);
+}
+
+.anvi-pdp-size-table th,
+.anvi-pdp-size-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.1);
+}
+
+.anvi-pdp-size-table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--color-primary-maroon);
+  background-color: var(--color-warm-beige);
+}
+
+/* ============================================================
+   RESPONSIVE COMPOSITION (< 992px and < 640px)
+   ============================================================ */
+@media (max-width: 992px) {
+  .anvi-pdp-spread {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .anvi-pdp-info-panel {
+    position: static;
+  }
+
+  .anvi-pdp-recs-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .anvi-pdp-recs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .anvi-pdp {
+    padding: var(--space-24) 0 var(--space-80);
+  }
+
+  .anvi-pdp-container {
+    padding: 0 var(--space-16);
+  }
+
+  .anvi-pdp-gallery-wrap {
+    flex-direction: column-reverse;
+    gap: var(--space-12);
+  }
+
+  .anvi-pdp-thumbnails {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+    gap: var(--space-8);
+    scrollbar-width: none;
+  }
+
+  .anvi-pdp-thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+
+  .anvi-pdp-thumb-btn {
+    width: 60px;
+  }
+
+  .anvi-pdp-main-frame {
+    cursor: default;
+  }
+
+  .anvi-pdp-zoom-badge {
+    display: none;
+  }
+
+  .anvi-pdp-actions-row {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-ivory);
+    padding: var(--space-12) 16px;
+    padding-bottom: max(var(--space-12), env(safe-area-inset-bottom, 12px));
+    border-top: 1px solid rgba(47, 43, 43, 0.1);
+    z-index: 100;
+    margin: var(--space-16) -16px 0 -16px;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
+  }
+
+  .anvi-pdp-modal {
+    padding: var(--space-20) var(--space-16);
+    max-height: 85dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .anvi-pdp-modal-close {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .anvi-pdp-recs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+

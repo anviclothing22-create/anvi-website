@@ -1,0 +1,690 @@
+/* ==========================================================================
+   ANVI CUSTOMER ACCOUNT EXPERIENCE STYLES
+   Editorial, boutique client suite — never a generic SaaS dashboard.
+   ========================================================================== */
+
+.anvi-account-page {
+  background-color: var(--color-ivory, #FAF7F2);
+  min-height: 80vh;
+  padding: 2.5rem 1.5rem 6rem;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+.anvi-account-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* 1. Breadcrumb */
+.anvi-account-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.55);
+  margin-bottom: 2rem;
+}
+
+.anvi-account-breadcrumb a {
+  color: inherit;
+  transition: color 150ms ease;
+}
+
+.anvi-account-breadcrumb a:hover {
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-account-breadcrumb-sep {
+  opacity: 0.4;
+}
+
+.anvi-account-breadcrumb-current {
+  color: var(--color-charcoal, #2F2B2B);
+  font-weight: 500;
+}
+
+/* 2. Account Hero / Client Card */
+.anvi-account-hero {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 4px;
+  padding: 2rem 2.25rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(22, 16, 18, 0.03);
+}
+
+.anvi-account-hero-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.anvi-account-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.anvi-account-greeting {
+  font-family: var(--font-serif);
+  font-size: 1.625rem;
+  font-weight: 400;
+  color: var(--color-maroon, #5B1727);
+  margin: 0 0 0.25rem 0;
+}
+
+.anvi-account-meta {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: rgba(47, 43, 43, 0.65);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.anvi-account-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #8C6A38;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.anvi-account-signout-btn {
+  background: transparent;
+  border: 1px solid rgba(47, 43, 43, 0.16);
+  border-radius: 2px;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.7);
+  cursor: pointer;
+  transition: all 150ms ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.anvi-account-signout-btn:hover {
+  border-color: #B3261E;
+  color: #B3261E;
+}
+
+/* 3. Navigation Tabs (Mobile scrollable, Desktop inline) */
+.anvi-account-tabs-wrap {
+  border-bottom: 1px solid rgba(47, 43, 43, 0.1);
+  margin-bottom: 2.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.anvi-account-tabs-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.anvi-account-tabs {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: max-content;
+}
+
+.anvi-account-tab-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  min-height: 44px;
+  padding: 0.75rem 0.25rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.6);
+  position: relative;
+  transition: color 150ms ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.anvi-account-tab-btn:hover {
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-account-tab-btn--active {
+  color: var(--color-maroon, #5B1727);
+  font-weight: 600;
+}
+
+.anvi-account-tab-btn--active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-maroon, #5B1727);
+}
+
+.anvi-account-tab-count {
+  background-color: rgba(91, 23, 39, 0.08);
+  color: var(--color-maroon, #5B1727);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.1rem 0.45rem;
+  border-radius: 10px;
+}
+
+/* 4. Orders Section */
+.anvi-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.anvi-order-card {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(22, 16, 18, 0.02);
+}
+
+.anvi-order-card-header {
+  padding: 1.25rem 1.75rem;
+  background-color: #FAF5EE;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.anvi-order-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.anvi-order-id-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(47, 43, 43, 0.5);
+  margin-bottom: 0.15rem;
+}
+
+.anvi-order-id-val {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-order-date-val {
+  font-size: 0.875rem;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+.anvi-order-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.anvi-order-status-pill--prep {
+  background-color: #FEF7ED;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.anvi-order-status-pill--delivered {
+  background-color: #F0FDF4;
+  color: #166534;
+  border: 1px solid #BBF7D0;
+}
+
+.anvi-order-card-body {
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.anvi-order-items-preview {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.anvi-order-item-thumb {
+  width: 60px;
+  aspect-ratio: 3 / 4;
+  border-radius: 2px;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  object-fit: cover;
+  background-color: #F1E8DC;
+}
+
+.anvi-order-item-desc {
+  display: flex;
+  flex-direction: column;
+}
+
+.anvi-order-item-name {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 0.2rem 0;
+}
+
+.anvi-order-item-qty {
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.6);
+}
+
+.anvi-order-card-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.anvi-order-total-block {
+  text-align: right;
+}
+
+.anvi-order-total-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(47, 43, 43, 0.5);
+}
+
+.anvi-order-total-val {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-order-detail-btn {
+  background: transparent;
+  border: 1px solid var(--color-maroon, #5B1727);
+  color: var(--color-maroon, #5B1727);
+  padding: 0.625rem 1.25rem;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 150ms ease;
+  white-space: nowrap;
+}
+
+.anvi-order-detail-btn:hover {
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+}
+
+/* 5. Order Details Modal */
+.anvi-order-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(22, 16, 18, 0.65);
+  backdrop-filter: blur(5px);
+  z-index: 1080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: anviModalFade 200ms ease;
+}
+
+.anvi-order-modal {
+  background-color: #FAF7F2;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  border-radius: 4px;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(22, 16, 18, 0.25);
+  border: 1px solid rgba(47, 43, 43, 0.1);
+  padding: 2rem;
+  position: relative;
+}
+
+.anvi-order-modal-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.anvi-order-modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-maroon, #5B1727);
+  margin: 0;
+}
+
+.anvi-order-modal-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-charcoal, #2F2B2B);
+  padding: 0.25rem;
+}
+
+/* Modal Items Table */
+.anvi-order-modal-items {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.anvi-order-modal-item-row {
+  display: grid;
+  grid-template-columns: 54px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.06);
+}
+
+.anvi-order-modal-item-row:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.anvi-order-modal-thumb {
+  width: 54px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+/* Modal Summary / Info Grid */
+.anvi-order-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.anvi-order-modal-card {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 4px;
+  padding: 1.25rem;
+}
+
+.anvi-order-modal-card-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-maroon, #5B1727);
+  margin: 0 0 0.5rem 0;
+}
+
+.anvi-order-modal-card-text {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgba(47, 43, 43, 0.75);
+  margin: 0;
+}
+
+/* 6. Profile Section */
+.anvi-profile-card {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 4px;
+  padding: 2rem;
+  max-width: 680px;
+}
+
+.anvi-profile-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--color-maroon, #5B1727);
+  margin: 0 0 1.5rem 0;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  padding-bottom: 0.875rem;
+}
+
+.anvi-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.anvi-profile-full {
+  grid-column: 1 / -1;
+}
+
+.anvi-profile-btn {
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.anvi-profile-btn:hover {
+  background-color: var(--color-maroon-darker, #420F1B);
+}
+
+.anvi-profile-saved-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: 1rem;
+  font-size: 0.8125rem;
+  color: #2F6F4E;
+  font-weight: 500;
+}
+
+/* 7. Saved Addresses Section */
+.anvi-addresses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.anvi-address-card {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 4px;
+  padding: 1.75rem;
+  position: relative;
+}
+
+.anvi-address-card--default {
+  border-color: rgba(91, 23, 39, 0.35);
+  box-shadow: 0 4px 15px rgba(91, 23, 39, 0.04);
+}
+
+.anvi-address-badge {
+  display: inline-block;
+  background-color: rgba(91, 23, 39, 0.08);
+  color: var(--color-maroon, #5B1727);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  margin-bottom: 0.75rem;
+}
+
+.anvi-address-name {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 0.35rem 0;
+}
+
+.anvi-address-text {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgba(47, 43, 43, 0.7);
+  margin: 0 0 1.25rem 0;
+}
+
+.anvi-address-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid rgba(47, 43, 43, 0.06);
+  padding-top: 0.875rem;
+}
+
+.anvi-address-action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-maroon, #5B1727);
+  text-decoration: underline;
+  padding: 0;
+}
+
+.anvi-address-action-btn--delete {
+  color: rgba(47, 43, 43, 0.5);
+}
+
+.anvi-address-action-btn--delete:hover {
+  color: #B3261E;
+}
+
+.anvi-add-address-card {
+  border: 1px dashed rgba(47, 43, 43, 0.2);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 150ms ease;
+  min-height: 200px;
+}
+
+.anvi-add-address-card:hover {
+  border-color: var(--color-maroon, #5B1727);
+  background-color: #FFFFFF;
+}
+
+.anvi-add-address-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+  margin-top: 0.5rem;
+}
+
+/* 8. Responsive Breakpoints */
+@media (max-width: 800px) {
+  .anvi-account-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .anvi-account-signout-btn {
+    align-self: flex-start;
+  }
+
+  .anvi-order-card-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .anvi-order-card-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .anvi-addresses-grid,
+  .anvi-order-modal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .anvi-account-page {
+    padding: 1.5rem 1rem calc(4rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .anvi-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes anviModalFade {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,787 @@
+/* ==========================================================================
+   ANVI CHECKOUT PAGE STYLES
+   Mobile-first, trust-focused, minimalist luxury checkout.
+   ========================================================================== */
+
+.anvi-checkout-page {
+  min-height: 100vh;
+  background-color: var(--color-ivory, #FAF7F2);
+  color: var(--color-charcoal, #2F2B2B);
+  font-family: var(--font-sans);
+}
+
+/* 1. Minimalist Checkout Header */
+.anvi-checkout-header {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  padding: 1rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.anvi-checkout-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.anvi-checkout-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.anvi-checkout-logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+.anvi-checkout-trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.65);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.anvi-checkout-trust-badge-icon {
+  color: #2F6F4E;
+}
+
+.anvi-checkout-return-cart {
+  font-size: 0.8125rem;
+  color: var(--color-maroon, #5B1727);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 150ms ease;
+}
+
+.anvi-checkout-return-cart:hover {
+  opacity: 0.75;
+}
+
+/* 2. Mobile Order Summary Dropdown Banner */
+.anvi-checkout-mobile-summary-toggle {
+  display: none;
+  width: 100%;
+  background-color: #F4ECE1;
+  border-bottom: 1px solid #E5D7C5;
+  padding: 0.875rem 1.25rem;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+.anvi-checkout-mobile-summary-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-maroon, #5B1727);
+  font-weight: 500;
+}
+
+.anvi-checkout-mobile-summary-total {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-checkout-mobile-summary-drawer {
+  display: none;
+  background-color: #FAF5EE;
+  border-bottom: 1px solid #E5D7C5;
+  padding: 1.25rem;
+}
+
+.anvi-checkout-mobile-summary-drawer--open {
+  display: block;
+}
+
+/* 3. Main Checkout Grid (Desktop 2 Columns) */
+.anvi-checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  min-height: calc(100vh - 65px);
+}
+
+/* 4. Left Column: Form Steps */
+.anvi-checkout-main {
+  padding: 2.5rem 3rem 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.anvi-checkout-section {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 4px;
+  padding: 1.75rem;
+}
+
+.anvi-checkout-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.06);
+  padding-bottom: 0.75rem;
+}
+
+.anvi-checkout-section-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-maroon, #5B1727);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.anvi-checkout-section-num {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.anvi-checkout-section-subtitle {
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.55);
+}
+
+/* Form Fields */
+.anvi-checkout-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.anvi-checkout-form-grid--full {
+  grid-column: 1 / -1;
+}
+
+.anvi-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.anvi-form-group--full {
+  grid-column: 1 / -1;
+}
+
+.anvi-form-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(47, 43, 43, 0.8);
+  letter-spacing: 0.02em;
+}
+
+.anvi-form-input {
+  height: 44px;
+  padding: 0 0.875rem;
+  border: 1px solid rgba(47, 43, 43, 0.18);
+  border-radius: 2px;
+  background-color: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--color-charcoal, #2F2B2B);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.anvi-form-input:focus {
+  outline: none;
+  border-color: var(--color-maroon, #5B1727);
+  box-shadow: 0 0 0 1px var(--color-maroon, #5B1727);
+}
+
+.anvi-form-input::placeholder {
+  color: rgba(47, 43, 43, 0.4);
+}
+
+.anvi-form-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.7);
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.anvi-form-checkbox {
+  accent-color: var(--color-maroon, #5B1727);
+  width: 15px;
+  height: 15px;
+}
+
+/* 5. Delivery Methods (Radio options) */
+.anvi-delivery-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.anvi-delivery-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(47, 43, 43, 0.14);
+  border-radius: 3px;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.anvi-delivery-option--active {
+  border-color: var(--color-maroon, #5B1727);
+  background-color: rgba(91, 23, 39, 0.03);
+}
+
+.anvi-delivery-option-left {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.anvi-delivery-option-radio {
+  accent-color: var(--color-maroon, #5B1727);
+}
+
+.anvi-delivery-option-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0;
+}
+
+.anvi-delivery-option-desc {
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.6);
+  margin: 0.15rem 0 0 0;
+}
+
+.anvi-delivery-option-price {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+}
+
+/* 6. Payment Methods (Tabs / Radio options) */
+.anvi-payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.anvi-payment-option {
+  border: 1px solid rgba(47, 43, 43, 0.14);
+  border-radius: 3px;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.anvi-payment-option--active {
+  border-color: var(--color-maroon, #5B1727);
+  background-color: rgba(91, 23, 39, 0.02);
+}
+
+.anvi-payment-option-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.anvi-payment-option-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.anvi-payment-option-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+.anvi-payment-badges {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.anvi-payment-badge {
+  font-size: 0.6875rem;
+  padding: 0.15rem 0.4rem;
+  background-color: rgba(47, 43, 43, 0.06);
+  border-radius: 2px;
+  color: rgba(47, 43, 43, 0.7);
+  font-weight: 500;
+}
+
+.anvi-payment-option-content {
+  margin-top: 1rem;
+  padding-top: 0.875rem;
+  border-top: 1px dashed rgba(47, 43, 43, 0.12);
+  font-size: 0.8125rem;
+  color: rgba(47, 43, 43, 0.7);
+  line-height: 1.5;
+}
+
+/* Place Order CTA Row */
+.anvi-checkout-cta-wrap {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.anvi-checkout-place-btn {
+  width: 100%;
+  height: 56px;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 200ms ease, transform 150ms ease;
+  box-shadow: 0 4px 15px rgba(91, 23, 39, 0.2);
+}
+
+.anvi-checkout-place-btn:hover {
+  background-color: var(--color-maroon-darker, #420F1B);
+  transform: translateY(-1px);
+}
+
+.anvi-checkout-place-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Reassurance Strip */
+.anvi-checkout-reassurance {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(47, 43, 43, 0.08);
+}
+
+.anvi-checkout-reassurance-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.65);
+}
+
+.anvi-checkout-reassurance-icon {
+  color: var(--color-gold, #D4B27C);
+  flex-shrink: 0;
+}
+
+/* 7. Right Column: Order Summary (Desktop Sticky) */
+.anvi-checkout-sidebar {
+  background-color: #FAF5EE;
+  border-left: 1px solid rgba(47, 43, 43, 0.08);
+  padding: 2.5rem 2rem;
+  position: sticky;
+  top: 65px;
+  height: calc(100vh - 65px);
+  overflow-y: auto;
+}
+
+.anvi-checkout-sidebar-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 1.5rem 0;
+}
+
+/* Product list */
+.anvi-checkout-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.1);
+  margin-bottom: 1.5rem;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.anvi-checkout-item {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 0.875rem;
+  align-items: center;
+}
+
+.anvi-checkout-item-thumb-wrap {
+  position: relative;
+  width: 60px;
+  aspect-ratio: 3 / 4;
+  background-color: #F1E8DC;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 2px;
+  overflow: visible;
+}
+
+.anvi-checkout-item-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+.anvi-checkout-item-qty-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FFFFFF;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.anvi-checkout-item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.anvi-checkout-item-name {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-charcoal, #2F2B2B);
+  line-height: 1.35;
+  margin: 0 0 0.2rem 0;
+}
+
+.anvi-checkout-item-variant {
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.55);
+}
+
+.anvi-checkout-item-price {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+/* Totals */
+.anvi-checkout-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.anvi-checkout-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.875rem;
+  color: rgba(47, 43, 43, 0.7);
+}
+
+.anvi-checkout-total-row--highlight {
+  color: #2F6F4E;
+  font-weight: 500;
+}
+
+.anvi-checkout-total-row--final {
+  border-top: 1px solid rgba(47, 43, 43, 0.12);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.anvi-checkout-final-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+.anvi-checkout-final-amount {
+  font-family: var(--font-serif);
+  font-size: 1.625rem;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-checkout-tax-note {
+  font-size: 0.75rem;
+  color: rgba(47, 43, 43, 0.5);
+  margin-top: 0.35rem;
+}
+
+/* 8. Success / Confirmation Screen */
+.anvi-checkout-success {
+  max-width: 680px;
+  margin: 4rem auto;
+  padding: 3rem 2rem;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 4px;
+  text-align: center;
+  box-shadow: 0 6px 24px rgba(22, 16, 18, 0.04);
+}
+
+.anvi-checkout-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: rgba(47, 111, 78, 0.1);
+  color: #2F6F4E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.anvi-checkout-success-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--color-maroon, #5B1727);
+  margin: 0 0 0.5rem 0;
+}
+
+.anvi-checkout-success-order-id {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: rgba(47, 43, 43, 0.6);
+  margin: 0 0 1.75rem 0;
+}
+
+.anvi-checkout-success-order-id strong {
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+.anvi-checkout-success-card {
+  background-color: #FAF7F2;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.anvi-checkout-success-card-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-maroon, #5B1727);
+  margin: 0 0 0.75rem 0;
+}
+
+.anvi-checkout-success-card-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(47, 43, 43, 0.75);
+  margin: 0;
+}
+
+.anvi-checkout-success-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background-color: var(--color-maroon, #5B1727);
+  color: #FAF7F2;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background-color 200ms ease;
+}
+
+.anvi-checkout-success-btn:hover {
+  background-color: var(--color-maroon-darker, #420F1B);
+}
+
+.anvi-checkout-success-btn--secondary {
+  background-color: transparent;
+  border: 1px solid rgba(91, 23, 39, 0.3);
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-checkout-success-btn--secondary:hover {
+  background-color: rgba(91, 23, 39, 0.05);
+  color: var(--color-maroon, #5B1727);
+}
+
+.anvi-checkout-success-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+/* Purchased Items Breakdown in Confirmation */
+.anvi-checkout-confirmation-items {
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(47, 43, 43, 0.08);
+  padding-top: 1.25rem;
+  text-align: left;
+}
+
+.anvi-checkout-confirmation-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0;
+}
+
+.anvi-checkout-confirmation-thumb {
+  width: 48px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 2px;
+  background-color: #F0EAE1;
+}
+
+.anvi-checkout-confirmation-details {
+  flex: 1;
+}
+
+.anvi-checkout-confirmation-name {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 2px;
+}
+
+.anvi-checkout-confirmation-meta {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(47, 43, 43, 0.6);
+}
+
+.anvi-checkout-confirmation-price {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-maroon, #5B1727);
+}
+
+/* Payment Failure Simulation Banner */
+.anvi-checkout-failure-banner {
+  background-color: #FFF5F5;
+  border: 1px solid #FED7D7;
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: #C53030;
+}
+
+.anvi-checkout-failure-retry-btn {
+  background-color: #C53030;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 2px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* 9. Responsive Breakpoints */
+@media (max-width: 960px) {
+  .anvi-checkout-container {
+    grid-template-columns: 1fr;
+  }
+
+  .anvi-checkout-sidebar {
+    display: none;
+  }
+
+  .anvi-checkout-mobile-summary-toggle {
+    display: flex;
+    min-height: 48px;
+  }
+
+  .anvi-checkout-main {
+    padding: 1.25rem 1rem calc(3rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .anvi-checkout-reassurance {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .anvi-checkout-form-grid {
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+
+  .anvi-checkout-section {
+    padding: 1rem;
+  }
+
+  .anvi-checkout-trust-badge {
+    display: none;
+  }
+
+  .anvi-checkout-place-btn {
+    min-height: 52px;
+    font-size: 0.875rem;
+  }
+}
+

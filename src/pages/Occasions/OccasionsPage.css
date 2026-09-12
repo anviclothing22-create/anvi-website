@@ -1,0 +1,644 @@
+/* ==========================================================================
+   ANVI Occasions / Wardrobe Directory Page Styles
+   Streamlined visual-first luxury styling, life moments, minimal text
+   ========================================================================== */
+
+.anvi-occasions-page {
+  background-color: var(--color-background, #FAF7F2);
+  color: var(--color-text-primary, #2F2B2B);
+  min-height: 100vh;
+  padding-bottom: var(--space-16, 4rem);
+}
+
+/* --------------------------------------------------------------------------
+   1. HERO SECTION (Directory View)
+   -------------------------------------------------------------------------- */
+.anvi-occasions-hero {
+  padding: var(--space-12, 3rem) var(--space-6, 1.5rem) var(--space-8, 2rem);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.anvi-occasions-pretitle {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-burgundy, #5B1727);
+  margin-bottom: var(--space-2, 0.5rem);
+  display: block;
+}
+
+.anvi-occasions-title {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 var(--space-2, 0.5rem);
+}
+
+.anvi-occasions-lead {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--color-text-secondary, #6B6565);
+  margin: 0 auto var(--space-6, 1.5rem);
+}
+
+/* Quick Jump Pills */
+.anvi-occasions-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.anvi-occasions-pill-link {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(47, 43, 43, 0.12);
+  background: #FFFFFF;
+  color: var(--color-text-primary, #2F2B2B);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.anvi-occasions-pill-link:hover {
+  background: var(--color-burgundy, #5B1727);
+  color: #FFFFFF;
+  border-color: var(--color-burgundy, #5B1727);
+}
+
+/* --------------------------------------------------------------------------
+   2. MOMENT CARDS (Directory View)
+   -------------------------------------------------------------------------- */
+.anvi-occasions-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-6, 1.5rem);
+}
+
+.anvi-occasions-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12, 3rem);
+}
+
+.anvi-occasion-moment-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.3s ease;
+}
+
+@media (min-width: 900px) {
+  .anvi-occasion-moment-card {
+    grid-template-columns: 460px 1fr;
+  }
+
+  .anvi-occasion-moment-card.is-reversed {
+    grid-template-columns: 1fr 460px;
+  }
+
+  .anvi-occasion-moment-card.is-reversed .anvi-occasion-moment-visual {
+    order: 2;
+  }
+
+  .anvi-occasion-moment-card.is-reversed .anvi-occasion-moment-content {
+    order: 1;
+  }
+}
+
+/* Visual Column */
+.anvi-occasion-moment-visual {
+  position: relative;
+  min-height: 340px;
+  overflow: hidden;
+  background: #EFECE6;
+}
+
+.anvi-occasion-moment-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.anvi-occasion-moment-card:hover .anvi-occasion-moment-img {
+  transform: scale(1.03);
+}
+
+.anvi-occasion-moment-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(47, 43, 43, 0.85);
+  backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 2px;
+}
+
+/* Content Column */
+.anvi-occasion-moment-content {
+  padding: var(--space-6, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .anvi-occasion-moment-content {
+    padding: var(--space-8, 2rem) var(--space-10, 2.5rem);
+  }
+}
+
+.anvi-occasion-moment-header {
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.anvi-occasion-moment-seq {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-burgundy, #5B1727);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.anvi-occasion-moment-title {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.75rem, 2.8vw, 2.3rem);
+  font-weight: 400;
+  line-height: 1.18;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 0.25rem;
+}
+
+.anvi-occasion-moment-subtitle {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: 500;
+  color: var(--color-text-secondary, #6B6565);
+  display: block;
+}
+
+/* Single Concise Styling Tip */
+.anvi-occasion-mini-tip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--color-charcoal, #2F2B2B);
+  background: #FAF7F2;
+  border-left: 2px solid var(--color-gold, #D4B27C);
+  padding: 0.6rem 0.85rem;
+  margin: var(--space-4, 1rem) 0 var(--space-5, 1.25rem);
+  border-radius: 0 2px 2px 0;
+}
+
+.anvi-occasion-tip-icon {
+  color: var(--color-gold, #D4B27C);
+  font-size: 0.75rem;
+}
+
+/* Lookbook Mini Preview Strip */
+.anvi-occasion-preview-strip {
+  margin-bottom: var(--space-6, 1.5rem);
+}
+
+.anvi-occasion-preview-label {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary, #6B6565);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.anvi-occasion-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  max-width: 320px;
+}
+
+.anvi-occasion-preview-thumb {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #EFECE6;
+  text-decoration: none;
+  display: block;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+}
+
+.anvi-occasion-preview-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.anvi-occasion-preview-thumb:hover img {
+  transform: scale(1.06);
+}
+
+.anvi-occasion-preview-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  padding: 0.4rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.anvi-occasion-preview-thumb:hover .anvi-occasion-preview-thumb-overlay {
+  opacity: 1;
+}
+
+.anvi-occasion-preview-thumb-title {
+  color: #FFFFFF;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.625rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Card Action CTA */
+.anvi-occasion-moment-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-burgundy, #5B1727);
+  color: #FFFFFF;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.4rem;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.anvi-occasion-moment-cta:hover {
+  background: #46111E;
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   3. DEDICATED OCCASION LOOKBOOK VIEW (/occasions/:slug)
+   -------------------------------------------------------------------------- */
+.anvi-occasion-detail-header {
+  background: #FFFFFF;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  padding: var(--space-6, 1.5rem);
+}
+
+.anvi-occasion-detail-header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.anvi-occasion-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary, #6B6565);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.anvi-occasion-breadcrumbs a {
+  color: var(--color-text-secondary, #6B6565);
+  text-decoration: none;
+}
+
+.anvi-occasion-breadcrumbs a:hover {
+  color: var(--color-burgundy, #5B1727);
+}
+
+.anvi-occasion-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  margin-bottom: var(--space-4, 1rem);
+  scrollbar-width: thin;
+}
+
+.anvi-occasion-switcher-btn {
+  white-space: nowrap;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 0.9rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(47, 43, 43, 0.12);
+  background: #FFFFFF;
+  color: var(--color-text-primary, #2F2B2B);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.anvi-occasion-switcher-btn.is-active {
+  background: var(--color-burgundy, #5B1727);
+  color: #FFFFFF;
+  border-color: var(--color-burgundy, #5B1727);
+}
+
+/* Clean Lookbook Hero Banner */
+.anvi-occasion-lookbook-clean-hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 0.75rem);
+}
+
+@media (min-width: 768px) {
+  .anvi-occasion-lookbook-clean-hero {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+.anvi-occasion-lookbook-badge {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-burgundy, #5B1727);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.anvi-occasion-lookbook-title {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 0.25rem;
+}
+
+.anvi-occasion-lookbook-tagline {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--color-text-secondary, #6B6565);
+  margin: 0;
+}
+
+/* Chic 1-Line Styling Tip Banner */
+.anvi-occasion-concierge-tip-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FAF7F2;
+  border: 1px solid rgba(212, 178, 124, 0.4);
+  border-radius: 4px;
+  padding: 0.6rem 1rem;
+}
+
+.anvi-occasion-tip-text {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+/* Topbar & Filter Strip */
+.anvi-occasion-grid-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3, 0.75rem) 0;
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  margin-bottom: var(--space-6, 1.5rem);
+}
+
+.anvi-occasion-piece-count {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary, #6B6565);
+}
+
+.anvi-occasion-sort-select {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.6875rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(47, 43, 43, 0.15);
+  border-radius: 2px;
+  background: #FFFFFF;
+  color: var(--color-text-primary, #2F2B2B);
+  cursor: pointer;
+}
+
+/* Product Grid */
+.anvi-occasion-products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4, 1rem);
+}
+
+@media (min-width: 768px) {
+  .anvi-occasion-products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6, 1.5rem);
+  }
+}
+
+@media (min-width: 1100px) {
+  .anvi-occasion-products-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-8, 2rem);
+  }
+}
+
+/* Next Occasion Teaser Rail */
+.anvi-occasion-next-rail {
+  margin-top: var(--space-12, 3rem);
+  padding-top: var(--space-8, 2rem);
+  border-top: 1px solid rgba(47, 43, 43, 0.08);
+}
+
+.anvi-occasion-next-rail h3 {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: 1.5rem;
+  color: var(--color-charcoal, #2F2B2B);
+  text-align: center;
+  margin-bottom: var(--space-6, 1.5rem);
+}
+
+.anvi-occasion-next-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .anvi-occasion-next-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.anvi-occasion-mini-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.anvi-occasion-mini-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.anvi-occasion-mini-thumb {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #EFECE6;
+}
+
+.anvi-occasion-mini-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.anvi-occasion-mini-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.anvi-occasion-mini-body h4 {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: 1.15rem;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 0 0 0.25rem;
+}
+
+.anvi-occasion-mini-body p {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary, #6B6565);
+  margin: 0 0 0.75rem;
+}
+
+.anvi-occasion-mini-link {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-burgundy, #5B1727);
+}
+
+/* --------------------------------------------------------------------------
+   4. SLEEK 1-LINE CONCIERGE STRIP (Directory Bottom)
+   -------------------------------------------------------------------------- */
+.anvi-occasions-concierge-strip {
+  margin-top: var(--space-12, 3rem);
+  background: #2F2B2B;
+  color: #FAF7F2;
+  border-radius: 2px;
+  padding: 1.25rem var(--space-6, 1.5rem);
+}
+
+.anvi-occasions-concierge-strip-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .anvi-occasions-concierge-strip-inner {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+.anvi-occasions-concierge-strip-tag {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold, #D4B27C);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.anvi-occasions-concierge-strip-text p {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: var(--text-xs, 0.75rem);
+  color: #FAF7F2;
+  margin: 0;
+}
+
+.anvi-occasions-concierge-strip-btn {
+  background: var(--color-gold, #D4B27C);
+  color: #2F2B2B;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.25rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.anvi-occasions-concierge-strip-btn:hover {
+  background: #E5C799;
+  transform: translateY(-1px);
+}

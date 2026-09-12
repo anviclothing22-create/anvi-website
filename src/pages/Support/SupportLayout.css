@@ -1,0 +1,303 @@
+/* ==========================================================================
+   ANVI Support, Policy & Client Care Suite Layout
+   Color Palette: Deep Maroon #5B1727, Ivory #FAF7F2, Beige #F1E8DC, Gold #D4B27C
+   ========================================================================== */
+
+.anvi-support-wrapper {
+  background-color: var(--color-ivory);
+  min-height: 80vh;
+  color: var(--color-charcoal);
+  display: flex;
+  flex-direction: column;
+}
+
+.anvi-support-container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 var(--space-24);
+}
+
+/* Breadcrumbs */
+.anvi-support-breadcrumbs-bar {
+  border-bottom: 1px solid var(--color-border-subtle);
+  background-color: #f7f3ec;
+  padding: 12px 0;
+}
+
+.anvi-support-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7a736e;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.anvi-breadcrumb-link {
+  color: #7a736e;
+  transition: color var(--transition-fast);
+}
+
+.anvi-breadcrumb-link:hover {
+  color: var(--color-deep-maroon);
+}
+
+.anvi-breadcrumb-separator {
+  color: #c7beaf;
+}
+
+.anvi-breadcrumb-active {
+  color: var(--color-deep-maroon);
+  font-weight: 600;
+}
+
+/* Hero Section */
+.anvi-support-hero {
+  background: linear-gradient(180deg, #F5EFEB 0%, var(--color-ivory) 100%);
+  padding: 48px 0 32px 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  text-align: center;
+}
+
+.anvi-support-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary-maroon);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.anvi-support-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-deep-maroon);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.anvi-support-subtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #5d5652;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.anvi-support-updated {
+  margin-top: 14px;
+  font-size: 0.78rem;
+  color: #8c827a;
+  letter-spacing: 0.04em;
+}
+
+.anvi-support-updated span {
+  font-weight: 500;
+  color: var(--color-charcoal);
+}
+
+/* Sub-Navigation Tabs Bar */
+.anvi-support-nav-bar {
+  position: sticky;
+  top: 70px; /* Aligned with standard 70px desktop sticky header */
+  z-index: 20;
+  background-color: rgba(250, 247, 242, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-subtle);
+  box-shadow: 0 4px 12px rgba(47, 43, 43, 0.02);
+}
+
+.anvi-support-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 10px 0;
+}
+
+.anvi-support-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.anvi-support-tab-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 40px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #615a55;
+  background: transparent;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.anvi-support-tab-icon {
+  color: #8c827a;
+  transition: color var(--transition-fast);
+}
+
+.anvi-support-tab-item:hover {
+  background-color: var(--color-warm-beige);
+  color: var(--color-deep-maroon);
+}
+
+.anvi-support-tab-item:hover .anvi-support-tab-icon {
+  color: var(--color-deep-maroon);
+}
+
+.anvi-support-tab-item--active {
+  background-color: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  border-color: var(--color-deep-maroon);
+}
+
+.anvi-support-tab-item--active .anvi-support-tab-icon {
+  color: var(--color-champagne-gold);
+}
+
+.anvi-support-tab-item--active:hover {
+  background-color: var(--color-primary-maroon);
+  color: var(--color-ivory);
+}
+
+.anvi-support-tab-item--active:hover .anvi-support-tab-icon {
+  color: var(--color-champagne-gold);
+}
+
+/* Main Content Area */
+.anvi-support-content {
+  padding: 48px 0 80px 0;
+  flex: 1;
+}
+
+/* Concierge Strip */
+.anvi-support-concierge-strip {
+  background-color: var(--color-warm-beige);
+  border-top: 1px solid #e5dbcd;
+  padding: 40px 0;
+  margin-top: auto;
+}
+
+.anvi-concierge-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.anvi-concierge-text {
+  max-width: 620px;
+}
+
+.anvi-concierge-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--color-primary-maroon);
+  margin-bottom: 6px;
+}
+
+.anvi-concierge-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--color-deep-maroon);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.anvi-concierge-desc {
+  font-size: 0.9rem;
+  color: #635b55;
+  line-height: 1.5;
+}
+
+.anvi-concierge-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.anvi-btn-concierge-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #1e6d42; /* Refined dark forest green */
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all var(--transition-fast);
+}
+
+.anvi-btn-concierge-whatsapp:hover {
+  background-color: #165332;
+  box-shadow: 0 4px 12px rgba(30, 109, 66, 0.25);
+}
+
+.anvi-btn-concierge-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--color-deep-maroon);
+  border: 1px solid var(--color-deep-maroon);
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all var(--transition-fast);
+}
+
+.anvi-btn-concierge-call:hover {
+  background-color: var(--color-deep-maroon);
+  color: var(--color-ivory);
+}
+
+@media (max-width: 768px) {
+  .anvi-support-hero {
+    padding: 32px 0 24px 0;
+    text-align: left;
+  }
+
+  .anvi-support-nav-bar {
+    top: 58px;
+  }
+
+  .anvi-concierge-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .anvi-concierge-actions {
+    width: 100%;
+  }
+
+  .anvi-btn-concierge-whatsapp,
+  .anvi-btn-concierge-call {
+    flex: 1;
+    justify-content: center;
+  }
+}

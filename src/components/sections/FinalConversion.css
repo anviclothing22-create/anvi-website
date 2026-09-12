@@ -1,0 +1,236 @@
+/**
+ * ANVI CLOTHING — V2 FINAL HOMEPAGE CONVERSION SECTION
+ * Background: Deep Maroon #5B1727
+ * Headline: "Find something that feels like you."
+ * Final Emotional Transition into Shopping • Visually Calm • Zero Urgency Tactics
+ */
+
+.anvi-final-conversion-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-deep-maroon);
+  background: linear-gradient(
+    180deg,
+    #5B1727 0%,
+    #4E1320 50%,
+    #3D0E19 100%
+  );
+  color: var(--color-ivory);
+  padding: var(--space-120) 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(212, 178, 124, 0.18);
+}
+
+/* Subtle, calm ambient gold glow */
+.anvi-final-conversion-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(212, 178, 124, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.anvi-final-conversion-container {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 var(--space-32);
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Restrained Brand Emblem / Eyebrow */
+.anvi-final-conversion-emblem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-12);
+  margin-bottom: var(--space-28);
+}
+
+.anvi-final-conversion-emblem-line {
+  width: 32px;
+  height: 1px;
+  background-color: rgba(212, 178, 124, 0.4);
+}
+
+.anvi-final-conversion-emblem-glyph {
+  font-size: 10px;
+  color: var(--color-champagne-gold);
+}
+
+.anvi-final-conversion-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-champagne-gold);
+}
+
+/* Large Editorial Serif Display Headline */
+.anvi-final-conversion-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(42px, 5.8vw, 76px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  margin: 0 0 var(--space-24) 0;
+  max-width: 780px;
+}
+
+.anvi-final-conversion-headline-line1 {
+  display: block;
+}
+
+.anvi-final-conversion-headline-line2 {
+  display: block;
+  font-style: italic;
+  color: var(--color-champagne-gold);
+}
+
+/* Very Short, Poetic Supporting Whisper */
+.anvi-final-conversion-copy {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(250, 247, 242, 0.85);
+  margin: 0 0 var(--space-48) 0;
+  max-width: 500px;
+}
+
+/* Dual Calm Action Buttons */
+.anvi-final-conversion-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-20);
+  flex-wrap: wrap;
+}
+
+/* Primary CTA: SHOP WOMEN */
+.anvi-final-conversion-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-12);
+  background-color: var(--color-ivory);
+  color: var(--color-deep-maroon);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: var(--radius-subtle);
+  text-decoration: none;
+  border: 1px solid var(--color-ivory);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+  transition: 
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.anvi-final-conversion-btn-primary:hover {
+  background-color: var(--color-champagne-gold);
+  border-color: var(--color-champagne-gold);
+  color: var(--color-deep-maroon);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
+}
+
+.anvi-final-conversion-arrow {
+  transition: transform var(--transition-fast);
+  display: inline-block;
+  font-size: 14px;
+}
+
+.anvi-final-conversion-btn-primary:hover .anvi-final-conversion-arrow {
+  transform: translateX(4px);
+}
+
+.anvi-final-conversion-btn-primary:focus-visible {
+  outline: 2px solid var(--color-champagne-gold);
+  outline-offset: 4px;
+}
+
+/* Secondary CTA: EXPLORE COLLECTIONS */
+.anvi-final-conversion-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-12);
+  background-color: transparent;
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: var(--radius-subtle);
+  text-decoration: none;
+  border: 1px solid rgba(212, 178, 124, 0.45);
+  transition: 
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.anvi-final-conversion-btn-secondary:hover {
+  background-color: rgba(212, 178, 124, 0.12);
+  border-color: var(--color-champagne-gold);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.anvi-final-conversion-btn-secondary:focus-visible {
+  outline: 2px solid var(--color-champagne-gold);
+  outline-offset: 4px;
+}
+
+/* ============================================================
+   RESPONSIVE COMPOSITION (< 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  .anvi-final-conversion-section {
+    padding: var(--space-80) 0 var(--space-96);
+  }
+
+  .anvi-final-conversion-container {
+    padding: 0 var(--space-20);
+  }
+
+  .anvi-final-conversion-headline {
+    font-size: 38px;
+    margin-bottom: var(--space-16);
+  }
+
+  .anvi-final-conversion-copy {
+    font-size: 15px;
+    margin-bottom: var(--space-36);
+  }
+
+  .anvi-final-conversion-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: var(--space-16);
+  }
+
+  .anvi-final-conversion-btn-primary,
+  .anvi-final-conversion-btn-secondary {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 15px var(--space-20);
+  }
+}

@@ -1,0 +1,226 @@
+/* ==========================================================================
+   ANVI Premium 404 Page
+   Minimal, refined luxury aesthetic with subtle editorial typography.
+   Palette: Deep Maroon #5B1727, Ivory #FAF7F2, Champagne Gold #D4B27C, Charcoal #2F2B2B
+   ========================================================================== */
+
+.anvi-404-page {
+  background-color: var(--color-ivory);
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px var(--space-24);
+}
+
+.anvi-404-container {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Subtle Watermark 404 Numeral in Background */
+.anvi-404-watermark {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-serif);
+  font-size: clamp(14rem, 28vw, 24rem);
+  font-weight: 300;
+  line-height: 1;
+  color: rgba(91, 23, 39, 0.04);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Content Box */
+.anvi-404-content {
+  position: relative;
+  z-index: 3;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Subtle Brand Seal */
+.anvi-404-brand-seal {
+  margin-bottom: 20px;
+}
+
+.anvi-404-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-primary-maroon);
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-champagne-gold);
+  padding-bottom: 4px;
+}
+
+/* Headline */
+.anvi-404-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-weight: 400;
+  color: var(--color-deep-maroon);
+  line-height: 1.18;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+/* Short Supporting Text */
+.anvi-404-desc {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #635b54;
+  margin-bottom: 36px;
+  max-width: 480px;
+}
+
+/* Actions */
+.anvi-404-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.anvi-404-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.anvi-404-btn--primary {
+  background-color: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  border: 1px solid var(--color-deep-maroon);
+}
+
+.anvi-404-btn--primary:hover {
+  background-color: var(--color-primary-maroon);
+  border-color: var(--color-primary-maroon);
+  box-shadow: 0 4px 16px rgba(91, 23, 39, 0.2);
+  transform: translateY(-1px);
+}
+
+.anvi-404-btn--secondary {
+  background-color: transparent;
+  color: var(--color-deep-maroon);
+  border: 1px solid #c9bdae;
+}
+
+.anvi-404-btn--secondary:hover {
+  background-color: #f3ece1;
+  border-color: var(--color-deep-maroon);
+}
+
+/* Discovery Links */
+.anvi-404-links {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 24px;
+  width: 100%;
+}
+
+.anvi-404-links-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #8c827a;
+  margin-bottom: 10px;
+}
+
+.anvi-404-links-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.86rem;
+  color: var(--color-charcoal);
+}
+
+.anvi-404-links-group a {
+  color: var(--color-deep-maroon);
+  transition: color var(--transition-fast);
+}
+
+.anvi-404-links-group a:hover {
+  color: var(--color-primary-maroon);
+  text-decoration: underline;
+}
+
+.anvi-404-links-group .dot {
+  color: #c4b9ad;
+}
+
+/* Subtle Visual Accent */
+.anvi-404-visual-accent {
+  position: absolute;
+  right: -60px;
+  bottom: -40px;
+  width: 220px;
+  height: 280px;
+  opacity: 0.15;
+  border-radius: 4px;
+  overflow: hidden;
+  pointer-events: none;
+  filter: grayscale(80%);
+}
+
+.anvi-404-accent-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.anvi-404-accent-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, var(--color-ivory) 100%);
+}
+
+@media (max-width: 640px) {
+  .anvi-404-page {
+    padding: 60px 16px;
+    min-height: 65vh;
+  }
+
+  .anvi-404-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .anvi-404-btn {
+    width: 100%;
+  }
+
+  .anvi-404-visual-accent {
+    display: none;
+  }
+}

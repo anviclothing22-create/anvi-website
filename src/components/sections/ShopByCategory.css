@@ -1,0 +1,153 @@
+/**
+ * ANVI CLOTHING — V2 CATEGORY DISCOVERY SECTION
+ * Editorial Magazine Spread Navigation
+ */
+
+.anvi-category-section {
+  width: 100%;
+  padding: var(--space-96) 0;
+  background-color: var(--color-warm-beige);
+}
+
+.anvi-category-container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-32);
+  box-sizing: border-box;
+}
+
+/* Section Header */
+.anvi-category-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--space-48);
+}
+
+.anvi-category-section-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary-maroon);
+  margin-bottom: var(--space-8);
+  display: block;
+}
+
+.anvi-category-section-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 3.8vw, 44px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+  margin: 0 0 var(--space-12) 0;
+  line-height: 1.15;
+}
+
+.anvi-category-section-subtext {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: rgba(47, 43, 43, 0.7);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ============================================================
+   EDITORIAL MULTI-COLUMN COMPOSITION (DESKTOP)
+   Asymmetric 5fr / 7fr Composition
+   ============================================================ */
+.anvi-category-layout {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Left Featured Column (Sarees) */
+.anvi-category-featured-col {
+  display: flex;
+}
+
+.anvi-category-featured-col .anvi-category-card {
+  width: 100%;
+}
+
+/* Right 2x2 Grid Column (Salwars, Co-ords, 3-Piece, Kidswear) */
+.anvi-category-grid-col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* ============================================================
+   RESPONSIVE LAYOUTS (TABLET & MOBILE)
+   ============================================================ */
+@media (max-width: 1024px) {
+  .anvi-category-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .anvi-category-featured-col .anvi-category-card--featured {
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .anvi-category-section {
+    padding: var(--space-64) 0;
+  }
+
+  .anvi-category-container {
+    padding: 0 var(--space-16);
+  }
+
+  .anvi-category-header {
+    margin-bottom: var(--space-32);
+    text-align: left;
+  }
+
+  /* Deliberate 2-Column Mobile Composition */
+  .anvi-category-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .anvi-category-featured-col {
+    grid-column: span 2;
+  }
+
+  .anvi-category-featured-col .anvi-category-card--featured {
+    min-height: 320px;
+  }
+
+  .anvi-category-grid-col {
+    grid-column: span 2;
+    display: contents; /* Flattens children directly into the 2-column mobile grid */
+  }
+
+  .anvi-category-card--standard {
+    min-height: 220px;
+  }
+
+  .anvi-category-content {
+    padding: var(--space-14) var(--space-12);
+  }
+
+  .anvi-category-name {
+    font-size: 16px;
+  }
+
+  .anvi-category-card--featured .anvi-category-name {
+    font-size: 22px;
+  }
+
+  .anvi-category-arrow {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+}

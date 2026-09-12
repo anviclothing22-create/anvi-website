@@ -1,0 +1,532 @@
+/**
+ * ANVI CLOTHING — COLLECTIONS EDITORIAL PAGE STYLES
+ * High-fashion magazine editorial layout, full-bleed monograph spreads,
+ * capsule narratives, and bespoke lookbook galleries.
+ */
+
+.anvi-collections-page {
+  width: 100%;
+  background-color: var(--color-ivory);
+  min-height: 100vh;
+  padding: var(--space-48) 0 var(--space-120);
+  box-sizing: border-box;
+}
+
+.anvi-collections-container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-32);
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   1. BREADCRUMBS & EDITORIAL HERO HEADER
+   ============================================================ */
+.anvi-collections-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.55);
+  margin-bottom: var(--space-20);
+}
+
+.anvi-collections-breadcrumb a {
+  color: rgba(47, 43, 43, 0.65);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.anvi-collections-breadcrumb a:hover {
+  color: var(--color-primary-maroon);
+}
+
+.anvi-collections-breadcrumb-sep {
+  color: rgba(47, 43, 43, 0.35);
+  font-size: 10px;
+}
+
+.anvi-collections-breadcrumb-current {
+  color: var(--color-charcoal);
+  font-weight: 600;
+}
+
+.anvi-collections-header {
+  margin-bottom: var(--space-48);
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.anvi-collections-eyebrow {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-champagne-gold);
+  margin-bottom: var(--space-12);
+}
+
+.anvi-collections-title {
+  font-family: var(--font-serif);
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--color-charcoal);
+  margin: 0 0 var(--space-16);
+  line-height: 1.08;
+}
+
+.anvi-collections-subtitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(47, 43, 43, 0.75);
+  margin: 0 auto;
+  max-width: 640px;
+}
+
+/* ============================================================
+   2. CAPSULE QUICK JUMP BAR
+   ============================================================ */
+.anvi-collections-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-48);
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.anvi-collections-nav-btn {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-charcoal, #2F2B2B);
+  padding: 0.5rem 1.15rem;
+  background: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.12);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.anvi-collections-nav-btn:hover,
+.anvi-collections-nav-btn--active,
+.anvi-collections-nav-btn.is-active {
+  background-color: var(--color-primary-maroon, #5B1727);
+  color: #FFFFFF;
+  border-color: var(--color-primary-maroon, #5B1727);
+}
+
+/* ============================================================
+   3. EDITORIAL CAPSULE SPREADS (/collections)
+   ============================================================ */
+.anvi-capsules-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-80);
+}
+
+.anvi-capsule-spread {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-radius: var(--radius-subtle);
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(22, 16, 18, 0.03);
+}
+
+.anvi-capsule-spread-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 480px;
+}
+
+.anvi-capsule-spread-img-wrap {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-warm-beige);
+}
+
+.anvi-capsule-spread-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.anvi-capsule-spread:hover .anvi-capsule-spread-img {
+  transform: scale(1.03);
+}
+
+.anvi-capsule-spread-content {
+  padding: var(--space-48) var(--space-48);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-16);
+  background-color: #FFFFFF;
+}
+
+.anvi-capsule-spread-num {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-champagne-gold);
+}
+
+.anvi-capsule-spread-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-charcoal);
+  margin: 0;
+}
+
+.anvi-capsule-spread-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--color-primary-maroon);
+  margin: 0;
+}
+
+.anvi-capsule-spread-desc {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(47, 43, 43, 0.75);
+  margin: 0;
+  max-width: 500px;
+}
+
+.anvi-capsule-craft-chip {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(47, 43, 43, 0.65);
+  margin-top: var(--space-8);
+  padding: 6px 14px;
+  background: rgba(47, 43, 43, 0.04);
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.anvi-capsule-detail-craft {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.9);
+  margin: var(--space-8) 0 0;
+}
+
+.anvi-capsule-spread-meta {
+  display: flex;
+  gap: var(--space-24);
+  padding: var(--space-16) 0;
+  border-top: 1px solid rgba(47, 43, 43, 0.08);
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+  margin: var(--space-8) 0;
+}
+
+.anvi-capsule-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.anvi-capsule-meta-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(47, 43, 43, 0.5);
+}
+
+.anvi-capsule-meta-val {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.anvi-capsule-spread-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background-color: var(--color-primary-maroon);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-subtle);
+  text-decoration: none;
+  width: fit-content;
+  transition: all var(--transition-fast);
+}
+
+.anvi-capsule-spread-cta:hover {
+  background-color: var(--color-deep-maroon);
+  transform: translateX(4px);
+}
+
+/* Capsule Preview Garment Rail */
+.anvi-capsule-preview-section {
+  padding: var(--space-32) var(--space-48) var(--space-48);
+  background-color: #FAF8F5;
+  border-top: 1px solid rgba(47, 43, 43, 0.06);
+}
+
+.anvi-capsule-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-20);
+}
+
+.anvi-capsule-preview-heading {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--color-charcoal);
+  margin: 0;
+}
+
+.anvi-capsule-preview-link {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-primary-maroon);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.anvi-capsule-preview-link:hover {
+  text-decoration: underline;
+}
+
+.anvi-capsule-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ============================================================
+   4. DEDICATED CAPSULE DETAIL VIEW (/collections/:slug)
+   ============================================================ */
+.anvi-capsule-detail-hero {
+  position: relative;
+  background-color: var(--color-deep-maroon);
+  color: var(--color-ivory);
+  border-radius: var(--radius-subtle);
+  overflow: hidden;
+  margin-bottom: var(--space-48);
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+}
+
+.anvi-capsule-detail-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  filter: saturate(0.85);
+}
+
+.anvi-capsule-detail-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-48) var(--space-48);
+  max-width: 720px;
+}
+
+.anvi-capsule-detail-badge {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-champagne-gold);
+  margin-bottom: var(--space-12);
+}
+
+.anvi-capsule-detail-title {
+  font-family: var(--font-serif);
+  font-size: clamp(34px, 4.5vw, 56px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #FFFFFF;
+  margin: 0 0 var(--space-12);
+}
+
+.anvi-capsule-detail-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--color-champagne-gold);
+  margin: 0 0 var(--space-16);
+}
+
+.anvi-capsule-detail-desc {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.anvi-capsule-lookbook-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-32);
+  padding-bottom: var(--space-16);
+  border-bottom: 1px solid rgba(47, 43, 43, 0.1);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.anvi-capsule-lookbook-count {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: rgba(47, 43, 43, 0.7);
+}
+
+.anvi-capsule-lookbook-count strong {
+  color: var(--color-charcoal);
+}
+
+.anvi-capsule-lookbook-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-24);
+  margin-bottom: var(--space-64);
+}
+
+/* Studio Craft Narrative Box */
+.anvi-capsule-studio-notes {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(47, 43, 43, 0.08);
+  border-left: 4px solid var(--color-champagne-gold);
+  border-radius: var(--radius-subtle);
+  padding: var(--space-32) var(--space-36);
+  margin-bottom: var(--space-80);
+}
+
+.anvi-capsule-notes-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--color-charcoal);
+  margin: 0 0 var(--space-12);
+}
+
+.anvi-capsule-notes-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(47, 43, 43, 0.75);
+  margin: 0;
+}
+
+/* Next Capsule Teaser Rail */
+.anvi-next-capsule-rail {
+  margin-top: var(--space-64);
+  padding-top: var(--space-48);
+  border-top: 1px solid rgba(47, 43, 43, 0.1);
+}
+
+.anvi-next-capsule-header {
+  margin-bottom: var(--space-24);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.anvi-next-capsule-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--color-charcoal);
+  margin: 0;
+}
+
+/* ============================================================
+   5. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+@media (max-width: 1080px) {
+  .anvi-capsule-spread-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .anvi-capsule-spread-img-wrap {
+    height: 380px;
+  }
+
+  .anvi-capsule-preview-grid,
+  .anvi-capsule-lookbook-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .anvi-collections-page {
+    padding: var(--space-32) 0 var(--space-80);
+  }
+
+  .anvi-collections-container {
+    padding: 0 var(--space-16);
+  }
+
+  .anvi-capsule-spread-content {
+    padding: var(--space-24) var(--space-20);
+  }
+
+  .anvi-capsule-preview-section {
+    padding: var(--space-20);
+  }
+
+  .anvi-capsule-preview-grid,
+  .anvi-capsule-lookbook-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .anvi-capsule-detail-hero {
+    min-height: auto;
+  }
+
+  .anvi-capsule-detail-hero-content {
+    padding: var(--space-32) var(--space-20);
+  }
+}

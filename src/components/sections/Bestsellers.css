@@ -1,0 +1,142 @@
+/**
+ * ANVI CLOTHING — V2 BESTSELLERS SECTION
+ * High-Fashion Product Grid Showcase
+ * Harmonious centered typography & uniform vertical spacing matching the entire homepage.
+ */
+
+.anvi-bestsellers {
+  width: 100%;
+  padding: var(--space-96) 0;
+  background-color: var(--color-ivory);
+}
+
+.anvi-bestsellers-container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-32);
+  box-sizing: border-box;
+}
+
+/* Centered Section Header (matches Find Your Anvi, Reviews & Instagram) */
+.anvi-bestsellers-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--space-48);
+}
+
+.anvi-bestsellers-eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary-maroon);
+  margin-bottom: var(--space-8);
+}
+
+.anvi-bestsellers-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 3.8vw, 44px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+  margin: 0;
+  line-height: 1.15;
+}
+
+/* Product Grid */
+.anvi-bestsellers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Centered Footer Action */
+.anvi-bestsellers-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-48);
+}
+
+.anvi-bestsellers-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-10);
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+  text-decoration: none;
+  padding: 12px 28px;
+  border: 1px solid var(--color-charcoal);
+  border-radius: 999px;
+  background: transparent;
+  transition: 
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.anvi-bestsellers-view-all-arrow {
+  transition: transform var(--transition-fast);
+  display: inline-block;
+  font-size: 14px;
+}
+
+.anvi-bestsellers-view-all:hover {
+  background-color: var(--color-primary-maroon);
+  border-color: var(--color-primary-maroon);
+  color: var(--color-ivory);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(124, 36, 58, 0.15);
+}
+
+.anvi-bestsellers-view-all:hover .anvi-bestsellers-view-all-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive Rules */
+@media (max-width: 1024px) {
+  .anvi-bestsellers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .anvi-bestsellers {
+    padding: var(--space-64) 0;
+  }
+
+  .anvi-bestsellers-container {
+    padding: 0 var(--space-16);
+  }
+
+  .anvi-bestsellers-header {
+    margin-bottom: var(--space-32);
+  }
+
+  .anvi-bestsellers-heading {
+    font-size: 26px;
+  }
+
+  .anvi-bestsellers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .anvi-bestsellers-footer {
+    margin-top: var(--space-32);
+  }
+
+  .anvi-bestsellers-view-all {
+    font-size: 11px;
+    padding: 10px 20px;
+  }
+}

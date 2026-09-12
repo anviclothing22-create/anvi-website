@@ -1,0 +1,344 @@
+/**
+ * ANVI CLOTHING — V2 PREMIUM PRODUCT SEARCH EXPERIENCE
+ * Not a generic browser-like search page.
+ * Luxury Editorial Search Modal with Real-Time Suggestions & Canonical ProductCards.
+ */
+
+.anvi-search-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(22, 16, 18, 0.78);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--space-48) var(--space-24);
+  box-sizing: border-box;
+  overflow-y: auto;
+  animation: anviSearchFadeIn 220ms ease;
+}
+
+.anvi-search-modal {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  background-color: var(--color-ivory);
+  border-radius: var(--radius-subtle);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(212, 178, 124, 0.25);
+  padding: var(--space-40) var(--space-48);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  animation: anviSearchSlideDown 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: var(--space-48);
+}
+
+/* ============================================================
+   1. SEARCH INPUT BAR
+   ============================================================ */
+.anvi-search-input-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  padding-bottom: var(--space-16);
+  border-bottom: 2px solid var(--color-primary-maroon);
+  position: relative;
+}
+
+.anvi-search-icon {
+  color: var(--color-primary-maroon);
+  flex-shrink: 0;
+}
+
+.anvi-search-input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 2.4vw, 28px);
+  color: var(--color-charcoal);
+  outline: none;
+  padding: 0;
+  letter-spacing: 0.01em;
+}
+
+.anvi-search-input::placeholder {
+  color: rgba(47, 43, 43, 0.4);
+  font-style: italic;
+}
+
+.anvi-search-clear-btn {
+  background: none;
+  border: none;
+  color: rgba(47, 43, 43, 0.5);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.anvi-search-clear-btn:hover {
+  color: var(--color-charcoal);
+}
+
+.anvi-search-close-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  background: none;
+  border: 1px solid rgba(47, 43, 43, 0.15);
+  border-radius: var(--radius-subtle);
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  transition: 
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.anvi-search-close-btn:hover {
+  background-color: var(--color-primary-maroon);
+  border-color: var(--color-primary-maroon);
+  color: var(--color-ivory);
+}
+
+.anvi-search-esc-tag {
+  font-size: 9px;
+  color: rgba(47, 43, 43, 0.45);
+  background-color: rgba(47, 43, 43, 0.08);
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+.anvi-search-close-btn:hover .anvi-search-esc-tag {
+  color: var(--color-ivory);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================================
+   2. SEARCH SUGGESTIONS & TRENDING CHIPS
+   ============================================================ */
+.anvi-search-suggestions-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+
+.anvi-search-section-title {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary-maroon);
+  margin: 0;
+}
+
+.anvi-search-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-10);
+}
+
+.anvi-search-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  background-color: var(--color-warm-beige);
+  border: 1px solid rgba(47, 43, 43, 0.1);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  transition: 
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.anvi-search-chip:hover {
+  background-color: var(--color-primary-maroon);
+  border-color: var(--color-primary-maroon);
+  color: var(--color-ivory);
+}
+
+/* Category Suggestions */
+.anvi-search-category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-10);
+}
+
+.anvi-search-category-chip {
+  background: none;
+  border: 1px solid rgba(212, 178, 124, 0.4);
+  border-radius: var(--radius-subtle);
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  transition: 
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.anvi-search-category-chip:hover {
+  background-color: var(--color-warm-beige);
+  border-color: var(--color-primary-maroon);
+  color: var(--color-primary-maroon);
+}
+
+/* ============================================================
+   3. RESULTS HEADER & GRID
+   ============================================================ */
+.anvi-search-results-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid rgba(47, 43, 43, 0.08);
+}
+
+.anvi-search-results-count {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--color-charcoal);
+}
+
+.anvi-search-view-all-link {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary-maroon);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.anvi-search-view-all-link:hover {
+  color: var(--color-deep-maroon);
+  text-decoration: underline;
+}
+
+/* 4-column desktop / 2-column mobile grid */
+.anvi-search-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: var(--space-8);
+}
+
+/* Custom subtle scrollbar */
+.anvi-search-grid::-webkit-scrollbar {
+  width: 4px;
+}
+
+.anvi-search-grid::-webkit-scrollbar-thumb {
+  background-color: rgba(47, 43, 43, 0.2);
+  border-radius: 999px;
+}
+
+/* ============================================================
+   4. NO RESULTS STATE
+   ============================================================ */
+.anvi-search-no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-48) var(--space-20);
+  background-color: var(--color-warm-beige);
+  border-radius: var(--radius-subtle);
+  border: 1px dashed rgba(47, 43, 43, 0.15);
+  gap: var(--space-16);
+}
+
+.anvi-search-no-results-glyph {
+  font-size: 28px;
+  color: var(--color-champagne-gold);
+}
+
+.anvi-search-no-results-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: var(--color-charcoal);
+  margin: 0;
+}
+
+.anvi-search-no-results-desc {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(47, 43, 43, 0.65);
+  max-width: 440px;
+  margin: 0;
+}
+
+@keyframes anviSearchFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes anviSearchSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE COMPOSITION (< 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  .anvi-search-modal-backdrop {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .anvi-search-modal {
+    max-width: 100%;
+    min-height: 100dvh;
+    border-radius: 0;
+    border: none;
+    padding: var(--space-24) var(--space-16);
+    margin-bottom: 0;
+  }
+
+  .anvi-search-input {
+    font-size: 18px;
+  }
+
+  .anvi-search-esc-tag {
+    display: none;
+  }
+
+  .anvi-search-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
