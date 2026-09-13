@@ -6,7 +6,8 @@ import type { HeroBanner } from '../types/hero';
 import type { PromoPopup } from '../types/popup';
 import type { BlogPost } from '../types/blog';
 import type { StoreAmbience } from '../types/ambience';
-import { generateId, isUUID } from '../lib/utils';
+import type { AdminReview } from '../types/review';
+import { generateId, generateUUID, isUUID } from '../lib/utils';
 import { STORAGE_KEYS, getStoredItem, setStoredItem, subscribeToStoreUpdates } from '../lib/storeSync';
 import { supabase } from '../lib/supabase';
 
@@ -61,6 +62,20 @@ const normalizeCMS = (data: any): CMSData => {
     })),
   };
 
+  const reviews: AdminReview[] = (data.reviews || initialMockCMS.reviews || []).map((r: any) => ({
+    id: r.id,
+    reviewerName: r.reviewerName || r.reviewer_name || r.name || 'ANVI Patron',
+    reviewerLocation: r.reviewerLocation || r.reviewer_location || r.location || '',
+    rating: Number(r.rating) || 5,
+    title: r.title || '',
+    body: r.body || r.review || '',
+    purchasedProductName: r.purchasedProductName || r.purchased_product_name || r.purchasedProduct || '',
+    isVerified: Boolean(r.isVerified ?? r.is_verified ?? true),
+    isApproved: Boolean(r.isApproved ?? r.is_approved ?? true),
+    helpfulCount: Number(r.helpfulCount ?? r.helpful_count ?? 0),
+    createdAt: r.createdAt || r.created_at || new Date().toISOString(),
+  }));
+
   return {
     announcements,
     heroBanners,
@@ -69,6 +84,7 @@ const normalizeCMS = (data: any): CMSData => {
     storeAmbience: ambience,
     elfsightWidgetId: data.elfsightWidgetId || '',
     instagramHandle: data.instagramHandle || 'anviclothing_coimbatore',
+    reviews,
   };
 };
 
@@ -220,14 +236,101 @@ export function useCMS() {
     saveToStorage(updated);
   }, [cmsData]);
 
+  // Reviews CRUD
+  const addReview = useCallback((rev: Omit<AdminReview, 'id' | 'createdAt'>) => {
+    const newId = generateUUID();
+    const newRev: AdminReview = {
+      ...rev,
+      id: newId,
+      createdAt: new Date().toISOString(),
+    };
+    const updated: CMSData = {
+      ...cmsData,
+      reviews: [newRev, ...cmsData.reviews],
+    };
+    saveToStorage(updated);
+    setStoredItem(STORAGE_KEYS.REVIEWS, updated.reviews, 'REVIEWS_UPDATED');
+
+    try {
+      void supabase.from('reviews').insert([{
+        id: newId,
+        reviewer_name: newRev.reviewerName,
+        reviewer_location: newRev.reviewerLocation || null,
+        rating: newRev.rating,
+        title: newRev.title || null,
+        body: newRev.body,
+        purchased_product_name: newRev.purchasedProductName || null,
+        is_verified: newRev.isVerified,
+        is_approved: newRev.isApproved,
+      }]).then(({ error }) => {
+        if (error) console.error('[useCMS] Supabase review insert error:', error);
+      });
+    } catch (err) {
+      console.warn('[useCMS] Supabase review insert exception:', err);
+    }
+  }, [cmsData]);
+
+  const updateReview = useCallback((id: string, updates: Partial<AdminReview>) => {
+    const updatedReviews = cmsData.reviews.map((r) => (r.id === id ? { ...r, ...updates } : r));
+    const updated: CMSData = {
+      ...cmsData,
+      reviews: updatedReviews,
+    };
+    saveToStorage(updated);
+    setStoredItem(STORAGE_KEYS.REVIEWS, updatedReviews, 'REVIEWS_UPDATED');
+
+    try {
+      const row: any = {};
+      if (updates.reviewerName !== undefined) row.reviewer_name = updates.reviewerName;
+      if (updates.reviewerLocation !== undefined) row.reviewer_location = updates.reviewerLocation;
+      if (updates.rating !== undefined) row.rating = updates.rating;
+      if (updates.title !== undefined) row.title = updates.title;
+      if (updates.body !== undefined) row.body = updates.body;
+      if (updates.purchasedProductName !== undefined) row.purchased_product_name = updates.purchasedProductName;
+      if (updates.isVerified !== undefined) row.is_verified = updates.isVerified;
+      if (updates.isApproved !== undefined) row.is_approved = updates.isApproved;
+
+      void supabase.from('reviews').update(row).eq('id', id).then(({ error }) => {
+        if (error) console.error('[useCMS] Supabase review update error:', error);
+      });
+    } catch (err) {
+      console.warn('[useCMS] Supabase review update exception:', err);
+    }
+  }, [cmsData]);
+
+  const deleteReview = useCallback((id: string) => {
+    const updatedReviews = cmsData.reviews.filter((r) => r.id !== id);
+    const updated: CMSData = {
+      ...cmsData,
+      reviews: updatedReviews,
+    };
+    saveToStorage(updated);
+    setStoredItem(STORAGE_KEYS.REVIEWS, updatedReviews, 'REVIEWS_UPDATED');
+
+    try {
+      void supabase.from('reviews').delete().eq('id', id).then(({ error }) => {
+        if (error) console.error('[useCMS] Supabase review delete error:', error);
+      });
+    } catch (err) {
+      console.warn('[useCMS] Supabase review delete exception:', err);
+    }
+  }, [cmsData]);
+
+  const toggleReviewApproval = useCallback((id: string) => {
+    const target = cmsData.reviews.find((r) => r.id === id);
+    if (!target) return;
+    updateReview(id, { isApproved: !target.isApproved });
+  }, [cmsData.reviews, updateReview]);
+
   useEffect(() => {
     let cancelled = false;
     async function loadLiveCMS() {
       try {
-        const [annRes, heroRes, confRes] = await Promise.all([
+        const [annRes, heroRes, confRes, revRes] = await Promise.all([
           supabase.from('announcements').select('*').order('display_order'),
           supabase.from('hero_banners').select('*').order('display_order'),
           supabase.from('site_config').select('*').eq('id', 'main').maybeSingle(),
+          supabase.from('reviews').select('*').order('created_at', { ascending: false }),
         ]);
 
         if (!cancelled) {
@@ -265,6 +368,22 @@ export function useCMS() {
             if (confRes.data?.instagram_handle) {
               next.instagramHandle = confRes.data.instagram_handle;
             }
+            if (revRes.data && revRes.data.length > 0) {
+              next.reviews = revRes.data.map((r: any) => ({
+                id: r.id,
+                reviewerName: r.reviewer_name,
+                reviewerLocation: r.reviewer_location || '',
+                rating: r.rating || 5,
+                title: r.title || '',
+                body: r.body,
+                purchasedProductName: r.purchased_product_name || '',
+                isVerified: r.is_verified ?? true,
+                isApproved: r.is_approved ?? true,
+                helpfulCount: r.helpful_count ?? 0,
+                createdAt: r.created_at,
+              }));
+              setStoredItem(STORAGE_KEYS.REVIEWS, next.reviews, 'REVIEWS_UPDATED');
+            }
             setStoredItem(STORAGE_KEYS.CMS, next, 'CMS_UPDATED');
             return next;
           });
@@ -281,6 +400,7 @@ export function useCMS() {
 
   const saveChanges = useCallback(() => {
     setStoredItem(STORAGE_KEYS.CMS, cmsData, 'CMS_UPDATED');
+    setStoredItem(STORAGE_KEYS.REVIEWS, cmsData.reviews, 'REVIEWS_UPDATED');
     setHasUnsavedChanges(false);
 
     // Replicate to Supabase
@@ -328,6 +448,23 @@ export function useCMS() {
           if (error) console.error('[useCMS] Supabase site_config upsert error:', error);
         });
       }
+
+      if (cmsData.reviews && cmsData.reviews.length > 0) {
+        const revRows = cmsData.reviews.map((r) => ({
+          ...(isUUID(r.id) ? { id: r.id } : {}),
+          reviewer_name: r.reviewerName,
+          reviewer_location: r.reviewerLocation || null,
+          rating: r.rating,
+          title: r.title || null,
+          body: r.body,
+          purchased_product_name: r.purchasedProductName || null,
+          is_verified: r.isVerified,
+          is_approved: r.isApproved,
+        }));
+        void supabase.from('reviews').upsert(revRows).then(({ error }) => {
+          if (error) console.error('[useCMS] Supabase reviews upsert error:', error);
+        });
+      }
     } catch (err) {
       console.warn('[useCMS] Supabase CMS save exception:', err);
     }
@@ -349,6 +486,7 @@ export function useCMS() {
     storeAmbience: cmsData.storeAmbience,
     elfsightWidgetId: cmsData.elfsightWidgetId || '',
     instagramHandle: cmsData.instagramHandle || 'anviclothing_coimbatore',
+    reviews: cmsData.reviews,
     hasUnsavedChanges,
     setHasUnsavedChanges,
     addAnnouncement,
@@ -363,6 +501,10 @@ export function useCMS() {
     deleteBlogPost,
     updateAmbience,
     updateElfsightConfig,
+    addReview,
+    updateReview,
+    deleteReview,
+    toggleReviewApproval,
     saveChanges,
     discardChanges,
   };

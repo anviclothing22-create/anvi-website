@@ -1,5 +1,5 @@
 import React from 'react';
-import { Megaphone, Image, MessageSquare, BookOpen, Store } from 'lucide-react';
+import { Megaphone, Image, MessageSquare, BookOpen, Store, Star } from 'lucide-react';
 
 const InstagramIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg
@@ -18,7 +18,7 @@ const InstagramIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4'
   </svg>
 );
 
-export type CMSTabId = 'announcements' | 'hero' | 'popup' | 'blog' | 'ambience' | 'instagram';
+export type CMSTabId = 'announcements' | 'hero' | 'popup' | 'blog' | 'ambience' | 'instagram' | 'reviews';
 
 interface CMSTabsProps {
   activeTab: CMSTabId;
@@ -29,6 +29,7 @@ export const CMSTabs: React.FC<CMSTabsProps> = ({ activeTab, onChange }) => {
   const tabs = [
     { id: 'announcements', label: 'Announcement Ticker', icon: Megaphone },
     { id: 'hero', label: 'Hero Editorial Banners', icon: Image },
+    { id: 'reviews', label: 'Customer Reviews (Loved by Women)', icon: Star },
     { id: 'popup', label: 'Promotional Welcome Modal', icon: MessageSquare },
     { id: 'blog', label: 'Journal & Stories', icon: BookOpen },
     { id: 'ambience', label: 'Store Ambience (Tatabad Boutique)', icon: Store },

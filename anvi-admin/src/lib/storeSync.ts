@@ -17,6 +17,7 @@ export const STORAGE_KEYS = {
   CMS: 'anvi_store_cms',
   CATEGORIES: 'anvi_store_categories',
   LEADS: 'anvi_store_leads',
+  REVIEWS: 'anvi_store_reviews',
 } as const;
 
 export const SYNC_CHANNEL_NAME = 'anvi_live_store_sync';
@@ -30,6 +31,7 @@ export interface StoreSyncEvent {
     | 'CMS_UPDATED'
     | 'CATEGORIES_UPDATED'
     | 'LEADS_UPDATED'
+    | 'REVIEWS_UPDATED'
     | 'SYNC_REQUEST'
     | 'SYNC_RESPONSE';
   timestamp: number;

@@ -8,6 +8,7 @@ import { PopupManager } from './popup/PopupManager';
 import { BlogManager } from './blog/BlogManager';
 import { StoreAmbienceManager } from './ambience/StoreAmbienceManager';
 import { InstagramReelsManager } from './instagram/InstagramReelsManager';
+import { ReviewManager } from './reviews/ReviewManager';
 import { useCMS } from '@/hooks/useCMS';
 import { Button } from '@/components/ui/Button';
 import { ExternalLink } from 'lucide-react';
@@ -22,6 +23,7 @@ export const CMSPage: React.FC = () => {
     storeAmbience,
     elfsightWidgetId,
     instagramHandle,
+    reviews,
     hasUnsavedChanges,
     addAnnouncement,
     updateAnnouncement,
@@ -35,6 +37,10 @@ export const CMSPage: React.FC = () => {
     deleteBlogPost,
     updateAmbience,
     updateElfsightConfig,
+    addReview,
+    updateReview,
+    deleteReview,
+    toggleReviewApproval,
     saveChanges,
     discardChanges,
   } = useCMS();
@@ -85,6 +91,16 @@ export const CMSPage: React.FC = () => {
           onAdd={addHeroBanner}
           onUpdate={updateHeroBanner}
           onDelete={deleteHeroBanner}
+        />
+      )}
+
+      {activeTab === 'reviews' && (
+        <ReviewManager
+          reviews={reviews}
+          onAdd={addReview}
+          onUpdate={updateReview}
+          onDelete={deleteReview}
+          onToggleApproval={toggleReviewApproval}
         />
       )}
 

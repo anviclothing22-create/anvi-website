@@ -261,3 +261,261 @@
     margin-bottom: var(--space-20);
   }
 }
+
+/* ============================================================
+   WRITE A REVIEW CTA & MODAL
+   ============================================================ */
+.anvi-reviews-cta-wrap {
+  margin-top: 18px;
+}
+
+.anvi-write-review-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background-color: var(--color-primary-maroon, #5A121E);
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(90, 18, 30, 0.15);
+}
+
+.anvi-write-review-btn:hover {
+  background-color: #420d16;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(90, 18, 30, 0.25);
+}
+
+.anvi-star-filled {
+  color: #C08D4D;
+}
+
+.anvi-star-empty {
+  color: rgba(47, 43, 43, 0.18);
+}
+
+/* Modal Overlay */
+.anvi-review-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(20, 18, 18, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: anviFadeIn 0.2s ease-out;
+}
+
+.anvi-review-modal {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  background-color: #FAF7F2;
+  border-radius: 24px;
+  border: 1px solid rgba(192, 141, 77, 0.3);
+  padding: 32px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+  animation: anviScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.anvi-review-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(47, 43, 43, 0.12);
+  background: transparent;
+  color: var(--color-charcoal, #2F2B2B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.anvi-review-modal-close:hover {
+  background-color: rgba(47, 43, 43, 0.08);
+  transform: rotate(90deg);
+}
+
+.anvi-review-modal-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-charcoal, #2F2B2B);
+  margin: 4px 0 6px;
+}
+
+.anvi-review-modal-sub {
+  font-size: 13px;
+  color: rgba(47, 43, 43, 0.7);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.anvi-review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.anvi-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.anvi-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 500px) {
+  .anvi-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.anvi-form-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-charcoal, #2F2B2B);
+}
+
+.anvi-req {
+  color: #c53030;
+}
+
+.anvi-form-input,
+.anvi-form-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(47, 43, 43, 0.15);
+  background-color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--color-charcoal, #2F2B2B);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.anvi-form-input:focus,
+.anvi-form-textarea:focus {
+  border-color: var(--color-primary-maroon, #5A121E);
+  box-shadow: 0 0 0 3px rgba(90, 18, 30, 0.1);
+}
+
+.anvi-star-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.anvi-star-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: transform 0.15s;
+}
+
+.anvi-star-btn:hover {
+  transform: scale(1.15);
+}
+
+.anvi-star-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-charcoal, #2F2B2B);
+  margin-left: 8px;
+}
+
+.anvi-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.anvi-form-cancel-btn {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(47, 43, 43, 0.18);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-charcoal, #2F2B2B);
+  cursor: pointer;
+}
+
+.anvi-form-submit-btn {
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: none;
+  background-color: var(--color-primary-maroon, #5A121E);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.anvi-form-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.anvi-review-success-state {
+  text-align: center;
+  padding: 36px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.anvi-review-success-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: var(--color-charcoal, #2F2B2B);
+  margin-bottom: 8px;
+}
+
+.anvi-review-success-desc {
+  font-size: 14px;
+  color: rgba(47, 43, 43, 0.75);
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+@keyframes anviFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes anviScaleUp {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
