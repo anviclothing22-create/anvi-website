@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { initialMockProducts } from '../data/mockProducts';
 import type { Product, ProductFormData } from '../types/product';
-import { generateId } from '../lib/utils';
+import { generateUUID, isUUID } from '../lib/utils';
 import { STORAGE_KEYS, getStoredItem, setStoredItem, subscribeToStoreUpdates } from '../lib/storeSync';
 import { supabase } from '../lib/supabase';
 
@@ -17,7 +17,7 @@ export function useProducts() {
       try {
         const { data, error } = await supabase
           .from('products')
-          .select('*, product_images(url)')
+          .select('*, product_images(url,is_primary,display_order)')
           .order('created_at', { ascending: false });
 
         if (!error && data && data.length > 0 && !cancelled) {
@@ -35,7 +35,10 @@ export function useProducts() {
             description: p.description || '',
             fabric: p.fabric || undefined,
             images: p.product_images && p.product_images.length > 0
-              ? p.product_images.map((img: any) => img.url)
+              ? p.product_images
+                  .slice()
+                  .sort((a: any, b: any) => Number(b.is_primary) - Number(a.is_primary) || a.display_order - b.display_order)
+                  .map((img: any) => img.url)
               : ['/images/products/saree_ajrakh_1.jpg'],
             tags: [],
             isActive: p.is_active ?? true,
@@ -47,8 +50,8 @@ export function useProducts() {
           setProducts(mapped);
           setStoredItem(STORAGE_KEYS.PRODUCTS, mapped, 'PRODUCTS_UPDATED');
         }
-      } catch {
-        // preserve local storage
+      } catch (err) {
+        console.warn('[useProducts] Load live products error:', err);
       }
     }
 
@@ -82,9 +85,10 @@ export function useProducts() {
       ? rawImages
       : ['/images/products/saree_ajrakh_1.jpg'];
 
+    const productId = generateUUID();
     const newProduct: Product = {
       ...formData,
-      id: generateId('prod'),
+      id: productId,
       slug: formData.slug || formData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
       category: formData.category || (formData.categorySlug ? formData.categorySlug.replace('-', ' ') : 'Sarees'),
       categorySlug: formData.categorySlug || (formData.category ? formData.category.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'sarees'),
@@ -103,7 +107,7 @@ export function useProducts() {
     // Asynchronously replicate to Supabase
     try {
       void supabase.from('products').insert({
-        id: newProduct.id,
+        id: productId,
         name: newProduct.name,
         slug: newProduct.slug,
         sku: newProduct.sku,
@@ -118,9 +122,11 @@ export function useProducts() {
         availability: newProduct.availability || 'In Stock',
         is_out_of_stock: (newProduct.stock ?? 15) === 0,
       }).then(({ error }) => {
-        if (!error && newProduct.images && newProduct.images.length > 0) {
+        if (error) {
+          console.error('[useProducts] Supabase insert product error:', error);
+        } else if (newProduct.images && newProduct.images.length > 0) {
           const imgs = newProduct.images.map((img: any, idx: number) => ({
-            product_id: newProduct.id,
+            product_id: productId,
             url: typeof img === 'string' ? img : img.url,
             is_primary: idx === 0,
             display_order: idx,
@@ -128,8 +134,8 @@ export function useProducts() {
           void supabase.from('product_images').insert(imgs);
         }
       });
-    } catch {
-      // offline fallback handled by storeSync
+    } catch (err) {
+      console.warn('[useProducts] Supabase insert product exception:', err);
     }
 
     return newProduct;
@@ -156,7 +162,7 @@ export function useProducts() {
     if (targetUpdatedProduct) {
       const p = targetUpdatedProduct;
       try {
-        void supabase.from('products').update({
+        const payload = {
           name: p.name,
           price_int: p.price,
           original_price_int: p.originalPrice ?? null,
@@ -168,9 +174,17 @@ export function useProducts() {
           is_new_arrival: p.isNewArrival ?? false,
           availability: p.availability || 'In Stock',
           is_out_of_stock: (p.stockQuantity ?? p.stock ?? 15) === 0,
-        }).eq('id', id);
+        };
 
-        if (p.images && p.images.length > 0) {
+        const updateQuery = isUUID(id)
+          ? supabase.from('products').update(payload).eq('id', id)
+          : supabase.from('products').update(payload).or(`legacy_id.eq.${id},slug.eq.${p.slug}`);
+
+        void updateQuery.then(({ error }) => {
+          if (error) console.error('[useProducts] Supabase update product error:', error);
+        });
+
+        if (p.images && p.images.length > 0 && isUUID(id)) {
           const imgs = p.images.map((img: any, idx: number) => ({
             product_id: id,
             url: typeof img === 'string' ? img : img.url,
@@ -181,8 +195,8 @@ export function useProducts() {
             void supabase.from('product_images').insert(imgs);
           });
         }
-      } catch {
-        // storeSync keeps realtime link active
+      } catch (err) {
+        console.warn('[useProducts] Supabase update product exception:', err);
       }
     }
   }, [products]);
@@ -193,9 +207,14 @@ export function useProducts() {
     saveProducts(updated);
 
     try {
-      void supabase.from('products').update({ is_active: nextStatus }).eq('id', id);
-    } catch {
-      // ignore
+      const query = isUUID(id)
+        ? supabase.from('products').update({ is_active: nextStatus }).eq('id', id)
+        : supabase.from('products').update({ is_active: nextStatus }).or(`legacy_id.eq.${id},id.eq.${id}`);
+      void query.then(({ error }) => {
+        if (error) console.error('[useProducts] Supabase toggle status error:', error);
+      });
+    } catch (err) {
+      console.warn('[useProducts] Supabase toggle status exception:', err);
     }
   }, [products]);
 
@@ -204,11 +223,15 @@ export function useProducts() {
     saveProducts(updated);
 
     try {
-      void supabase.from('product_images').delete().eq('product_id', id).then(() => {
-        void supabase.from('products').delete().eq('id', id);
-      });
-    } catch {
-      // ignore
+      if (isUUID(id)) {
+        void supabase.from('product_images').delete().eq('product_id', id).then(() => {
+          void supabase.from('products').delete().eq('id', id);
+        });
+      } else {
+        void supabase.from('products').delete().or(`legacy_id.eq.${id},slug.eq.${id}`);
+      }
+    } catch (err) {
+      console.warn('[useProducts] Supabase delete product exception:', err);
     }
   }, [products]);
 

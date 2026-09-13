@@ -6,9 +6,10 @@ import type { HeroBanner } from '../types/hero';
 import type { PromoPopup } from '../types/popup';
 import type { BlogPost } from '../types/blog';
 import type { StoreAmbience } from '../types/ambience';
-import { generateId } from '../lib/utils';
+import { generateId, isUUID } from '../lib/utils';
 import { STORAGE_KEYS, getStoredItem, setStoredItem, subscribeToStoreUpdates } from '../lib/storeSync';
 import { supabase } from '../lib/supabase';
+
 
 const normalizeCMS = (data: any): CMSData => {
   const announcements = (data.announcements || []).map((a: any) => ({
@@ -219,6 +220,65 @@ export function useCMS() {
     saveToStorage(updated);
   }, [cmsData]);
 
+  useEffect(() => {
+    let cancelled = false;
+    async function loadLiveCMS() {
+      try {
+        const [annRes, heroRes, confRes] = await Promise.all([
+          supabase.from('announcements').select('*').order('display_order'),
+          supabase.from('hero_banners').select('*').order('display_order'),
+          supabase.from('site_config').select('*').eq('id', 'main').maybeSingle(),
+        ]);
+
+        if (!cancelled) {
+          setCmsData((prev) => {
+            const next = { ...prev };
+            if (annRes.data && annRes.data.length > 0) {
+              next.announcements = annRes.data.map((a: any) => ({
+                id: a.id,
+                text: a.message,
+                message: a.message,
+                link: a.link_href || '',
+                linkText: a.link_text || 'Shop Collection',
+                isActive: a.is_active ?? true,
+                order: a.display_order ?? 1,
+                priority: a.display_order ?? 1,
+              }));
+            }
+            if (heroRes.data && heroRes.data.length > 0) {
+              next.heroBanners = heroRes.data.map((b: any) => ({
+                id: b.id,
+                title: `${b.headline_word1 || ''} ${b.headline_word2 || ''}`.trim() || 'ANVI Curation',
+                subtitle: b.badge || 'Curated with Care',
+                badge: b.badge || 'Curated with Care',
+                headlineWord1: b.headline_word1 || 'HAUTE',
+                headlineWord2: b.headline_word2 || 'COUTURE',
+                description: b.tagline || '',
+                tagline: b.tagline || '',
+                imageUrl: b.image_url || '/images/hero/hero_primary.webp',
+                ctaText: b.primary_cta_text || 'Explore Collection',
+                ctaLink: b.primary_cta_href || '/shop',
+                order: b.display_order ?? 1,
+                isActive: b.is_active ?? true,
+              }));
+            }
+            if (confRes.data?.instagram_handle) {
+              next.instagramHandle = confRes.data.instagram_handle;
+            }
+            setStoredItem(STORAGE_KEYS.CMS, next, 'CMS_UPDATED');
+            return next;
+          });
+        }
+      } catch (err) {
+        console.warn('[useCMS] Live CMS load error:', err);
+      }
+    }
+    loadLiveCMS();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const saveChanges = useCallback(() => {
     setStoredItem(STORAGE_KEYS.CMS, cmsData, 'CMS_UPDATED');
     setHasUnsavedChanges(false);
@@ -227,21 +287,23 @@ export function useCMS() {
     try {
       if (cmsData.announcements && cmsData.announcements.length > 0) {
         const rows = cmsData.announcements.map((a, idx) => ({
-          id: a.id,
+          ...(isUUID(a.id) ? { id: a.id } : {}),
           message: a.text || a.message || '',
           link_text: a.linkText || 'Shop Collection',
           link_href: a.link || a.linkHref || '/shop',
           is_active: a.isActive ?? true,
           display_order: idx + 1,
         }));
-        void supabase.from('announcements').upsert(rows);
+        void supabase.from('announcements').upsert(rows).then(({ error }) => {
+          if (error) console.error('[useCMS] Supabase announcements upsert error:', error);
+        });
       }
 
       if (cmsData.heroBanners && cmsData.heroBanners.length > 0) {
         const rows = cmsData.heroBanners.map((b, idx) => {
           const parts = (b.title || '').trim().split(/\s+/);
           return {
-            id: b.id,
+            ...(isUUID(b.id) ? { id: b.id } : {}),
             badge: b.subtitle || b.badge || '',
             headline_word1: b.headlineWord1 || parts[0] || 'HAUTE',
             headline_word2: b.headlineWord2 || parts.slice(1).join(' ') || 'COUTURE',
@@ -253,19 +315,24 @@ export function useCMS() {
             is_active: true,
           };
         });
-        void supabase.from('hero_banners').upsert(rows);
+        void supabase.from('hero_banners').upsert(rows).then(({ error }) => {
+          if (error) console.error('[useCMS] Supabase hero_banners upsert error:', error);
+        });
       }
 
       if (cmsData.instagramHandle) {
         void supabase.from('site_config').upsert({
           id: 'main',
           instagram_handle: cmsData.instagramHandle,
+        }).then(({ error }) => {
+          if (error) console.error('[useCMS] Supabase site_config upsert error:', error);
         });
       }
-    } catch {
-      // offline/fallback handled by storeSync
+    } catch (err) {
+      console.warn('[useCMS] Supabase CMS save exception:', err);
     }
   }, [cmsData]);
+
 
   const discardChanges = useCallback(() => {
     const raw = getStoredItem<any>(STORAGE_KEYS.CMS, initialMockCMS);

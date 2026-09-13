@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { categoriesData, type Category } from '../../data/categories';
 import { CategoryCard } from '../ui/CategoryCard';
 import { STORAGE_KEYS, getStoredItem, subscribeToStoreUpdates } from '../../lib/storeSync';
+import { getSupabase } from '../../lib/supabaseClient';
 import './ShopByCategory.css';
+
 
 export interface ShopByCategoryProps {
   categories?: Category[];
@@ -23,11 +25,8 @@ function normalizeStorefrontCategory(c: any): Category {
 }
 
 /**
- * ANVI Category Discovery Section
- * Heading: FIND YOUR ANVI
- * Multi-column editorial composition with dedicated photography for:
- * Sarees, Salwars, Co-ord Sets, 3-Piece Sets, Kidswear.
- * Dynamically synchronized with Admin Command.
+ * SHOP BY CATEGORY SECTION
+ * Dynamically synchronized with Supabase & Admin Command.
  */
 export const ShopByCategory: React.FC<ShopByCategoryProps> = ({
   categories: propCategories,
@@ -40,6 +39,39 @@ export const ShopByCategory: React.FC<ShopByCategoryProps> = ({
     const stored = getStoredItem<any[]>(STORAGE_KEYS.CATEGORIES, []);
     return stored.length > 0 ? stored.map(normalizeStorefrontCategory) : categoriesData;
   });
+
+  // Fetch live categories from Supabase
+  useEffect(() => {
+    if (propCategories) return;
+    let cancelled = false;
+    const sb = getSupabase();
+    if (sb) {
+      (async () => {
+        try {
+          const { data, error } = await sb
+            .from('categories')
+            .select('*')
+            .eq('is_active', true)
+            .order('display_order', { ascending: true });
+          if (!error && data && data.length > 0 && !cancelled) {
+            setLiveCategories(data.map((c: any) => normalizeStorefrontCategory({
+              id: c.id,
+              name: c.name,
+              slug: c.slug,
+              description: c.short_description || c.description || '',
+              imageUrl: c.image_url || '/images/products/saree_ajrakh_1.jpg',
+              featured: Boolean(c.featured),
+            })));
+          }
+        } catch {
+          // ignore network failure, fallback to initial state
+        }
+      })();
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [propCategories]);
 
   useEffect(() => {
     if (propCategories) return;
