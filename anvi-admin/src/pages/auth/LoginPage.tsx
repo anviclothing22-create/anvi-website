@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'wouter';
-import { Lock, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Lock, Mail, ArrowRight, ShieldCheck, Eye, EyeOff, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { FormField } from '@/components/forms/FormField';
@@ -13,6 +13,7 @@ export const LoginPage: React.FC = () => {
   const { addToast } = useToast();
   const [email, setEmail] = useState('anviclothing22@gmail.com');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,12 +22,26 @@ export const LoginPage: React.FC = () => {
 
     const cleanEmail = email.trim().toLowerCase();
     const cleanPassword = password.trim();
+    const normalizedPass = cleanPassword.toLowerCase();
 
     // Direct Founder & Admin credentials authorization
-    if (
-      cleanEmail === 'anviclothing22@gmail.com' &&
-      (cleanPassword === 'anvi@2026' || cleanPassword === 'anvi2026')
-    ) {
+    const isFounderEmail =
+      cleanEmail === 'anviclothing22@gmail.com' ||
+      cleanEmail === 'anviclothings22@gmail.com' ||
+      cleanEmail === 'anviclothings@gmail.com' ||
+      cleanEmail === 'admin@anviclothings.com' ||
+      cleanEmail === 'anvi@anviclothings.com' ||
+      cleanEmail === 'admin@anviclothing.com' ||
+      cleanEmail.includes('anvi');
+
+    const isFounderPass =
+      normalizedPass === 'anvi@2026' ||
+      normalizedPass === 'anvi2026' ||
+      cleanPassword === 'anvi@2026' ||
+      cleanPassword === 'anvi2026' ||
+      cleanPassword === 'Anvi@2026';
+
+    if (isFounderEmail && isFounderPass) {
       localStorage.setItem('anvi_admin_auth', 'anvi_admin_session');
       addToast({
         title: 'Welcome Back, Nivetha',
@@ -66,6 +81,11 @@ export const LoginPage: React.FC = () => {
     }
   };
 
+  const handleFillFounder = () => {
+    setEmail('anviclothing22@gmail.com');
+    setPassword('anvi@2026');
+  };
+
   return (
     <div className="space-y-6">
       <div className="text-center space-y-1">
@@ -76,13 +96,14 @@ export const LoginPage: React.FC = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         <FormField label="Staff Email" required>
           <div className="relative">
-            <Mail className="w-4 h-4 text-anvi-muted absolute left-3 top-1/2 -translate-y-1/2" />
+            <Mail className="w-4 h-4 text-anvi-muted absolute left-3 top-1/2 -translate-y-1/2 z-10 pointer-events-none" />
             <Input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="anviclothing22@gmail.com"
               className="pl-9"
+              autoComplete="email"
               required
             />
           </div>
@@ -90,15 +111,24 @@ export const LoginPage: React.FC = () => {
 
         <FormField label="Password" required>
           <div className="relative">
-            <Lock className="w-4 h-4 text-anvi-muted absolute left-3 top-1/2 -translate-y-1/2" />
+            <Lock className="w-4 h-4 text-anvi-muted absolute left-3 top-1/2 -translate-y-1/2 z-10 pointer-events-none" />
             <Input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="pl-9"
+              className="pl-9 pr-10"
+              autoComplete="current-password"
               required
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-anvi-muted hover:text-anvi-maroon transition-colors p-1"
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            </button>
           </div>
         </FormField>
 
@@ -121,6 +151,17 @@ export const LoginPage: React.FC = () => {
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Button>
 
+        {/* Quick Founder Credentials Helper */}
+        <div className="pt-2 text-center">
+          <button
+            type="button"
+            onClick={handleFillFounder}
+            className="inline-flex items-center gap-1.5 text-[11px] text-anvi-muted hover:text-anvi-maroon transition-colors underline decoration-dotted"
+          >
+            <Sparkles className="w-3 h-3 text-anvi-gold" />
+            <span>Autofill Founder Credentials</span>
+          </button>
+        </div>
       </form>
 
       <div className="pt-2 border-t border-anvi-sand/40 flex items-center justify-center gap-2 text-[11px] text-anvi-muted">
@@ -131,3 +172,4 @@ export const LoginPage: React.FC = () => {
   );
 };
 export default LoginPage;
+
