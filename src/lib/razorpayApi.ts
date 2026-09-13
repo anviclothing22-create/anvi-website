@@ -49,7 +49,7 @@ declare global {
   }
 }
 
-const FALLBACK_RAZORPAY_KEY_ID = 'rzp_test_TahvsEePU1iaDx';
+const FALLBACK_RAZORPAY_KEY_ID = 'rzp_test_TbUIX1k67k85XN';
 const FALLBACK_SUPABASE_URL = 'https://dpgjizuamndpmpfmmsxv.supabase.co';
 const FALLBACK_ANON_KEY = 'sb_publishable_j18bKyDSn59jFwCaupbWaw_m819_hKt';
 

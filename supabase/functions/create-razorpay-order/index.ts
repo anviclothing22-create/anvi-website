@@ -135,7 +135,6 @@ serve(async (req: Request) => {
         (rzp?.["error"] as Record<string, unknown> | undefined)?.["description"] ??
         "Razorpay order creation failed.";
       console.error("[create-razorpay-order] Razorpay error:", res.status, desc);
-      // Auth failures surface as 401 so the client can report misconfiguration.
       return json({ error: String(desc) }, cors, res.status === 401 ? 401 : 500);
     }
   } catch (err) {
