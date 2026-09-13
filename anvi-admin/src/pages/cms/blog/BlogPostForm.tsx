@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/Textarea';
 import { Switch } from '@/components/ui/Switch';
 import { Button } from '@/components/ui/Button';
 import { BlogPost } from '@/types/blog';
+import { ImagePicker } from '@/components/ui/ImagePicker';
 import { BlogPostEditor } from './BlogPostEditor';
 
 interface BlogPostFormProps {
@@ -82,23 +83,27 @@ export const BlogPostForm: React.FC<BlogPostFormProps> = ({
         </FormField>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <FormField label="Cover Image URL" required>
-          <Input
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="md:col-span-2">
+          <ImagePicker
+            label="Cover Editorial Imagery"
             value={coverImage}
-            onChange={(e) => setCoverImage(e.target.value)}
-            placeholder="https://images.unsplash.com/..."
+            onChange={setCoverImage}
             required
+            bucket="blog-images"
+            helpText="Upload a picture from your device or paste an image URL."
           />
-        </FormField>
+        </div>
 
-        <FormField label="Estimated Reading Time">
-          <Input
-            value={readTime}
-            onChange={(e) => setReadTime(e.target.value)}
-            placeholder="e.g. 5 min read"
-          />
-        </FormField>
+        <div>
+          <FormField label="Estimated Reading Time">
+            <Input
+              value={readTime}
+              onChange={(e) => setReadTime(e.target.value)}
+              placeholder="e.g. 5 min read"
+            />
+          </FormField>
+        </div>
       </div>
 
       <FormField label="Short Teaser / Excerpt" required>

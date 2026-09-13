@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Switch } from '@/components/ui/Switch';
 import { Button } from '@/components/ui/Button';
+import { ImagePicker } from '@/components/ui/ImagePicker';
 import { HeroBanner } from '@/types/hero';
 
 interface HeroBannerFormProps {
@@ -81,14 +82,14 @@ export const HeroBannerForm: React.FC<HeroBannerFormProps> = ({
         />
       </FormField>
 
-      <FormField label="Hero Image URL" required>
-        <Input
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-          placeholder="https://images.unsplash.com/..."
-          required
-        />
-      </FormField>
+      <ImagePicker
+        label="Hero Editorial Image"
+        value={imageUrl}
+        onChange={setImageUrl}
+        required
+        bucket="hero-banners"
+        helpText="Upload a high-resolution picture from your local device, or paste an image URL."
+      />
 
       <div className="grid grid-cols-2 gap-4">
         <FormField label="Button Label (CTA)" required>

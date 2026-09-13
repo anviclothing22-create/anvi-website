@@ -2,6 +2,7 @@ import React from 'react';
 import { FormField } from '@/components/forms/FormField';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
+import { ImagePicker } from '@/components/ui/ImagePicker';
 import { StoreAmbience } from '@/types/ambience';
 
 interface AmbienceFormProps {
@@ -41,7 +42,7 @@ export const AmbienceForm: React.FC<AmbienceFormProps> = ({ ambience, onChange }
         />
       </FormField>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <FormField label="Direct Hotline / Phone">
           <Input
             value={ambience.phone}
@@ -55,15 +56,16 @@ export const AmbienceForm: React.FC<AmbienceFormProps> = ({ ambience, onChange }
             onChange={(e) => update('timings', e.target.value)}
           />
         </FormField>
-
-        <FormField label="Hero Backdrop Image URL" required>
-          <Input
-            value={ambience.heroImage}
-            onChange={(e) => update('heroImage', e.target.value)}
-            required
-          />
-        </FormField>
       </div>
+
+      <ImagePicker
+        label="Hero Backdrop Image"
+        value={ambience.heroImage || ''}
+        onChange={(url) => update('heroImage', url)}
+        required
+        bucket="ambience-gallery"
+        helpText="Upload a picture of your boutique showroom from your local device or paste an image URL."
+      />
 
       <FormField label="Boutique Experience Narrative" required>
         <Textarea
