@@ -49,9 +49,12 @@ declare global {
   }
 }
 
+const FALLBACK_RAZORPAY_KEY_ID = 'rzp_test_TahvsEePU1iaDx';
+
 /** Publishable key only — safe for client bundle. */
 export function getRazorpayKeyId(): string {
-  return ((import.meta.env.VITE_RAZORPAY_KEY_ID as string | undefined) ?? '').trim();
+  const envKey = ((import.meta.env.VITE_RAZORPAY_KEY_ID as string | undefined) ?? '').trim();
+  return envKey || FALLBACK_RAZORPAY_KEY_ID;
 }
 
 export function isRazorpayConfigured(): boolean {
