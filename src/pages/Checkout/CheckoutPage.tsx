@@ -431,13 +431,8 @@ export const CheckoutPage: React.FC = () => {
       setSubmitError('Your bag is empty. Add a garment before paying.');
       return;
     }
-    if (!user) {
-      setSubmitError('Online payments (UPI / Card / Net Banking) require signing in for secure OTP and bank verification. Please sign in above, or choose Cash / Pay on Delivery below for instant order placement.');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
     if (!isRazorpayConfigured()) {
-      setSubmitError('Online payments are temporarily undergoing gateway maintenance. Please choose Cash / Pay on Delivery for instant checkout or reach our concierge on WhatsApp.');
+      setSubmitError('Online payments are not enabled yet. Please choose Cash on Delivery or reach our concierge on WhatsApp.');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -1314,14 +1309,9 @@ export const CheckoutPage: React.FC = () => {
                 </div>
                 {paymentMethod === 'upi' && (
                   <div className="anvi-payment-option-content">
-                    {!user && (
-                      <div style={{ padding: '6px 10px', background: 'rgba(197, 48, 48, 0.08)', borderRadius: '6px', marginBottom: '8px', color: '#9b2c2c', fontSize: '11px', fontWeight: 500 }}>
-                        ✦ Online payments require signing in for OTP verification. Please sign in above, or choose <strong>Cash on Delivery</strong> below for instant 1-click checkout.
-                      </div>
-                    )}
                     After clicking &ldquo;Pay Securely&rdquo;, a Razorpay window opens —
                     scan the UPI QR or approve the collect request in Google Pay,
-                    PhonePe or Paytm. Zero extra fees.
+                    PhonePe or Paytm. Zero extra fees. Instant guest checkout — no account required.
                   </div>
                 )}
               </label>
@@ -1353,11 +1343,6 @@ export const CheckoutPage: React.FC = () => {
                 </div>
                 {paymentMethod === 'card' && (
                   <div className="anvi-payment-option-content">
-                    {!user && (
-                      <div style={{ padding: '6px 10px', background: 'rgba(197, 48, 48, 0.08)', borderRadius: '6px', marginBottom: '8px', color: '#9b2c2c', fontSize: '11px', fontWeight: 500 }}>
-                        ✦ Online payments require signing in for OTP verification. Please sign in above, or choose <strong>Cash on Delivery</strong> below for instant 1-click checkout.
-                      </div>
-                    )}
                     After clicking &ldquo;Pay Securely&rdquo;, a Razorpay window opens —
                     pay with Visa, Mastercard, RuPay or American Express with
                     3D Secure OTP verification.
@@ -1388,11 +1373,6 @@ export const CheckoutPage: React.FC = () => {
                 </div>
                 {paymentMethod === 'netbanking' && (
                   <div className="anvi-payment-option-content">
-                    {!user && (
-                      <div style={{ padding: '6px 10px', background: 'rgba(197, 48, 48, 0.08)', borderRadius: '6px', marginBottom: '8px', color: '#9b2c2c', fontSize: '11px', fontWeight: 500 }}>
-                        ✦ Online payments require signing in for OTP verification. Please sign in above, or choose <strong>Cash on Delivery</strong> below for instant 1-click checkout.
-                      </div>
-                    )}
                     After clicking &ldquo;Pay Securely&rdquo;, a Razorpay window opens —
                     select your bank (HDFC, ICICI, SBI, Axis, Kotak, etc.) on the
                     secure gateway.
@@ -1418,9 +1398,6 @@ export const CheckoutPage: React.FC = () => {
                     <span className="anvi-payment-option-title">
                       Cash / Pay on Delivery
                     </span>
-                  </div>
-                  <div className="anvi-payment-badges">
-                    <span className="anvi-payment-badge" style={{ backgroundColor: '#2e7d32', color: '#ffffff' }}>Instant Checkout</span>
                   </div>
                 </div>
                 {paymentMethod === 'cod' && (

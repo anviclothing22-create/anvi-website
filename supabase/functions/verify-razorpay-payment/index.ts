@@ -88,10 +88,9 @@ serve(async (req: Request) => {
     return json({ error: "Method not allowed. Use POST." }, cors, 405);
   }
   const userId = await getAuthUserId(req);
-  if (!userId) {
-    return json({ error: "Authentication required. Sign in and try again." }, cors, 401);
-  }
-  if (rateLimited(userId)) {
+  const clientIp = req.headers.get("x-forwarded-for") ?? req.headers.get("cf-connecting-ip") ?? "guest-ip";
+  const rateLimitKey = userId ?? clientIp;
+  if (rateLimited(rateLimitKey)) {
     return json({ error: "Too many requests. Slow down and try again." }, cors, 429);
   }
 
