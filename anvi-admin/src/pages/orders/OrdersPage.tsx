@@ -34,8 +34,16 @@ export const OrdersPage: React.FC = () => {
         if (!matchNum && !matchName && !matchEmail && !matchCity) return false;
       }
 
-      if (statusFilter !== 'all' && o.orderStatus.toLowerCase() !== statusFilter.toLowerCase()) {
-        return false;
+      if (statusFilter !== 'all') {
+        const orderSt = (o.orderStatus || '').toLowerCase().replace(/[\s_-]+/g, '_');
+        const filterSt = statusFilter.toLowerCase().replace(/[\s_-]+/g, '_');
+        const isMatch =
+          orderSt === filterSt ||
+          (filterSt === 'processing' && (orderSt === 'in_studio_preparation' || orderSt === 'processing')) ||
+          (filterSt === 'in_studio_preparation' && (orderSt === 'in_studio_preparation' || orderSt === 'processing')) ||
+          (filterSt === 'shipped' && (orderSt === 'dispatched' || orderSt === 'shipped')) ||
+          (filterSt === 'dispatched' && (orderSt === 'dispatched' || orderSt === 'shipped'));
+        if (!isMatch) return false;
       }
 
       return true;
@@ -98,8 +106,8 @@ export const OrdersPage: React.FC = () => {
             <option value="all">All Order Statuses</option>
             <option value="pending">Pending</option>
             <option value="confirmed">Confirmed</option>
-            <option value="processing">In Studio Preparation</option>
-            <option value="shipped">Dispatched</option>
+            <option value="in_studio_preparation">In Preparation</option>
+            <option value="dispatched">Dispatched</option>
             <option value="delivered">Delivered</option>
             <option value="cancelled">Cancelled</option>
           </Select>

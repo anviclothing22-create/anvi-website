@@ -385,7 +385,7 @@ export const CheckoutPage: React.FC = () => {
     }
   };
 
-  const handlePlaceOrder = (e: React.FormEvent) => {
+  const handlePlaceOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
     setPaymentFailed(false);
@@ -422,11 +422,16 @@ export const CheckoutPage: React.FC = () => {
       void startRazorpayFlow(e164);
       return;
     }
-    if (user && isSupabaseConfigured()) {
-      void placeServerOrder();
-      return;
+    if (isSupabaseConfigured()) {
+      try {
+        await placeServerOrder();
+        return;
+      } catch (srvErr) {
+        console.warn('[CheckoutPage] Server order error, saving local order fallback:', srvErr);
+        placeLocalOrder();
+        return;
+      }
     }
-    // Guest COD orders are local-only (never reach Supabase — see create_order auth policy).
     placeLocalOrder();
   };
 
@@ -537,11 +542,16 @@ export const CheckoutPage: React.FC = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    if (user && isSupabaseConfigured()) {
-      await placeServerOrder(verified);
-      return;
+    if (isSupabaseConfigured()) {
+      try {
+        await placeServerOrder(verified);
+        return;
+      } catch (srvErr) {
+        console.warn('[handleRazorpaySuccess] Server order error, saving local order fallback:', srvErr);
+        placeLocalOrder(verified);
+        return;
+      }
     }
-    // Guest prepaid orders: payment verified server-side, order recorded locally.
     placeLocalOrder(verified);
   };
 

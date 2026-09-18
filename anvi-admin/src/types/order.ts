@@ -23,7 +23,9 @@ export type OrderStatus =
   | 'pending'
   | 'confirmed'
   | 'processing'
+  | 'in_studio_preparation'
   | 'shipped'
+  | 'dispatched'
   | 'delivered'
   | 'cancelled'
   | 'refunded';

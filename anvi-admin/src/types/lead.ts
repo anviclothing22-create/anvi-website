@@ -9,7 +9,9 @@ export type LeadSource =
   | 'bridal_consultation'
   | 'whatsapp'
   | 'phone_inquiry'
-  | 'website';
+  | 'website'
+  | 'website_popup'
+  | string;
 
 export type LeadStatus =
   | 'New'

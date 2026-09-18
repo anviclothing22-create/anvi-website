@@ -11,17 +11,17 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({ order, onUpdateSta
   const steps = [
     { key: 'pending', label: 'Order Received', desc: 'Client placed order online' },
     { key: 'confirmed', label: 'Payment Confirmed', desc: 'Funds cleared gateway' },
-    { key: 'processing', label: 'Quality Check & Packing', desc: 'Garment inspected at studio' },
-    { key: 'shipped', label: 'Handed to Courier', desc: 'AWB generated with partner' },
+    { key: 'in_studio_preparation', label: 'Quality Check & Packing', desc: 'Garment inspected at boutique' },
+    { key: 'dispatched', label: 'Handed to Courier', desc: 'AWB generated with partner' },
     { key: 'delivered', label: 'Delivered to Patron', desc: 'Package signed for' },
   ];
 
-  const normalizedStatus = (order.orderStatus || '').toLowerCase();
+  const normalizedStatus = (order.orderStatus || '').toLowerCase().replace(/[\s_-]+/g, '_');
   const currentIdx = steps.findIndex(
     (s) =>
       s.key === normalizedStatus ||
-      (normalizedStatus.includes('preparation') && s.key === 'processing') ||
-      (normalizedStatus.includes('dispatched') && s.key === 'shipped')
+      (normalizedStatus === 'processing' && s.key === 'in_studio_preparation') ||
+      (normalizedStatus === 'shipped' && s.key === 'dispatched')
   );
 
   return (

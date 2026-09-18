@@ -20,6 +20,7 @@ export const LeadSourceBadge: React.FC<LeadSourceBadgeProps> = ({ source }) => {
       case 'phone_inquiry':
         return 'bg-blue-50 text-blue-800 border-blue-200';
       case 'website':
+      case 'website_popup':
         return 'bg-amber-50 text-amber-900 border-amber-300';
       default:
         return 'bg-stone-100 text-stone-700 border-stone-200';
@@ -40,7 +41,9 @@ export const LeadSourceBadge: React.FC<LeadSourceBadgeProps> = ({ source }) => {
       case 'phone_inquiry':
         return 'Phone Inquiry';
       case 'website':
-        return 'Website Privilege';
+        return 'Website Contact';
+      case 'website_popup':
+        return 'Website Privilege (Popup)';
       default:
         return 'Online Form';
     }

@@ -73,6 +73,12 @@ export async function attachVerifiedPayment(
 export async function fetchOrderById(orderId: string): Promise<unknown> {
   const sb = getSupabase();
   if (!sb) throw new Error('Supabase not configured.');
+  try {
+    const { data: rpcData, error: rpcError } = await sb.rpc('get_order_details', { p_order_id: orderId });
+    if (!rpcError && rpcData) return rpcData;
+  } catch {
+    // fallback to direct table select
+  }
   const { data, error } = await sb.from('orders').select('*, order_items(*), order_timeline(*)').eq('id', orderId).single();
   if (error) throw new Error(error.message);
   return data;

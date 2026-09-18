@@ -14,6 +14,10 @@ export const OrderActions: React.FC<OrderActionsProps> = ({
   onView,
   onUpdateStatus,
 }) => {
+  const normalized = (order.orderStatus || '').toLowerCase().replace(/[\s_-]+/g, '_');
+  const canDispatch = Boolean(onUpdateStatus && (normalized === 'in_studio_preparation' || normalized === 'processing' || normalized === 'confirmed' || normalized === 'pending'));
+  const canDeliver = Boolean(onUpdateStatus && (normalized === 'dispatched' || normalized === 'shipped'));
+
   return (
     <div className="flex items-center justify-end gap-1">
       <IconButton
@@ -22,19 +26,19 @@ export const OrderActions: React.FC<OrderActionsProps> = ({
         onClick={onView}
         className="text-anvi-muted hover:text-anvi-maroon"
       />
-      {onUpdateStatus && order.orderStatus === 'processing' && (
+      {canDispatch && (
         <IconButton
           icon={Truck}
-          label="Mark as Shipped"
-          onClick={() => onUpdateStatus('shipped')}
+          label="Mark as Dispatched"
+          onClick={() => onUpdateStatus!('dispatched')}
           className="text-anvi-muted hover:text-blue-600"
         />
       )}
-      {onUpdateStatus && order.orderStatus === 'shipped' && (
+      {canDeliver && (
         <IconButton
           icon={CheckCircle}
           label="Mark as Delivered"
-          onClick={() => onUpdateStatus('delivered')}
+          onClick={() => onUpdateStatus!('delivered')}
           className="text-anvi-muted hover:text-emerald-600"
         />
       )}

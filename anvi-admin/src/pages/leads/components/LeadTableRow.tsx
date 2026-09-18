@@ -69,7 +69,7 @@ export const LeadTableRow: React.FC<LeadTableRowProps> = ({
       {/* Status Selector */}
       <td className="py-3.5 px-4">
         <select
-          value={lead.status}
+          value={normalizedStatus}
           onChange={(e) => onUpdateStatus(lead.id, e.target.value as LeadStatus)}
           className={`px-2 py-1 rounded-lg text-xs font-medium border focus:outline-none capitalize ${
             normalizedStatus === 'converted'
@@ -81,10 +81,11 @@ export const LeadTableRow: React.FC<LeadTableRowProps> = ({
               : 'bg-stone-50 text-stone-700 border-stone-200'
           }`}
         >
-          <option value="New">New</option>
-          <option value="Contacted">Contacted</option>
-          <option value="Converted">Purchased / Converted</option>
-          <option value="Closed">Closed</option>
+          <option value="new">New</option>
+          <option value="contacted">Contacted</option>
+          <option value="scheduled">Fitting Scheduled</option>
+          <option value="converted">Purchased / Converted</option>
+          <option value="closed">Closed</option>
         </select>
       </td>
 
