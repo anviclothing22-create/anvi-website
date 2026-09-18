@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { TrendingUp, Calendar, ArrowUpRight } from 'lucide-react';
+import { TrendingUp } from 'lucide-react';
 import { RevenueChart } from './RevenueChart';
 import { RevenuePoint } from '@/types/dashboard';
-import { formatCurrency } from '@/lib/formatCurrency';
 
 interface RevenueOverviewProps {
   data: RevenuePoint[];
   totalRevenue: number;
 }
 
-export const RevenueOverview: React.FC<RevenueOverviewProps> = ({ data, totalRevenue }) => {
+export const RevenueOverview: React.FC<RevenueOverviewProps> = ({ data }) => {
   const [filterRange, setFilterRange] = useState<'30d' | '90d' | '1y'>('30d');
 
   return (

@@ -17,7 +17,7 @@ export const CouponEmptyState: React.FC<CouponEmptyStateProps> = ({ onCreateCoup
           No promotional codes active
         </h3>
         <p className="text-xs text-anvi-muted leading-relaxed">
-          Create festive discounts, bridal privilege passes, or first-purchase welcome vouchers.
+          Create festive discounts, seasonal privilege passes, or first-purchase welcome vouchers.
         </p>
       </div>
       <Button onClick={onCreateCoupon} size="sm">

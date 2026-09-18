@@ -12,7 +12,7 @@ export const LeadsEmptyState: React.FC = () => {
           No styling inquiries logged
         </h3>
         <p className="text-xs text-anvi-muted leading-relaxed">
-          Walk-in patrons, WhatsApp consultations, and bridal appointment bookings will appear here.
+          Walk-in patrons, WhatsApp consultations, and styling appointment bookings will appear here.
         </p>
       </div>
     </div>

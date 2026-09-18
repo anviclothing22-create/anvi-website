@@ -97,7 +97,7 @@ export const CollectionsPage: React.FC = () => {
   const capsuleProducts = useMemo(() => {
     if (!activeCapsule) return [];
     return productsData.filter((p) => p.collection === activeCapsule.collectionField);
-  }, [activeCapsule]);
+  }, [activeCapsule, productsData]);
 
   const nextCapsule = useMemo(() => {
     if (!activeCapsule) return null;

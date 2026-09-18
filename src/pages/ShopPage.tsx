@@ -324,6 +324,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({
 
     return result;
   }, [
+    productsData,
     searchQuery,
     selectedCategory,
     selectedOccasion,
@@ -379,7 +380,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({
       }
     });
     return map;
-  }, []);
+  }, [productsData]);
 
   // Dynamic Editorial Header & Breadcrumb Computation
   const { pageTitle, pageSubtitle, breadcrumbTrail } = useMemo(() => {

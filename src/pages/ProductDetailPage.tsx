@@ -184,7 +184,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     return productsData
       .filter((p) => p.id !== product.id && p.category !== product.category)
       .slice(0, 4);
-  }, [product]);
+  }, [product, productsData]);
 
   // Sale calculations
   const hasSale = Boolean(product.isOnSale || (product.originalPrice && product.originalPrice > product.price));

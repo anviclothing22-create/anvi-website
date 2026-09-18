@@ -157,7 +157,7 @@ export const DashboardPage: React.FC = () => {
               <h3 className="text-base font-serif font-bold text-anvi-charcoal">
                 Storefront Leads
               </h3>
-              <p className="text-xs text-anvi-muted">Tatabad boutique visits & bridal styling inquiries.</p>
+              <p className="text-xs text-anvi-muted">Tatabad boutique visits & custom styling inquiries.</p>
             </div>
             <Button
               variant="ghost"

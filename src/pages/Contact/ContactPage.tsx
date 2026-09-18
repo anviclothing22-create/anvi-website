@@ -21,7 +21,7 @@ import './ContactPage.css';
 type ContactChannel = 'whatsapp' | 'call' | 'email';
 type InquiryType =
   | 'appointment'
-  | 'bridal'
+  | 'custom-styling'
   | 'sizing'
   | 'order-status'
   | 'press'
@@ -71,7 +71,7 @@ export const ContactPage: React.FC = () => {
 
     // Persist concierge inquiry as a lead (Supabase-first, offline-tolerant).
     const source =
-      form.inquiryType === 'appointment' || form.inquiryType === 'bridal'
+      form.inquiryType === 'appointment' || form.inquiryType === 'custom-styling'
         ? 'fitting_booking'
         : form.preferredChannel === 'whatsapp'
           ? 'whatsapp'
@@ -147,7 +147,7 @@ export const ContactPage: React.FC = () => {
           </div>
           <h1 className="anvi-contact-title">Visit the Studio. Converse with Our Concierge.</h1>
           <p className="anvi-contact-subtitle">
-            A sanctuary for tactile handlooms, bespoke bridal fittings, and unhurried design conversations.
+            A sanctuary for tactile handlooms, bespoke tailoring, and unhurried design conversations.
             Walk through our Coimbatore doors or speak directly with our studio team from anywhere in the world.
           </p>
         </div>
@@ -167,7 +167,7 @@ export const ContactPage: React.FC = () => {
                 <span className="anvi-storefront-tag">Flagship Boutique</span>
                 <h3 className="anvi-storefront-name">146, Raju Naidu St, Tatabad, Coimbatore</h3>
                 <p className="anvi-storefront-caption">
-                  Open Monday through Saturday, 10:00 AM – 7:30 PM IST · Sunday by prior bridal appointment
+                  Open Monday through Saturday, 10:00 AM – 7:30 PM IST · Sunday by prior appointment
                 </p>
               </div>
               <a
@@ -232,7 +232,7 @@ export const ContactPage: React.FC = () => {
                   </div>
                   <div className="anvi-hours-row">
                     <span className="day">Sunday</span>
-                    <span className="time">Prior Bridal Fitting Appointment</span>
+                    <span className="time">Prior Fitting & Styling Appointment</span>
                   </div>
                 </div>
               </div>
@@ -293,7 +293,7 @@ export const ContactPage: React.FC = () => {
                 </h4>
                 <ul className="anvi-amenities-bullets">
                   <li>
-                    <strong>Private Bridal Salon:</strong> Private 1-on-1 trousseau viewing with custom embroidery trials and swatch matching.
+                    <strong>Private Styling Lounge:</strong> Private 1-on-1 wardrobe consultation with custom embroidery trials and fabric swatch matching.
                   </li>
                   <li>
                     <strong>Master Tailor Fitting:</strong> Precise in-person adjustments for blouse sleeves, necklines, and saree fall-pico.
@@ -339,7 +339,7 @@ export const ContactPage: React.FC = () => {
                       <span className="anvi-stationery-eyebrow">Direct Studio Correspondence</span>
                       <h2 className="anvi-stationery-title">Send a Note to Our Concierge</h2>
                       <p className="anvi-stationery-subtitle">
-                        Whether requesting a private bridal fitting, bespoke sizing, or order support,
+                        Whether requesting a studio fitting, bespoke sizing, or order support,
                         every inquiry is answered with personal care.
                       </p>
                     </div>
@@ -364,7 +364,7 @@ export const ContactPage: React.FC = () => {
                           className="anvi-field-select"
                         >
                           <option value="appointment">Book a Studio Visit / Fitting (Coimbatore)</option>
-                          <option value="bridal">Bespoke Bridal & Trousseau Consultation</option>
+                          <option value="custom-styling">Bespoke Styling & Wardrobe Consultation</option>
                           <option value="sizing">Garment Sizing, Draping & Custom Alterations</option>
                           <option value="order-status">Order Status, Dispatch & Tracking</option>
                           <option value="press">Press, Collaborations & Wholesale</option>
@@ -459,7 +459,7 @@ export const ContactPage: React.FC = () => {
                       </div>
 
                       {/* Conditional Date for Appointments */}
-                      {(form.inquiryType === 'appointment' || form.inquiryType === 'bridal') && (
+                      {(form.inquiryType === 'appointment' || form.inquiryType === 'custom-styling') && (
                         <div className="anvi-field-group">
                           <label htmlFor="contact-visit-date" className="anvi-field-label">
                             Preferred Visit Date (Optional)
@@ -616,7 +616,7 @@ export const ContactPage: React.FC = () => {
 
               <div className="anvi-transit-callout">
                 <p>
-                  Visiting from Bengaluru, Chennai, or Kochi for a wedding trousseau? Let our concierge know in advance and we can arrange curated fabric swatches ready upon your arrival.
+                  Visiting from Bengaluru, Chennai, or Kochi for curated handloom shopping? Let our concierge know in advance and we can arrange custom fabric swatches ready upon your arrival.
                 </p>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Eye, Truck, CheckCircle, XCircle } from 'lucide-react';
+import { Eye, Truck, CheckCircle } from 'lucide-react';
 import { IconButton } from '@/components/ui/IconButton';
 import { Order, OrderStatus } from '@/types/order';
 

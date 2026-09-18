@@ -79,7 +79,7 @@ export const OccasionsPage: React.FC = () => {
       default:
         return list;
     }
-  }, [activeOccasion, sortBy]);
+  }, [activeOccasion, productsData, sortBy]);
 
   // If on /occasions/:slug and valid occasion found, render dedicated Occasion Lookbook
   if (activeOccasion) {

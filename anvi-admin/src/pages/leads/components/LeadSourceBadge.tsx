@@ -12,6 +12,7 @@ export const LeadSourceBadge: React.FC<LeadSourceBadgeProps> = ({ source }) => {
         return 'bg-purple-50 text-purple-800 border-purple-200';
       case 'fitting_booking':
         return 'bg-amber-50 text-amber-800 border-amber-200';
+      case 'styling_consultation':
       case 'bridal_consultation':
         return 'bg-rose-50 text-rose-800 border-rose-200';
       case 'whatsapp':
@@ -31,8 +32,9 @@ export const LeadSourceBadge: React.FC<LeadSourceBadgeProps> = ({ source }) => {
         return 'Store Walk-In';
       case 'fitting_booking':
         return 'Fitting Session';
+      case 'styling_consultation':
       case 'bridal_consultation':
-        return 'Bridal Consultation';
+        return 'Styling Consultation';
       case 'whatsapp':
         return 'WhatsApp';
       case 'phone_inquiry':

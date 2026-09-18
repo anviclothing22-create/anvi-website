@@ -30,7 +30,7 @@ export interface FooterData {
 
 export const footerData: FooterData = {
   brand: {
-    name: 'ANVI',
+    name: 'ANVI Clothing',
     tagline: 'Handpicked favourites chosen with love. Curated with care by Nivetha. 🤍✨',
     location: 'Coimbatore, Tamil Nadu, India',
     logoSrc: '/images/brand/anvi_logo.png',

@@ -84,10 +84,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
       >
         {/* Drawer Header */}
         <div className="anvi-drawer-header">
-          <a href="/" onClick={onClose} aria-label="ANVI Home">
+          <a href="/" onClick={onClose} aria-label="ANVI Clothing Home">
             <img
               src="/images/brand/anvi_logo.png"
-              alt="ANVI"
+              alt="ANVI Clothing"
               className="anvi-drawer-logo"
             />
           </a>

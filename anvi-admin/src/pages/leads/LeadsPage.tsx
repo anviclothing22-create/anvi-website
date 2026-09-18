@@ -107,7 +107,7 @@ export const LeadsPage: React.FC = () => {
             <option value="all">All Channels</option>
             <option value="walk_in">Store Walk-In</option>
             <option value="fitting_booking">Fitting Session</option>
-            <option value="bridal_consultation">Bridal Consult</option>
+            <option value="styling_consultation">Styling Consult</option>
             <option value="whatsapp">WhatsApp</option>
             <option value="website">Website</option>
           </Select>
@@ -178,7 +178,7 @@ export const LeadsPage: React.FC = () => {
               <Select value={source} onChange={(e) => setSource(e.target.value as any)}>
                 <option value="walk_in">Tatabad Store Walk-In</option>
                 <option value="fitting_booking">Fitting Booking</option>
-                <option value="bridal_consultation">Bridal Consultation</option>
+                <option value="styling_consultation">Styling Consultation</option>
                 <option value="whatsapp">WhatsApp Chat</option>
                 <option value="phone_inquiry">Phone Inquiry</option>
               </Select>

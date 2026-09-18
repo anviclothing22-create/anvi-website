@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, Plus, Link as LinkIcon, Loader2 } from 'lucide-react';
+import { Upload, Link as LinkIcon, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { supabase } from '@/lib/supabase';
@@ -13,7 +13,7 @@ export const ProductImageUpload: React.FC<ProductImageUploadProps> = ({ onAddIma
   const [altInput, setAltInput] = useState('');
   const [showUrlInput, setShowUrlInput] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [, setUploadError] = useState<string | null>(null);
 
   const handleUrlSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -16,7 +16,7 @@ export const WishlistPage: React.FC = () => {
   // Match saved IDs against products dataset
   const savedProducts = useMemo(() => {
     return productsData.filter((p) => wishlistIds.includes(p.id));
-  }, [wishlistIds]);
+  }, [productsData, wishlistIds]);
 
   const handleAddToBag = (product: Product) => {
     addItem({

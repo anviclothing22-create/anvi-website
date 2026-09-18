@@ -8,7 +8,7 @@ export const initialMockLeads: Lead[] = [
     phone: '+91 98941 23456',
     city: 'Coimbatore',
     source: 'Offline Store Walk-in',
-    interests: ['Bridal Kanjeevaram Saree', 'Custom Blouse Stitching'],
+    interests: ['Pure Kanjeevaram Silk Saree', 'Custom Blouse Stitching'],
     notes: 'Walked in on Saturday with mother. Looking for sister wedding saree in gold zari.',
     status: 'Contacted',
     createdAt: '2026-09-08T15:20:00Z',

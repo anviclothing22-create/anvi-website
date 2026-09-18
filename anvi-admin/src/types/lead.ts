@@ -5,6 +5,7 @@ export type LeadSource =
   | 'Boutique Fitting Appointment'
   | 'walk_in'
   | 'fitting_booking'
+  | 'styling_consultation'
   | 'bridal_consultation'
   | 'whatsapp'
   | 'phone_inquiry'
