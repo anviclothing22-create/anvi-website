@@ -13,7 +13,7 @@ export const PrivacyPage: React.FC = () => {
     <SupportLayout
       activeTab="privacy"
       title="Privacy Policy"
-      subtitle="Your privacy is sacred to our studio. We collect only what is essential to craft and deliver your garments."
+      subtitle="Your privacy is sacred to ANVI Clothing. We collect only what is essential to craft and deliver your garments."
       lastUpdated="September 2026"
     >
       <div className="anvi-policy-container">
@@ -56,10 +56,10 @@ export const PrivacyPage: React.FC = () => {
         <section className="anvi-policy-section">
           <div className="anvi-policy-section-header">
             <span className="anvi-policy-num">01</span>
-            <h2 className="anvi-policy-h2">Our Studio Commitment to Privacy</h2>
+            <h2 className="anvi-policy-h2">Our Commitment to Privacy</h2>
           </div>
           <p className="anvi-policy-p">
-            ANVI Clothing (“ANVI”, “we”, “our”, or “us”) is operated from our registered studio at Coimbatore, Tamil Nadu, India.
+            ANVI Clothing (“ANVI”, “we”, “our”, or “us”) is operated from our registered boutique at Coimbatore, Tamil Nadu, India.
             This Privacy Policy sets out how we handle, store, and protect any information you entrust to us when you visit our online store, browse our collections, or make a purchase.
           </p>
           <p className="anvi-policy-p">
@@ -138,7 +138,7 @@ export const PrivacyPage: React.FC = () => {
             </li>
             <li className="anvi-policy-list-item">
               <span className="anvi-policy-list-bullet">✦</span>
-              <span>Optional studio dispatches (new edition launches, seasonal festive previews) only when you explicitly opt in. You can unsubscribe at any instant with a single click.</span>
+              <span>Optional updates (new collection launches, seasonal previews) only when you explicitly opt in. You can unsubscribe at any instant with a single click.</span>
             </li>
           </ul>
         </section>
@@ -193,7 +193,7 @@ export const PrivacyPage: React.FC = () => {
             <div>
               <h4 style={{ fontSize: '1rem', color: 'var(--color-deep-maroon)', marginBottom: 4 }}>Grievance Officer — ANVI Clothing</h4>
               <p style={{ fontSize: '0.88rem', color: '#594f4a', lineHeight: 1.6, margin: 0 }}>
-                ANVI Studio, 146, Raju Naidu St, Sivananda Colony, Tatabad, Coimbatore, Tamil Nadu 641012, India<br />
+                ANVI Clothing, 146, Raju Naidu St, Sivananda Colony, Tatabad, Coimbatore, Tamil Nadu 641012, India<br />
                 <strong>Email:</strong> <a href="mailto:anviclothing22@gmail.com" style={{ color: 'var(--color-deep-maroon)', textDecoration: 'underline' }}>anviclothing22@gmail.com</a><br />
                 <strong>Response Window:</strong> Within 48 business hours as per statutory timelines.
               </p>

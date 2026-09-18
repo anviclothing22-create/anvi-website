@@ -29,7 +29,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   public override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Log privately to internal telemetry/console without showing to customers
     if (typeof console !== 'undefined' && console.error) {
-      console.error('[ANVI Studio Boundary Caught Error]:', error, errorInfo);
+      console.error('[ANVI Clothing Boundary Caught Error]:', error, errorInfo);
     }
   }
 

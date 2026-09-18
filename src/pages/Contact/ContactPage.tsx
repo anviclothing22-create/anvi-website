@@ -102,7 +102,7 @@ export const ContactPage: React.FC = () => {
       {/* Mobile Sticky Quick-Action Bar */}
       <aside className="anvi-contact-mobile-actionbar" aria-label="Quick contact actions">
         <a
-          href="https://wa.me/919994837459?text=Hello%20ANVI%20Studio,%20I%20would%20like%20to%20connect%20with%20a%20concierge."
+          href="https://wa.me/919994837459?text=Hello%20ANVI%20Clothing,%20I%20would%20like%20to%20connect%20with%20a%20concierge."
           target="_blank"
           rel="noopener noreferrer"
           className="anvi-mobile-btn anvi-mobile-btn--whatsapp"
@@ -131,7 +131,7 @@ export const ContactPage: React.FC = () => {
           <nav aria-label="Breadcrumb" className="anvi-contact-breadcrumbs">
             <a href="/">Home</a>
             <span aria-hidden="true">/</span>
-            <span>The Studio</span>
+            <span>ANVI Clothing</span>
             <span aria-hidden="true">/</span>
             <span className="current">Contact & Visit</span>
           </nav>
@@ -143,12 +143,12 @@ export const ContactPage: React.FC = () => {
         <div className="anvi-contact-container">
           <div className="anvi-hero-badge">
             <Sparkles size={13} />
-            <span>The ANVI Studio · Tatabad, Coimbatore</span>
+            <span>ANVI Clothing · Tatabad, Coimbatore</span>
           </div>
-          <h1 className="anvi-contact-title">Visit the Studio. Converse with Our Concierge.</h1>
+          <h1 className="anvi-contact-title">Visit ANVI Clothing. Converse with Our Concierge.</h1>
           <p className="anvi-contact-subtitle">
             A sanctuary for tactile handlooms, bespoke tailoring, and unhurried design conversations.
-            Walk through our Coimbatore doors or speak directly with our studio team from anywhere in the world.
+            Walk through our Coimbatore doors or speak directly with our team from anywhere in the world.
           </p>
         </div>
       </header>
@@ -197,13 +197,13 @@ export const ContactPage: React.FC = () => {
                     <MapPin size={18} />
                   </div>
                   <div>
-                    <h3 className="anvi-info-heading">Studio Location</h3>
+                    <h3 className="anvi-info-heading">Store Location</h3>
                     <p className="anvi-info-subtext">Sivananda Colony, Tatabad</p>
                   </div>
                 </div>
                 <div className="anvi-info-body">
                   <p className="anvi-address-text">
-                    <strong>ANVI Flagship Studio</strong><br />
+                    <strong>ANVI Clothing Flagship Store</strong><br />
                     146, Raju Naidu St, Sivananda Colony,<br />
                     Tatabad, Coimbatore, Tamil Nadu 641012, India
                   </p>
@@ -221,7 +221,7 @@ export const ContactPage: React.FC = () => {
                     <Clock size={18} />
                   </div>
                   <div>
-                    <h3 className="anvi-info-heading">Studio Timings</h3>
+                    <h3 className="anvi-info-heading">Store Timings</h3>
                     <p className="anvi-info-subtext">Open 6 days a week</p>
                   </div>
                 </div>
@@ -250,7 +250,7 @@ export const ContactPage: React.FC = () => {
                 </div>
                 <div className="anvi-channels-list">
                   <a
-                    href="https://wa.me/919994837459?text=Hello%20ANVI%20Studio,%20I%20would%20like%20to%20inquire%20about%20a%20garment/appointment."
+                    href="https://wa.me/919994837459?text=Hello%20ANVI%20Clothing,%20I%20would%20like%20to%20inquire%20about%20a%20garment/appointment."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="anvi-channel-row anvi-channel-row--whatsapp"
@@ -265,7 +265,7 @@ export const ContactPage: React.FC = () => {
 
                   <a href="tel:+919994837459" className="anvi-channel-row">
                     <div className="anvi-channel-detail">
-                      <span className="channel-label">Studio Direct Line</span>
+                      <span className="channel-label">Store Direct Line</span>
                       <span className="channel-value">+91 99948 37459</span>
                     </div>
                     <span className="channel-action">Call ↗</span>
@@ -289,7 +289,7 @@ export const ContactPage: React.FC = () => {
               <div className="anvi-amenities-box">
                 <h4 className="anvi-amenities-header">
                   <Sparkles size={15} color="var(--color-champagne-gold)" />
-                  <span>The ANVI In-Person Studio Experience</span>
+                  <span>The ANVI Clothing Experience</span>
                 </h4>
                 <ul className="anvi-amenities-bullets">
                   <li>
@@ -313,10 +313,10 @@ export const ContactPage: React.FC = () => {
                     <div className="anvi-success-seal">
                       <Check size={32} />
                     </div>
-                    <span className="anvi-success-eyebrow">Studio Dispatch Confirmed</span>
+                    <span className="anvi-success-eyebrow">Inquiry Confirmed</span>
                     <h2 className="anvi-success-title">Thank You, {form.name}</h2>
                     <p className="anvi-success-body">
-                      Your note has been received by our senior concierge at the Coimbatore workshop.
+                      Your note has been received by our senior concierge at ANVI Clothing, Coimbatore.
                       We will connect with you via <strong>{form.preferredChannel.toUpperCase()}</strong> ({form.phone || form.email}) within 3 to 4 business hours.
                     </p>
                     {form.inquiryType === 'appointment' && form.appointmentDate && (
@@ -336,10 +336,10 @@ export const ContactPage: React.FC = () => {
                 ) : (
                   <>
                     <div className="anvi-stationery-header">
-                      <span className="anvi-stationery-eyebrow">Direct Studio Correspondence</span>
+                      <span className="anvi-stationery-eyebrow">Direct Correspondence</span>
                       <h2 className="anvi-stationery-title">Send a Note to Our Concierge</h2>
                       <p className="anvi-stationery-subtitle">
-                        Whether requesting a studio fitting, bespoke sizing, or order support,
+                        Whether requesting a fitting, bespoke sizing, or order support,
                         every inquiry is answered with personal care.
                       </p>
                     </div>
@@ -363,12 +363,12 @@ export const ContactPage: React.FC = () => {
                           }
                           className="anvi-field-select"
                         >
-                          <option value="appointment">Book a Studio Visit / Fitting (Coimbatore)</option>
+                          <option value="appointment">Book a Store Visit / Fitting (Coimbatore)</option>
                           <option value="custom-styling">Bespoke Styling & Wardrobe Consultation</option>
                           <option value="sizing">Garment Sizing, Draping & Custom Alterations</option>
                           <option value="order-status">Order Status, Dispatch & Tracking</option>
                           <option value="press">Press, Collaborations & Wholesale</option>
-                          <option value="general">General Studio Inquiry</option>
+                          <option value="general">General Inquiry</option>
                         </select>
                       </div>
 
@@ -517,7 +517,7 @@ export const ContactPage: React.FC = () => {
                         ) : (
                           <>
                             <Send size={16} />
-                            <span>Transmit to Studio Concierge</span>
+                            <span>Send Message to Concierge</span>
                           </>
                         )}
                       </button>
@@ -535,11 +535,11 @@ export const ContactPage: React.FC = () => {
       </div>
 
       {/* Map & Arrival Guide Section */}
-      <section className="anvi-contact-map-section" aria-label="Studio Map and Arrival Guide">
+      <section className="anvi-contact-map-section" aria-label="Store Map and Arrival Guide">
         <div className="anvi-contact-container">
           <div className="anvi-arrival-header">
             <span className="anvi-arrival-eyebrow">Reaching the Boutique</span>
-            <h2 className="anvi-arrival-title">How to Arrive at Our Tatabad Studio</h2>
+            <h2 className="anvi-arrival-title">How to Arrive at ANVI Clothing</h2>
             <p className="anvi-arrival-subtitle">
               Located at 146, Raju Naidu St, Sivananda Colony, Tatabad, Coimbatore.
             </p>
@@ -549,7 +549,7 @@ export const ContactPage: React.FC = () => {
             {/* Embedded Google Map */}
             <div className="anvi-map-container">
               <iframe
-                title="ANVI Studio Location in Tatabad, Coimbatore"
+                title="ANVI Clothing Location in Tatabad, Coimbatore"
                 src="https://maps.google.com/maps?q=146+Raju+Naidu+St+Sivananda+Colony+Tatabad+Coimbatore+Tamil+Nadu+641012&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="380"

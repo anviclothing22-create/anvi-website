@@ -56,13 +56,13 @@ export const TermsPage: React.FC = () => {
         <section className="anvi-policy-section">
           <div className="anvi-policy-section-header">
             <span className="anvi-policy-num">01</span>
-            <h2 className="anvi-policy-h2">Studio Terms Overview & Scope</h2>
+            <h2 className="anvi-policy-h2">Terms Overview & Scope</h2>
           </div>
           <p className="anvi-policy-p">
             Welcome to ANVI Clothing. By browsing, creating an account, or purchasing any garments through our website or Coimbatore boutique, you agree to be bound by the terms, conditions, and notices contained herein. Please review them with care.
           </p>
           <p className="anvi-policy-p">
-            We reserve the right to refine or update these terms periodically to reflect updates in consumer regulations or studio capabilities. The date of the most recent revision will always be displayed at the top of this document.
+            We reserve the right to refine or update these terms periodically to reflect updates in consumer regulations or store capabilities. The date of the most recent revision will always be displayed at the top of this document.
           </p>
         </section>
 

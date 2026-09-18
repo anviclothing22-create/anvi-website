@@ -369,7 +369,7 @@ create table if not exists public.blog_posts (
   content_markdown text not null default '',
   content_json jsonb not null default '{}'::jsonb,
   cover_image_url text,
-  author_name text not null default 'ANVI Studio',
+  author_name text not null default 'ANVI Clothing',
   author_role text,
   author_avatar_url text,
   read_time text,

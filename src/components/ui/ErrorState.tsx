@@ -164,7 +164,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
           <div className="anvi-error-icon-seal">
             <Icon size={28} />
           </div>
-          <span className="anvi-error-eyebrow">Studio Client Care</span>
+          <span className="anvi-error-eyebrow">Client Care</span>
           <h1 className="anvi-error-title">{displayTitle}</h1>
           <p className="anvi-error-message">{displayMessage}</p>
 
@@ -205,7 +205,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
               <span>
                 Need immediate styling or order assistance?{' '}
                 <a
-                  href="https://wa.me/919994837459?text=Hello%20ANVI%20Studio,%20I%20experienced%20an%20issue%20while%20browsing/shopping."
+                  href="https://wa.me/919994837459?text=Hello%20ANVI%20Clothing,%20I%20experienced%20an%20issue%20while%20browsing/shopping."
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -268,7 +268,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              WhatsApp Studio Concierge
+              WhatsApp Concierge
             </a>
           </span>
         </div>

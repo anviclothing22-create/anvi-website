@@ -372,7 +372,7 @@ export const AccountPage: React.FC = () => {
                 <span>{profileData.email}</span>
                 <span>·</span>
                 <span className="anvi-account-meta-badge">
-                  ✦ Coimbatore Studio Patron
+                  ✦ ANVI Clothing Patron
                 </span>
               </div>
             </div>
@@ -624,7 +624,7 @@ export const AccountPage: React.FC = () => {
                 </button>
                 {profileSavedToast && (
                   <span className="anvi-profile-saved-toast">
-                    <Check size={16} /> Changes saved to your studio profile
+                    <Check size={16} /> Changes saved to your profile
                   </span>
                 )}
               </div>
@@ -943,7 +943,7 @@ export const AccountPage: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'rgba(47, 43, 43, 0.65)', borderTop: '1px solid rgba(47, 43, 43, 0.08)', paddingTop: '1rem' }}>
               <ShieldCheck size={16} color="var(--color-gold)" />
               <span>
-                7-Day Boutique Exchange active for this order. For doorstep assistance, contact our Coimbatore studio.
+                7-Day Boutique Exchange active for this order. For doorstep assistance, contact our Coimbatore team.
               </span>
             </div>
           </div>

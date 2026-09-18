@@ -330,7 +330,7 @@ export const FAQPage: React.FC = () => {
                 borderRadius: 4,
               }}
             >
-              Contact Studio
+              Contact ANVI Clothing
             </a>
           </div>
         ) : (

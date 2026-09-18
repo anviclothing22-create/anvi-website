@@ -24,7 +24,7 @@ const SUPPORT_TABS: TabItem[] = [
   { key: 'faq', label: 'FAQs', href: '/faqs', icon: HelpCircle },
   { key: 'shipping', label: 'Shipping & Delivery', href: '/shipping', icon: Truck },
   { key: 'returns', label: 'Exchange & Returns', href: '/returns', icon: RefreshCw },
-  { key: 'contact', label: 'Contact Studio', href: '/contact', icon: Mail },
+  { key: 'contact', label: 'Contact ANVI Clothing', href: '/contact', icon: Mail },
   { key: 'privacy', label: 'Privacy Policy', href: '/privacy', icon: ShieldCheck },
   { key: 'terms', label: 'Terms & Conditions', href: '/terms', icon: FileText },
 ];
@@ -37,7 +37,7 @@ const SUPPORT_TABS: TabItem[] = [
 export const SupportLayout: React.FC<SupportLayoutProps> = ({
   activeTab,
   title,
-  eyebrow = 'Client Care & Studio Policies',
+  eyebrow = 'Client Care & Store Policies',
   subtitle,
   lastUpdated,
   children,
@@ -101,20 +101,20 @@ export const SupportLayout: React.FC<SupportLayoutProps> = ({
         <div className="anvi-support-container">{children}</div>
       </div>
 
-      {/* Studio Direct Care Bar */}
-      <section className="anvi-support-concierge-strip" aria-label="Direct studio assistance">
+      {/* Direct Care Bar */}
+      <section className="anvi-support-concierge-strip" aria-label="Direct concierge assistance">
         <div className="anvi-support-container">
           <div className="anvi-concierge-inner">
             <div className="anvi-concierge-text">
-              <span className="anvi-concierge-badge">✦ Direct Studio Concierge</span>
+              <span className="anvi-concierge-badge">✦ Direct Concierge</span>
               <h3 className="anvi-concierge-title">Have a specific question about a drape, custom fit, or order?</h3>
               <p className="anvi-concierge-desc">
-                Our Coimbatore studio team is at your service Monday to Saturday, 10:00 AM – 7:30 PM IST.
+                Our Coimbatore team is at your service Monday to Saturday, 10:00 AM – 7:30 PM IST.
               </p>
             </div>
             <div className="anvi-concierge-actions">
               <a
-                href="https://wa.me/919994837459?text=Hello%20ANVI%20Studio,%20I%20have%20an%20inquiry%20regarding%20my%20order/garment."
+                href="https://wa.me/919994837459?text=Hello%20ANVI%20Clothing,%20I%20have%20an%20inquiry%20regarding%20my%20order/garment."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="anvi-btn-concierge-whatsapp"
@@ -124,7 +124,7 @@ export const SupportLayout: React.FC<SupportLayoutProps> = ({
               </a>
               <a href="tel:+919994837459" className="anvi-btn-concierge-call">
                 <Phone size={16} />
-                <span>Call Studio</span>
+                <span>Call ANVI Clothing</span>
               </a>
             </div>
           </div>

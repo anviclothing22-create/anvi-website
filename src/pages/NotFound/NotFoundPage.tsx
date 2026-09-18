@@ -46,7 +46,7 @@ export const NotFoundPage: React.FC = () => {
 
           {/* Subtle Suggested Discovery Links */}
           <div className="anvi-404-links">
-            <span className="anvi-404-links-label">Explore the Studio</span>
+            <span className="anvi-404-links-label">Explore ANVI Clothing</span>
             <div className="anvi-404-links-group">
               <a href="/shop/sarees">Sarees</a>
               <span className="dot" aria-hidden="true">·</span>
@@ -56,7 +56,7 @@ export const NotFoundPage: React.FC = () => {
               <span className="dot" aria-hidden="true">·</span>
               <a href="/our-story">Our Story</a>
               <span className="dot" aria-hidden="true">·</span>
-              <a href="/contact">Contact Studio</a>
+              <a href="/contact">Contact Us</a>
             </div>
           </div>
         </div>

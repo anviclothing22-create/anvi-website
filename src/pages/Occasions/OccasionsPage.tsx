@@ -304,8 +304,8 @@ export const OccasionsPage: React.FC = () => {
         <section className="anvi-occasions-concierge-strip" aria-label="Concierge Styling">
           <div className="anvi-occasions-concierge-strip-inner">
             <div className="anvi-occasions-concierge-strip-text">
-              <span className="anvi-occasions-concierge-strip-tag">Studio Concierge</span>
-              <p>Need personal styling guidance? Connect with our Coimbatore studio on WhatsApp.</p>
+              <span className="anvi-occasions-concierge-strip-tag">ANVI Concierge</span>
+              <p>Need personal styling guidance? Connect with ANVI Clothing on WhatsApp.</p>
             </div>
             <a
               href="https://wa.me/919488212262?text=Hello%20ANVI%20Styling%20Concierge%2C%20I%20would%20like%20guidance%20on%20choosing%20an%20attire%20for%20an%20upcoming%20occasion."

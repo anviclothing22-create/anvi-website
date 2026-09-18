@@ -779,7 +779,7 @@ export const CheckoutPage: React.FC = () => {
           <div className="anvi-checkout-success-actions" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <a
               href={`https://wa.me/919994837459?text=${encodeURIComponent(
-                `Hello ANVI Studio, I have placed order #${placedOrder.id} for ${formatPrice(placedOrder.total)}. Please confirm my order details.`
+                `Hello ANVI Clothing, I have placed order #${placedOrder.id} for ${formatPrice(placedOrder.total)}. Please confirm my order details.`
               )}`}
               target="_blank"
               rel="noopener noreferrer"

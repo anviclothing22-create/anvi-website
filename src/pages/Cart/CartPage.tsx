@@ -256,7 +256,7 @@ export const CartPage: React.FC = () => {
                     <Truck size={16} className="anvi-cart-info-glyph" />
                     <span>
                       <strong>Dispatches in 24–48 Hours:</strong> Express insured
-                      courier dispatch from our Coimbatore studio with real-time
+                      courier dispatch from our Coimbatore boutique with real-time
                       tracking.
                     </span>
                   </div>
