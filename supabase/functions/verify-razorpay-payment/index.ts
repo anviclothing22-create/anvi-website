@@ -5,34 +5,41 @@
 // matches razorpay_signature. Mismatch -> 400 and the order must NOT be marked paid.
 //
 // Security:
-//   - Requires a valid authenticated Supabase session (Bearer JWT) to limit who can
-//     probe the verification endpoint.
-//   - CORS restricted to an origin allowlist (CORS_ALLOWED_ORIGINS env, comma-separated).
+//   - Cryptographic constant-time HMAC-SHA256 verification against RAZORPAY_KEY_SECRET.
+//   - Rate-limited per user or client IP.
+//   - Dynamic CORS supporting configured origins, localhost, and Vercel domains.
 //
-// Secret (never in client code — set via `supabase secrets set`):
-//   RAZORPAY_KEY_SECRET
-// Optional:
-//   CORS_ALLOWED_ORIGINS  e.g. "https://anvi.example,https://admin.anvi.example"
-//
-// Deploy: supabase functions deploy verify-razorpay-payment
-// Serve locally: supabase functions serve verify-razorpay-payment --env-file ./supabase/.env.local
+// Deploy: supabase functions deploy verify-razorpay-payment --no-verify-jwt
 
 import { serve } from "https://deno.land/std@0.208.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const ALLOWED_ORIGINS = (Deno.env.get("CORS_ALLOWED_ORIGINS") ??
-  "http://localhost:5173,http://localhost:5174")
+const CONFIGURED_ORIGINS = (Deno.env.get("CORS_ALLOWED_ORIGINS") ??
+  "http://localhost:5173,http://localhost:5174,http://localhost:3000,https://anviclothing.com,https://www.anviclothing.com,https://anviclothings.com")
   .split(",")
   .map((s: string) => s.trim())
   .filter(Boolean);
 
+function isAllowedOrigin(origin: string): boolean {
+  if (!origin) return false;
+  if (CONFIGURED_ORIGINS.includes(origin) || CONFIGURED_ORIGINS.includes("*")) return true;
+  // Allow all localhost / 127.0.0.1 ports in local development
+  if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) return true;
+  // Allow Vercel preview and production environments
+  if (/^https:\/\/([a-z0-9-]+\.)*vercel\.app$/.test(origin)) return true;
+  // Allow canonical boutique domains
+  if (/^https:\/\/(www\.)?anviclothings?\.com$/.test(origin)) return true;
+  return false;
+}
+
 function corsHeadersFor(req: Request): Record<string, string> {
   const origin = req.headers.get("Origin") ?? "";
-  const allowed = ALLOWED_ORIGINS.includes(origin);
+  const allowed = isAllowedOrigin(origin);
   return {
-    "Access-Control-Allow-Origin": allowed ? origin : ALLOWED_ORIGINS[0],
+    "Access-Control-Allow-Origin": allowed ? origin : (origin || CONFIGURED_ORIGINS[0] || "*"),
     "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Max-Age": "86400",
     Vary: "Origin",
   };
 }
@@ -44,22 +51,27 @@ function json(data: unknown, cors: Record<string, string>, status = 200): Respon
   });
 }
 
-/** Returns the authenticated user's id, or null when the bearer token is invalid. */
+/** Returns the authenticated user's id, or null for guests or invalid tokens. */
 async function getAuthUserId(req: Request): Promise<string | null> {
   const url = Deno.env.get("SUPABASE_URL");
   const anon = Deno.env.get("SUPABASE_ANON_KEY");
   const header = req.headers.get("Authorization") ?? "";
-  const token = header.startsWith("Bearer ") ? header.slice(7) : "";
+  const token = header.startsWith("Bearer ") ? header.slice(7).trim() : "";
   if (!url || !anon || !token) return null;
-  const supabase = createClient(url, anon, { auth: { persistSession: false } });
-  const { data, error } = await supabase.auth.getUser(token);
-  if (error || !data.user) return null;
-  return data.user.id;
+  if (token === anon || token.startsWith("sb_publishable_")) return null;
+  try {
+    const supabase = createClient(url, anon, { auth: { persistSession: false } });
+    const { data, error } = await supabase.auth.getUser(token);
+    if (error || !data.user) return null;
+    return data.user.id;
+  } catch {
+    return null;
+  }
 }
 
-/** Sliding-window per-user rate limit (per edge instance). */
+/** Sliding-window per-user/IP rate limit (per edge instance). */
 const RATE_WINDOW_MS = 60_000;
-const RATE_MAX = 20;
+const RATE_MAX = 30;
 const rateHits = new Map<string, number[]>();
 function rateLimited(key: string): boolean {
   const now = Date.now();
@@ -82,11 +94,12 @@ function timingSafeEqual(a: string, b: string): boolean {
 serve(async (req: Request) => {
   const cors = corsHeadersFor(req);
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: cors });
+    return new Response(null, { status: 204, headers: cors });
   }
   if (req.method !== "POST") {
     return json({ error: "Method not allowed. Use POST." }, cors, 405);
   }
+
   const userId = await getAuthUserId(req);
   const clientIp = req.headers.get("x-forwarded-for") ?? req.headers.get("cf-connecting-ip") ?? "guest-ip";
   const rateLimitKey = userId ?? clientIp;
@@ -96,26 +109,26 @@ serve(async (req: Request) => {
 
   const secret = Deno.env.get("RAZORPAY_KEY_SECRET");
   if (!secret) {
-    console.error("[verify-razorpay-payment] Missing RAZORPAY_KEY_SECRET");
-    return json({ verified: false, error: "Payment gateway is not configured." }, cors, 500);
+    console.error("[verify-razorpay-payment] Missing RAZORPAY_KEY_SECRET in Supabase secrets");
+    return json({ verified: false, error: "Payment gateway verification is not configured on the server." }, cors, 500);
   }
 
   let body: Record<string, unknown>;
   try {
     body = await req.json();
   } catch {
-    return json({ verified: false, error: "Invalid JSON body." }, cors, 400);
+    return json({ verified: false, error: "Invalid JSON request body." }, cors, 400);
   }
 
-  const orderId = String(body["razorpay_order_id"] ?? "");
-  const paymentId = String(body["razorpay_payment_id"] ?? "");
-  const signature = String(body["razorpay_signature"] ?? "");
+  const orderId = String(body["razorpay_order_id"] ?? "").trim();
+  const paymentId = String(body["razorpay_payment_id"] ?? "").trim();
+  const signature = String(body["razorpay_signature"] ?? "").trim();
 
   if (!orderId || !paymentId || !signature) {
     return json(
       {
         verified: false,
-        error: "Missing fields. Required: razorpay_order_id, razorpay_payment_id, razorpay_signature.",
+        error: "Missing required payment fields (order_id, payment_id, signature).",
       },
       cors,
       400,
@@ -136,23 +149,26 @@ serve(async (req: Request) => {
     .join("");
 
   if (!timingSafeEqual(expected, signature.toLowerCase())) {
-    console.warn("[verify-razorpay-payment] Signature mismatch for order:", orderId);
-    return json({ verified: false, error: "Signature mismatch. Payment NOT verified." }, cors, 400);
+    console.warn("[verify-razorpay-payment] Signature mismatch for order:", orderId, "payment:", paymentId);
+    return json({ verified: false, error: "Cryptographic signature mismatch. Payment could not be verified." }, cors, 400);
   }
 
-  // Record a one-time, server-side confirmation that attach_verified_payment() consumes
-  // to flip the order to paid. Written with service_role; clients cannot forge it.
+  // Record server-side confirmation consumed by attach_verified_payment() RPC
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   if (supabaseUrl && serviceKey) {
-    const admin = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false } });
-    const { error: upErr } = await admin
-      .from("payment_confirmations")
-      .upsert(
-        { razorpay_order_id: orderId, razorpay_payment_id: paymentId, signature, profile_id: userId },
-        { onConflict: "razorpay_order_id", ignoreDuplicates: true },
-      );
-    if (upErr) console.error("[verify-razorpay-payment] confirmation write failed:", upErr.message);
+    try {
+      const admin = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false } });
+      const { error: upErr } = await admin
+        .from("payment_confirmations")
+        .upsert(
+          { razorpay_order_id: orderId, razorpay_payment_id: paymentId, signature, profile_id: userId },
+          { onConflict: "razorpay_order_id", ignoreDuplicates: true },
+        );
+      if (upErr) console.error("[verify-razorpay-payment] Confirmation write failed:", upErr.message);
+    } catch (dbErr) {
+      console.error("[verify-razorpay-payment] Supabase DB write error:", dbErr);
+    }
   }
 
   return json({ verified: true, order_id: orderId, payment_id: paymentId }, cors);

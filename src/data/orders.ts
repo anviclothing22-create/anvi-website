@@ -30,6 +30,8 @@ export interface Order {
     phone: string;
   };
   paymentMethod: string;
+  razorpayPaymentId?: string;
+  razorpayOrderId?: string;
 }
 
 export const initialOrders: Order[] = [

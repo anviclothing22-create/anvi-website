@@ -291,8 +291,13 @@ export const CheckoutPage: React.FC = () => {
       : 'Cash on Delivery (Verified)';
 
   /** Display label for placed orders — marks server-verified prepaid payments. */
-  const displayPaymentMethod = (): string =>
-    verifiedPayment ? `${paymentLabel()} · Prepaid (Razorpay)` : paymentLabel();
+  const displayPaymentMethod = (verified?: { paymentId: string; orderId: string } | null): string => {
+    const v = verified ?? verifiedPayment;
+    if (v?.paymentId) {
+      return `${paymentLabel()} · Prepaid (Razorpay: ${v.paymentId})`;
+    }
+    return paymentLabel();
+  };
 
   const deliveryLabel = (): string =>
     deliveryMethod === 'standard' ? 'Standard Insured Delivery' : 'Express Air Courier';
@@ -332,7 +337,11 @@ export const CheckoutPage: React.FC = () => {
       let finalOrder: Order;
       try {
         const full = (await fetchOrderById(created.order_id)) as ServerOrder;
-        finalOrder = toStorefrontOrder(full);
+        finalOrder = {
+          ...toStorefrontOrder(full),
+          razorpayPaymentId: verified?.paymentId,
+          razorpayOrderId: verified?.orderId,
+        };
       } catch {
         const orderDate = new Date().toLocaleDateString('en-US', { month: 'long', day: '2-digit', year: 'numeric' });
         finalOrder = {
@@ -349,7 +358,9 @@ export const CheckoutPage: React.FC = () => {
           courier: 'BlueDart Express',
           trackingNumber: undefined,
           shippingAddress: addr,
-          paymentMethod: displayPaymentMethod(),
+          paymentMethod: displayPaymentMethod(verified),
+          razorpayPaymentId: verified?.paymentId,
+          razorpayOrderId: verified?.orderId,
         };
       }
       setPlacedOrder(finalOrder);
@@ -453,9 +464,11 @@ export const CheckoutPage: React.FC = () => {
     }
     let rzpOrder;
     try {
+      // Razorpay receipt max length is 40 chars
+      const safeReceipt = `anvi_${Date.now().toString(36)}_${idempotencyKey.replace(/-/g, '').slice(0, 16)}`;
       rzpOrder = await createRazorpayOrder({
         amountPaise,
-        receipt: `anvi-${idempotencyKey.replace(/-/g, '')}`,
+        receipt: safeReceipt,
         notes: {
           boutique: 'ANVI Clothing',
           delivery_method: deliveryMethod,
@@ -529,11 +542,11 @@ export const CheckoutPage: React.FC = () => {
       return;
     }
     // Guest prepaid orders: payment verified server-side, order recorded locally.
-    placeLocalOrder();
+    placeLocalOrder(verified);
   };
 
   /** Guest/offline fallback: local boutique order, preserved bag on failure. */
-  const placeLocalOrder = () => {
+  const placeLocalOrder = (verified?: { paymentId: string; orderId: string } | null) => {
     setIsSubmitting(true);
 
     setTimeout(() => {
@@ -560,7 +573,9 @@ export const CheckoutPage: React.FC = () => {
         courier: 'BlueDart Express',
         trackingNumber: `BLU-${Math.floor(10000000 + Math.random() * 90000000)}IN`,
         shippingAddress: shippingAddressFromForm(),
-        paymentMethod: displayPaymentMethod(),
+        paymentMethod: displayPaymentMethod(verified),
+        razorpayPaymentId: verified?.paymentId,
+        razorpayOrderId: verified?.orderId,
       };
 
       // Persist order into shared customer orders store and broadcast to admin

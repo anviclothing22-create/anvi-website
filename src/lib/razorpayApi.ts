@@ -16,6 +16,7 @@ export interface RazorpayOrder {
   amount: number;
   currency: string;
   receipt: string;
+  key_id?: string;
 }
 
 export interface RazorpaySuccessResponse {
@@ -49,7 +50,7 @@ declare global {
   }
 }
 
-const FALLBACK_RAZORPAY_KEY_ID = 'rzp_test_TbUIX1k67k85XN';
+const FALLBACK_RAZORPAY_KEY_ID = 'rzp_test_TdQvsRLUtPs0Ki';
 const FALLBACK_SUPABASE_URL = 'https://dpgjizuamndpmpfmmsxv.supabase.co';
 const FALLBACK_ANON_KEY = 'sb_publishable_j18bKyDSn59jFwCaupbWaw_m819_hKt';
 
@@ -80,41 +81,57 @@ function getAnonKey(): string {
 async function callEdgeFunction<T>(fn: string, payload: unknown): Promise<T> {
   const base = getFunctionsBase();
   if (!base) throw new Error('Payment service is not configured (missing API URL).');
-  // Send the signed-in user's access token or fallback to anon key for guests
-  let accessToken = getAnonKey();
+
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    apikey: getAnonKey(),
+  };
+
+  // Only pass Bearer token when an actual authenticated user session exists
   const sb = getSupabase();
   if (sb) {
-    const { data } = await sb.auth.getSession();
-    if (data.session?.access_token) accessToken = data.session.access_token;
+    try {
+      const { data } = await sb.auth.getSession();
+      if (data.session?.access_token) {
+        headers['Authorization'] = `Bearer ${data.session.access_token}`;
+      }
+    } catch {
+      // Session fetch failure — proceed as guest
+    }
   }
+
   let res: Response;
   try {
     res = await fetch(`${base}/${fn}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey: getAnonKey(),
-        Authorization: `Bearer ${accessToken}`,
-      },
+      headers,
       body: JSON.stringify(payload),
     });
-  } catch {
+  } catch (err) {
+    console.error(`[callEdgeFunction] Network error connecting to ${fn}:`, err);
     throw new Error('Could not reach the payment service. Check your connection and try again.');
   }
+
   let data: Record<string, unknown> | null = null;
   try {
     data = (await res.json()) as Record<string, unknown>;
   } catch {
     // non-JSON error body
   }
+
   if (!res.ok) {
-    if (res.status === 401) throw new Error('Payment gateway authentication failed. Please contact ANVI support.');
+    const errorMsg = (data?.['error'] as string) || '';
+    if (res.status === 401) {
+      throw new Error(
+        errorMsg || 'Payment gateway authentication failed. Please verify Razorpay API keys in Supabase secrets.',
+      );
+    }
     if (res.status === 404) {
       throw new Error(
         'Online payments are not set up on the server yet (payment function missing). Please choose Cash on Delivery or contact ANVI support.',
       );
     }
-    throw new Error((data?.['error'] as string) || `Payment request failed (${res.status}). Try again.`);
+    throw new Error(errorMsg || `Payment request failed (${res.status}). Try again.`);
   }
   return data as T;
 }
@@ -139,13 +156,12 @@ export async function createRazorpayOrder(args: {
       notes: args.notes ?? {},
     });
   } catch (err) {
-    console.warn('[createRazorpayOrder] Edge order creation fallback to direct checkout:', err);
-    return {
-      order_id: '',
-      amount,
-      currency: 'INR',
-      receipt: args.receipt,
-    };
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('[createRazorpayOrder] Backend order creation failed:', message);
+    // If running in development and gateway is unconfigured, provide clear actionable guidance
+    throw new Error(
+      `Could not initialize Razorpay order (${message}). Please check gateway credentials or try again.`,
+    );
   }
 }
 
@@ -158,28 +174,24 @@ export async function verifyRazorpayPayment(args: {
   if (!args.paymentId) {
     throw new Error('Incomplete payment response. Verification cannot proceed.');
   }
-  // Direct client checkout mode or missing signature: paymentId alone proves gateway capture
+  // Direct client checkout mode without orderId/signature
   if (!args.orderId || !args.signature) {
     return { order_id: args.orderId || 'direct_checkout', payment_id: args.paymentId };
   }
 
-  try {
-    const data = await callEdgeFunction<{ verified: boolean; order_id: string; payment_id: string; error?: string }>(
-      'verify-razorpay-payment',
-      {
-        razorpay_order_id: args.orderId,
-        razorpay_payment_id: args.paymentId,
-        razorpay_signature: args.signature,
-      },
-    );
-    if (!data?.verified) {
-      throw new Error(data?.error || 'Payment verification failed. Your money is safe — contact ANVI support before retrying.');
-    }
-    return { order_id: data.order_id, payment_id: data.payment_id };
-  } catch (err) {
-    console.warn('[verifyRazorpayPayment] Edge verification fallback:', err);
-    return { order_id: args.orderId, payment_id: args.paymentId };
+  // Strictly verify via Edge Function — never swallow signature verification errors
+  const data = await callEdgeFunction<{ verified: boolean; order_id: string; payment_id: string; error?: string }>(
+    'verify-razorpay-payment',
+    {
+      razorpay_order_id: args.orderId,
+      razorpay_payment_id: args.paymentId,
+      razorpay_signature: args.signature,
+    },
+  );
+  if (!data?.verified) {
+    throw new Error(data?.error || 'Payment verification failed. Your money is safe — contact ANVI support before retrying.');
   }
+  return { order_id: data.order_id, payment_id: data.payment_id };
 }
 
 let scriptPromise: Promise<void> | null = null;
@@ -188,21 +200,55 @@ let scriptPromise: Promise<void> | null = null;
 export function loadRazorpayScript(): Promise<void> {
   if (typeof window !== 'undefined' && window.Razorpay) return Promise.resolve();
   if (scriptPromise) return scriptPromise;
+
   scriptPromise = new Promise<void>((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      reject(new Error('Razorpay SDK load timed out. Check your internet connection or ad-blocker.'));
+    }, 12000);
+
+    const checkAndResolve = () => {
+      clearTimeout(timeoutId);
+      if (typeof window !== 'undefined' && window.Razorpay) {
+        resolve();
+      } else {
+        // Allow a brief tick for window assignment
+        setTimeout(() => {
+          if (typeof window !== 'undefined' && window.Razorpay) resolve();
+          else reject(new Error('Razorpay SDK script loaded but window.Razorpay is undefined.'));
+        }, 50);
+      }
+    };
+
     const existing = document.querySelector(`script[src="${RAZORPAY_CHECKOUT_SRC}"]`);
     if (existing) {
-      existing.addEventListener('load', () => resolve());
-      existing.addEventListener('error', () => reject(new Error('Could not load the Razorpay SDK. Check your connection or ad-blocker and try again.')));
+      if (typeof window !== 'undefined' && window.Razorpay) {
+        clearTimeout(timeoutId);
+        resolve();
+        return;
+      }
+      existing.addEventListener('load', checkAndResolve, { once: true });
+      existing.addEventListener(
+        'error',
+        () => {
+          clearTimeout(timeoutId);
+          reject(new Error('Could not load the Razorpay SDK. Check your connection or ad-blocker and try again.'));
+        },
+        { once: true },
+      );
       return;
     }
+
     const script = document.createElement('script');
     script.src = RAZORPAY_CHECKOUT_SRC;
     script.async = true;
-    script.onload = () => resolve();
-    script.onerror = () =>
+    script.onload = checkAndResolve;
+    script.onerror = () => {
+      clearTimeout(timeoutId);
       reject(new Error('Could not load the Razorpay SDK. Check your connection or ad-blocker and try again.'));
+    };
     document.body.appendChild(script);
   });
+
   scriptPromise.catch(() => {
     scriptPromise = null;
   });
@@ -225,7 +271,7 @@ export interface OpenCheckoutArgs {
 export function openRazorpayCheckout(args: OpenCheckoutArgs): void {
   const RazorpayCtor = typeof window !== 'undefined' ? window.Razorpay : undefined;
   if (!RazorpayCtor) throw new Error('Razorpay SDK is not loaded yet.');
-  const key = getRazorpayKeyId();
+  const key = args.order.key_id?.trim() || getRazorpayKeyId();
   if (!key) throw new Error('Online payments are not enabled (missing key). Choose Cash on Delivery or contact support.');
 
   const options: RazorpayModalOptions = {

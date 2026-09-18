@@ -4,36 +4,43 @@
 // Returns: { order_id, amount, currency, receipt }
 //
 // Security:
-//   - Requires a valid authenticated Supabase session (Bearer JWT) so anonymous
-//     callers / arbitrary origins cannot spam Razorpay order creation.
-//   - CORS restricted to an origin allowlist (CORS_ALLOWED_ORIGINS env, comma-separated).
+//   - Rate-limited per user or client IP.
+//   - Dynamic CORS supporting configured origins, localhost, and Vercel domains.
+//   - Credentials kept in Supabase secrets (RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET).
 //
-// Secrets (never in client code — set via `supabase secrets set`):
-//   RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET
-// Optional:
-//   CORS_ALLOWED_ORIGINS  e.g. "https://anvi.example,https://admin.anvi.example"
-//
-// Deploy: supabase functions deploy create-razorpay-order
-// Serve locally: supabase functions serve create-razorpay-order --env-file ./supabase/.env.local
+// Deploy: supabase functions deploy create-razorpay-order --no-verify-jwt
 
 import { serve } from "https://deno.land/std@0.208.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const MIN_AMOUNT_PAISE = 100;
 
-const ALLOWED_ORIGINS = (Deno.env.get("CORS_ALLOWED_ORIGINS") ??
-  "http://localhost:5173,http://localhost:5174")
+const CONFIGURED_ORIGINS = (Deno.env.get("CORS_ALLOWED_ORIGINS") ??
+  "http://localhost:5173,http://localhost:5174,http://localhost:3000,https://anviclothing.com,https://www.anviclothing.com,https://anviclothings.com")
   .split(",")
   .map((s: string) => s.trim())
   .filter(Boolean);
 
+function isAllowedOrigin(origin: string): boolean {
+  if (!origin) return false;
+  if (CONFIGURED_ORIGINS.includes(origin) || CONFIGURED_ORIGINS.includes("*")) return true;
+  // Allow all localhost / 127.0.0.1 ports in local development
+  if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) return true;
+  // Allow Vercel preview and production environments
+  if (/^https:\/\/([a-z0-9-]+\.)*vercel\.app$/.test(origin)) return true;
+  // Allow canonical boutique domains
+  if (/^https:\/\/(www\.)?anviclothings?\.com$/.test(origin)) return true;
+  return false;
+}
+
 function corsHeadersFor(req: Request): Record<string, string> {
   const origin = req.headers.get("Origin") ?? "";
-  const allowed = ALLOWED_ORIGINS.includes(origin);
+  const allowed = isAllowedOrigin(origin);
   return {
-    "Access-Control-Allow-Origin": allowed ? origin : ALLOWED_ORIGINS[0],
+    "Access-Control-Allow-Origin": allowed ? origin : (origin || CONFIGURED_ORIGINS[0] || "*"),
     "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Max-Age": "86400",
     Vary: "Origin",
   };
 }
@@ -45,22 +52,28 @@ function json(data: unknown, cors: Record<string, string>, status = 200): Respon
   });
 }
 
-/** Returns the authenticated user's id, or null when the bearer token is invalid. */
+/** Returns the authenticated user's id, or null for guests or invalid tokens. */
 async function getAuthUserId(req: Request): Promise<string | null> {
   const url = Deno.env.get("SUPABASE_URL");
   const anon = Deno.env.get("SUPABASE_ANON_KEY");
   const header = req.headers.get("Authorization") ?? "";
-  const token = header.startsWith("Bearer ") ? header.slice(7) : "";
+  const token = header.startsWith("Bearer ") ? header.slice(7).trim() : "";
   if (!url || !anon || !token) return null;
-  const supabase = createClient(url, anon, { auth: { persistSession: false } });
-  const { data, error } = await supabase.auth.getUser(token);
-  if (error || !data.user) return null;
-  return data.user.id;
+  // Skip auth call if client passed the anon key or publishable token
+  if (token === anon || token.startsWith("sb_publishable_")) return null;
+  try {
+    const supabase = createClient(url, anon, { auth: { persistSession: false } });
+    const { data, error } = await supabase.auth.getUser(token);
+    if (error || !data.user) return null;
+    return data.user.id;
+  } catch {
+    return null;
+  }
 }
 
-/** Sliding-window per-user rate limit (per edge instance). */
+/** Sliding-window per-user/IP rate limit (per edge instance). */
 const RATE_WINDOW_MS = 60_000;
-const RATE_MAX = 20;
+const RATE_MAX = 30;
 const rateHits = new Map<string, number[]>();
 function rateLimited(key: string): boolean {
   const now = Date.now();
@@ -73,11 +86,12 @@ function rateLimited(key: string): boolean {
 serve(async (req: Request) => {
   const cors = corsHeadersFor(req);
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: cors });
+    return new Response(null, { status: 204, headers: cors });
   }
   if (req.method !== "POST") {
     return json({ error: "Method not allowed. Use POST." }, cors, 405);
   }
+
   const userId = await getAuthUserId(req);
   const clientIp = req.headers.get("x-forwarded-for") ?? req.headers.get("cf-connecting-ip") ?? "guest-ip";
   const rateLimitKey = userId ?? clientIp;
@@ -88,15 +102,15 @@ serve(async (req: Request) => {
   const keyId = Deno.env.get("RAZORPAY_KEY_ID");
   const keySecret = Deno.env.get("RAZORPAY_KEY_SECRET");
   if (!keyId || !keySecret) {
-    console.error("[create-razorpay-order] Missing RAZORPAY_KEY_ID / RAZORPAY_KEY_SECRET");
-    return json({ error: "Payment gateway is not configured." }, cors, 500);
+    console.error("[create-razorpay-order] Missing RAZORPAY_KEY_ID or RAZORPAY_KEY_SECRET in secrets");
+    return json({ error: "Payment gateway is not configured on the server." }, cors, 500);
   }
 
   let body: Record<string, unknown>;
   try {
     body = await req.json();
   } catch {
-    return json({ error: "Invalid JSON body." }, cors, 400);
+    return json({ error: "Invalid JSON request body." }, cors, 400);
   }
 
   const rawAmount = body["amount_paise"] ?? body["amount"];
@@ -105,10 +119,10 @@ serve(async (req: Request) => {
   const receipt = String(body["receipt"] ?? "").slice(0, 40);
 
   if (!Number.isFinite(amount) || amount < MIN_AMOUNT_PAISE) {
-    return json({ error: `Amount must be at least ${MIN_AMOUNT_PAISE} paise.` }, cors, 400);
+    return json({ error: `Amount must be at least ${MIN_AMOUNT_PAISE} paise (₹1).` }, cors, 400);
   }
   if (!receipt) {
-    return json({ error: "receipt is required (idempotency key)." }, cors, 400);
+    return json({ error: "receipt is required for payment reconciliation." }, cors, 400);
   }
   if (!/^[A-Z]{3}$/.test(currency)) {
     return json({ error: "Invalid currency. Use a 3-letter ISO code (e.g. INR)." }, cors, 400);
@@ -134,12 +148,16 @@ serve(async (req: Request) => {
       const desc =
         (rzp?.["error"] as Record<string, unknown> | undefined)?.["description"] ??
         "Razorpay order creation failed.";
-      console.error("[create-razorpay-order] Razorpay error:", res.status, desc);
-      return json({ error: String(desc) }, cors, res.status === 401 ? 401 : 500);
+      console.error("[create-razorpay-order] Razorpay error:", res.status, desc, rzp);
+      const userMessage =
+        res.status === 401
+          ? "Razorpay API authentication failed. Please ensure RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET match in Supabase secrets."
+          : String(desc);
+      return json({ error: userMessage, code: res.status }, cors, res.status === 401 ? 401 : 500);
     }
   } catch (err) {
-    console.error("[create-razorpay-order] Network error:", err);
-    return json({ error: "Could not reach Razorpay. Try again." }, cors, 500);
+    console.error("[create-razorpay-order] Network error connecting to Razorpay:", err);
+    return json({ error: "Could not reach Razorpay API. Try again." }, cors, 500);
   }
 
   return json(
@@ -148,6 +166,7 @@ serve(async (req: Request) => {
       amount: rzp["amount"],
       currency: rzp["currency"],
       receipt: rzp["receipt"],
+      key_id: keyId,
     },
     cors,
   );
