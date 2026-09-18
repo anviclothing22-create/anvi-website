@@ -11,7 +11,6 @@ import {
   Sparkles,
   Calendar,
   Compass,
-  Car,
   Train,
   Plane,
 } from 'lucide-react';
@@ -207,10 +206,6 @@ export const ContactPage: React.FC = () => {
                     146, Raju Naidu St, Sivananda Colony,<br />
                     Tatabad, Coimbatore, Tamil Nadu 641012, India
                   </p>
-                  <div className="anvi-valet-note">
-                    <Car size={15} color="var(--color-primary-maroon)" />
-                    <span>Dedicated parking assistance for all boutique guests.</span>
-                  </div>
                 </div>
               </div>
 
@@ -222,17 +217,13 @@ export const ContactPage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="anvi-info-heading">Store Timings</h3>
-                    <p className="anvi-info-subtext">Open 6 days a week</p>
+                    <p className="anvi-info-subtext">Monday to Saturday</p>
                   </div>
                 </div>
                 <div className="anvi-info-body">
                   <div className="anvi-hours-row">
                     <span className="day">Monday – Saturday</span>
                     <span className="time">10:00 AM – 7:30 PM IST</span>
-                  </div>
-                  <div className="anvi-hours-row">
-                    <span className="day">Sunday</span>
-                    <span className="time">Prior Fitting & Styling Appointment</span>
                   </div>
                 </div>
               </div>
@@ -283,25 +274,6 @@ export const ContactPage: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* In-Person Studio Amenities */}
-              <div className="anvi-amenities-box">
-                <h4 className="anvi-amenities-header">
-                  <Sparkles size={15} color="var(--color-champagne-gold)" />
-                  <span>The ANVI Clothing Experience</span>
-                </h4>
-                <ul className="anvi-amenities-bullets">
-                  <li>
-                    <strong>Private Styling Lounge:</strong> Private 1-on-1 wardrobe consultation with custom embroidery trials and fabric swatch matching.
-                  </li>
-                  <li>
-                    <strong>Master Tailor Fitting:</strong> Precise in-person adjustments for blouse sleeves, necklines, and saree fall-pico.
-                  </li>
-                  <li>
-                    <strong>Handloom Touch Lounge:</strong> Feel raw Tussar, unbleached mulmul, and pure zari handloom textures under natural light.
-                  </li>
-                </ul>
               </div>
             </div>
 
@@ -604,12 +576,12 @@ export const ContactPage: React.FC = () => {
 
               <div className="anvi-transit-item">
                 <div className="anvi-transit-icon">
-                  <Car size={18} />
+                  <MapPin size={18} />
                 </div>
                 <div>
-                  <h4 className="transit-heading">Promenade Landmark & Parking</h4>
+                  <h4 className="transit-heading">Landmark & Location</h4>
                   <p className="transit-body">
-                    Directly opposite the Thomas Park walkway. Complimentary valet parking is managed at our boutique portico.
+                    Located in Sivananda Colony, Tatabad. Conveniently accessible via Dr. Rajendra Prasad Road and Sathyamangalam Road.
                   </p>
                 </div>
               </div>
