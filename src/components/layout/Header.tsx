@@ -97,7 +97,7 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="anvi-header-desktop-logo">
               <Link href="/" className="anvi-logo-link" aria-label="ANVI Clothing Home">
                 <img
-                  src="/images/brand/anvi_logo.png"
+                  src="/images/brand/anvi_logo.png?v=champagne"
                   alt="ANVI Clothing"
                   className="anvi-logo-img"
                   onError={(e) => {
@@ -120,7 +120,7 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="anvi-header-mobile-logo">
               <Link href="/" className="anvi-logo-link" aria-label="ANVI Clothing Home">
                 <img
-                  src="/images/brand/anvi_logo.png"
+                  src="/images/brand/anvi_logo.png?v=champagne"
                   alt="ANVI Clothing"
                   className="anvi-logo-img"
                 />
