@@ -1,7 +1,7 @@
 .anvi-announcement-bar {
-  background-color: var(--color-deep-maroon);
-  color: var(--color-ivory);
-  border-bottom: 1px solid var(--color-gold-subtle);
+  background-color: var(--color-ivory);
+  color: var(--color-deep-maroon);
+  border-bottom: 1px solid rgba(74, 21, 33, 0.12);
   width: 100%;
   position: relative;
   z-index: 50;
@@ -49,10 +49,10 @@
   align-items: center;
   font-family: var(--font-sans);
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-ivory);
+  color: var(--color-deep-maroon);
   line-height: 1;
   padding: 0 var(--space-24);
   gap: var(--space-10);
@@ -65,7 +65,7 @@
   height: 4px;
   border-radius: 50%;
   background-color: var(--color-champagne-gold);
-  opacity: 0.85;
+  opacity: 0.95;
   flex-shrink: 0;
 }
 
@@ -77,10 +77,10 @@
 .anvi-announcement-link {
   font-family: var(--font-sans);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-champagne-gold);
+  color: var(--color-primary-maroon);
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: opacity var(--transition-fast), color var(--transition-fast);
@@ -90,8 +90,8 @@
 }
 
 .anvi-announcement-link:hover {
-  opacity: 0.85;
-  color: #fff;
+  opacity: 0.8;
+  color: #2F0A12;
 }
 
 @keyframes anvi-announcement-marquee {
