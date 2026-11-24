@@ -23,6 +23,28 @@ export function subscribeTable<T>(opts: SubscribeOpts<T>): () => void {
   let closed = false;
   let attempt = 0;
   let timer: ReturnType<typeof setTimeout> | null = null;
+  let onlineHandler: (() => void) | null = null;
+
+  const scheduleReconnect = (): void => {
+    if (closed) return;
+    // Don't burn backoff timers while offline — wait for the online event.
+    if (typeof navigator !== 'undefined' && !navigator.onLine) {
+      if (!onlineHandler) {
+        onlineHandler = () => {
+          onlineHandler = null;
+          attempt = 0;
+          connect();
+        };
+        window.addEventListener('online', onlineHandler, { once: true });
+      }
+      return;
+    }
+    const backoff = Math.min(1000 * 2 ** attempt, MAX_BACKOFF_MS) + Math.random() * 250;
+    attempt += 1;
+    timer = setTimeout(() => {
+      connect();
+    }, backoff);
+  };
 
   const connect = (): void => {
     if (closed) return;
@@ -31,7 +53,10 @@ export function subscribeTable<T>(opts: SubscribeOpts<T>): () => void {
         try { void sb.removeChannel(channel); } catch { /* ignore */ }
         channel = null;
       }
-      const uniqueName = `${opts.channelName}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+      // Stable base name with a per-connection suffix so concurrent
+      // subscribers to the same table don't collide, while reconnects
+      // don't accumulate uniquely-named channels server-side.
+      const uniqueName = `${opts.channelName}-${opts.table}${opts.filter ? `-${opts.filter}` : ''}`;
       channel = sb.channel(uniqueName);
       channel.on(
         'postgres_changes' as never,
@@ -47,11 +72,7 @@ export function subscribeTable<T>(opts: SubscribeOpts<T>): () => void {
         opts.onStatus?.(status);
         if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
           if (closed) return;
-          const backoff = Math.min(1000 * 2 ** attempt, MAX_BACKOFF_MS) + Math.random() * 250;
-          attempt += 1;
-          timer = setTimeout(() => {
-            connect();
-          }, backoff);
+          scheduleReconnect();
         }
       });
     } catch (err) {
@@ -63,6 +84,7 @@ export function subscribeTable<T>(opts: SubscribeOpts<T>): () => void {
   return () => {
     closed = true;
     if (timer) clearTimeout(timer);
+    if (onlineHandler) window.removeEventListener('online', onlineHandler);
     if (channel) {
       try { void sb.removeChannel(channel); } catch { /* ignore */ }
       channel = null;

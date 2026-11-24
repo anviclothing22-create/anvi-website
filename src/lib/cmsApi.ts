@@ -7,6 +7,19 @@ import { STORAGE_KEYS, getStoredItem, subscribeToStoreUpdates } from './storeSyn
 
 const TTL = 5 * 60 * 1000;
 const cache = new Map<string, { at: number; data: unknown }>();
+// Single-flight: concurrent mounts (hero + announcement + journal on one page)
+// must not fire duplicate identical PostgREST queries.
+const cmsInflight = new Map<string, Promise<unknown>>();
+
+function cmsDeduped<T>(key: string, run: () => Promise<T>): Promise<T> {
+  const existing = cmsInflight.get(key);
+  if (existing) return existing as Promise<T>;
+  const p = run().finally(() => {
+    if (cmsInflight.get(key) === p) cmsInflight.delete(key);
+  });
+  cmsInflight.set(key, p);
+  return p;
+}
 
 function getCached<T>(key: string): T | null {
   const entry = cache.get(key);
@@ -34,6 +47,10 @@ function inWindow(start: string | null, end: string | null): boolean {
 }
 
 export async function getHeroBanners(): Promise<HeroSlide[]> {
+  return cmsDeduped('hero', getHeroBannersUncached);
+}
+
+async function getHeroBannersUncached(): Promise<HeroSlide[]> {
   // Check live synchronized store CMS from Admin first
   const stored = getStoredItem<any>(STORAGE_KEYS.CMS, null);
   if (stored?.heroBanners && Array.isArray(stored.heroBanners) && stored.heroBanners.length > 0) {
@@ -87,16 +104,28 @@ export async function getHeroBanners(): Promise<HeroSlide[]> {
 }
 
 export async function getAnnouncements(): Promise<AnnouncementConfig> {
+  return cmsDeduped('ann', getAnnouncementsUncached);
+}
+
+async function getAnnouncementsUncached(): Promise<AnnouncementConfig> {
   // Check live synchronized store CMS from Admin first
   const stored = getStoredItem<any>(STORAGE_KEYS.CMS, null);
   if (stored?.announcements && Array.isArray(stored.announcements) && stored.announcements.length > 0) {
-    const activeAnn = stored.announcements.find((a: any) => a.isActive !== false) || stored.announcements[0];
-    if (activeAnn && (activeAnn.text || activeAnn.message)) {
+    const activeList = stored.announcements
+      .filter((a: any) => a.isActive !== false && (a.text || a.message))
+      .map((a: any, idx: number) => ({
+        id: String(a.id || `ann-${idx}`),
+        message: a.text || a.message,
+        linkText: a.linkText || '',
+        linkUrl: a.link || a.linkHref || '',
+      }));
+    if (activeList.length > 0) {
       return {
-        message: activeAnn.text || activeAnn.message,
-        linkText: activeAnn.linkText || announcementConfig.linkText,
-        linkUrl: activeAnn.link || activeAnn.linkHref || announcementConfig.linkUrl,
-        isActive: activeAnn.isActive ?? true,
+        message: activeList[0].message,
+        linkText: activeList[0].linkText || announcementConfig.linkText,
+        linkUrl: activeList[0].linkUrl || announcementConfig.linkUrl,
+        isActive: true,
+        items: activeList,
       };
     }
   }
@@ -106,14 +135,23 @@ export async function getAnnouncements(): Promise<AnnouncementConfig> {
   const sb = getSupabase();
   if (!sb) return announcementConfig;
   try {
-    const { data, error } = await sb.from('announcements').select('*').eq('is_active', true).order('display_order').limit(1).maybeSingle();
-    if (error || !data) throw error ?? new Error('empty');
-    const row = data as Record<string, string | null>;
+    const { data, error } = await sb.from('announcements').select('*').eq('is_active', true).order('display_order');
+    if (error || !data || data.length === 0) throw error ?? new Error('empty');
+    const rows = data as Record<string, string | null>[];
+    const items = rows
+      .map((r, idx) => ({
+        id: String(r['id'] || `ann-${idx}`),
+        message: (r['message'] as string) || '',
+        linkText: (r['link_text'] as string) || '',
+        linkUrl: (r['link_href'] as string) || '',
+      }))
+      .filter((it) => !!it.message);
     const value: AnnouncementConfig = {
-      message: (row['message'] as string) ?? announcementConfig.message,
-      linkText: (row['link_text'] as string) ?? announcementConfig.linkText,
-      linkUrl: (row['link_href'] as string) ?? announcementConfig.linkUrl,
+      message: items[0]?.message ?? announcementConfig.message,
+      linkText: items[0]?.linkText ?? announcementConfig.linkText,
+      linkUrl: items[0]?.linkUrl ?? announcementConfig.linkUrl,
       isActive: true,
+      items: items.length > 0 ? items : announcementConfig.items,
     };
     setCached('ann', value);
     return value;
@@ -208,6 +246,10 @@ function toJournalArticle(row: BlogPostRow): JournalArticle {
 }
 
 export async function getBlogPosts(): Promise<JournalArticle[]> {
+  return cmsDeduped('blog', getBlogPostsUncached);
+}
+
+async function getBlogPostsUncached(): Promise<JournalArticle[]> {
   const hit = getCached<JournalArticle[]>('blog');
   if (hit) return hit;
   const sb = getSupabase();
@@ -230,6 +272,10 @@ export async function getBlogPosts(): Promise<JournalArticle[]> {
 }
 
 export async function getInstagram(): Promise<InstagramSectionData> {
+  return cmsDeduped('ig', getInstagramUncached);
+}
+
+async function getInstagramUncached(): Promise<InstagramSectionData> {
   const hit = getCached<InstagramSectionData>('ig');
   if (hit) return hit;
   const sb = getSupabase();
@@ -294,9 +340,10 @@ export function subscribeCmsInvalidation(cb: () => void): () => void {
 
   if (sb && !cmsChannel) {
     try {
-      const channelName = `cms-changes-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+      // Stable channel name: reconnect cycles reuse the same logical channel
+      // instead of leaking uniquely-named ones server-side.
       cmsChannel = sb
-        .channel(channelName)
+        .channel('cms-changes-v1')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'hero_banners' }, () => {
           invalidateCmsCache('hero');
           cmsListeners.forEach((fn) => {

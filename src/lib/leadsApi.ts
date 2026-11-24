@@ -19,6 +19,20 @@ export async function submitLead(input: SubmitLeadInput): Promise<{ coupon: stri
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) throw new Error('Invalid email');
   if (input.phone.replace(/\D/g, '').length < 10) throw new Error('Invalid phone');
 
+  // Coalesce double-submits (double-click / StrictMode): same outcome, one INSERT.
+  const pending = leadInflight.get(cleanEmail);
+  if (pending) return pending;
+  const p = submitLeadUncached(input, cleanEmail).finally(() => {
+    if (leadInflight.get(cleanEmail) === p) leadInflight.delete(cleanEmail);
+  });
+  leadInflight.set(cleanEmail, p);
+  return p;
+}
+
+const leadInflight = new Map<string, Promise<{ coupon: string; duplicate: boolean }>>();
+
+async function submitLeadUncached(input: SubmitLeadInput, cleanEmail: string): Promise<{ coupon: string; duplicate: boolean }> {
+
   const sb = getSupabase();
   if (!sb) {
     try {

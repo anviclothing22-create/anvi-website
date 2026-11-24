@@ -78,6 +78,29 @@ function getAnonKey(): string {
   return key || FALLBACK_ANON_KEY;
 }
 
+// Cache the Bearer token briefly: getSession() hits storage on every call and
+// checkout fires create → verify in quick succession. 60s TTL keeps logout
+// propagation prompt while skipping repeat storage reads.
+let cachedBearer: { token: string; at: number } | null = null;
+const BEARER_TTL_MS = 60_000;
+
+async function getBearerToken(): Promise<string | null> {
+  if (cachedBearer && Date.now() - cachedBearer.at <= BEARER_TTL_MS) return cachedBearer.token;
+  const sb = getSupabase();
+  if (!sb) return null;
+  try {
+    const { data } = await sb.auth.getSession();
+    const token = data.session?.access_token ?? null;
+    // Cache hits only; misses (logged out) are re-checked next call so a
+    // fresh login is picked up immediately.
+    if (token) cachedBearer = { token, at: Date.now() };
+    return token;
+  } catch {
+    // Session fetch failure — proceed as guest
+    return null;
+  }
+}
+
 async function callEdgeFunction<T>(fn: string, payload: unknown): Promise<T> {
   const base = getFunctionsBase();
   if (!base) throw new Error('Payment service is not configured (missing API URL).');
@@ -87,17 +110,11 @@ async function callEdgeFunction<T>(fn: string, payload: unknown): Promise<T> {
     apikey: getAnonKey(),
   };
 
-  // Only pass Bearer token when an actual authenticated user session exists
-  const sb = getSupabase();
-  if (sb) {
-    try {
-      const { data } = await sb.auth.getSession();
-      if (data.session?.access_token) {
-        headers['Authorization'] = `Bearer ${data.session.access_token}`;
-      }
-    } catch {
-      // Session fetch failure — proceed as guest
-    }
+  // Only pass Bearer token when an actual authenticated user session exists.
+  // Token is cached briefly (see getBearerToken) to avoid a storage read per call.
+  const bearer = await getBearerToken();
+  if (bearer) {
+    headers['Authorization'] = `Bearer ${bearer}`;
   }
 
   let res: Response;
@@ -106,6 +123,8 @@ async function callEdgeFunction<T>(fn: string, payload: unknown): Promise<T> {
       method: 'POST',
       headers,
       body: JSON.stringify(payload),
+      // Bound the wait: same error surface as a network failure below.
+      signal: AbortSignal.timeout(15_000),
     });
   } catch (err) {
     console.error(`[callEdgeFunction] Network error connecting to ${fn}:`, err);

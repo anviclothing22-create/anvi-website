@@ -179,9 +179,13 @@ export async function fetchMyStorefrontOrders(): Promise<Order[]> {
   if (!sb) return [];
   const { data: sessionData } = await sb.auth.getSession();
   if (!sessionData.session) return [];
+  // Explicit column list (not *) — same mapped output, far fewer bytes per row.
+  // Matches every field read by toStorefrontOrder.
   const { data, error } = await sb
     .from('orders')
-    .select('*, order_items(*)')
+    .select(
+      'id, order_number, placed_at, order_status, subtotal_int, discount_int, coupon_code, shipping_fee_int, total_int, delivery_method, courier, tracking_number, shipping_snapshot, payment_method, order_items(id, product_name, unit_price_int, quantity, size_label, image_url, slug)',
+    )
     .order('placed_at', { ascending: false });
   if (error) throw new Error(error.message);
   return ((data ?? []) as ServerOrder[]).map(toStorefrontOrder);

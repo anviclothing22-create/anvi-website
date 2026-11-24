@@ -12,6 +12,58 @@ import {
 
 export const CATALOG_PAGE_LIMIT = 24;
 
+// --- Request coalescing + short TTL cache (same return shape, fewer round-trips).
+// React StrictMode / multi-mount frequently fires identical list/detail/search
+// queries at once; without this each one is a full PostgREST round-trip with
+// 6 nested joins. TTLs are short so admin edits still surface quickly
+// (Realtime invalidation lives in cmsApi/liveSync for CMS; catalog refetch
+//  happens on navigation/filter change anyway).
+const LIST_TTL_MS = 30_000;
+const DETAIL_TTL_MS = 60_000;
+const SEARCH_TTL_MS = 20_000;
+const CACHE_CAP = 100;
+const listCache = new Map<string, { at: number; val: PagedResult<Product> }>();
+const detailCache = new Map<string, { at: number; val: Product | null }>();
+const searchCache = new Map<string, { at: number; val: Product[] }>();
+const inflight = new Map<string, Promise<unknown>>();
+
+function cacheGet<T>(m: Map<string, { at: number; val: T }>, key: string, ttl: number): T | null {
+  const e = m.get(key);
+  if (!e || Date.now() - e.at > ttl) {
+    if (e) m.delete(key);
+    return null;
+  }
+  return e.val;
+}
+
+function cacheSet<T>(m: Map<string, { at: number; val: T }>, key: string, val: T): void {
+  if (m.size >= CACHE_CAP) {
+    const oldest = m.keys().next().value;
+    if (oldest !== undefined) m.delete(oldest);
+  }
+  m.set(key, { at: Date.now(), val });
+}
+
+function cacheFresh<T>(m: Map<string, { at: number; val: T }>, key: string, ttl: number): boolean {
+  const e = m.get(key);
+  if (!e) return false;
+  if (Date.now() - e.at > ttl) {
+    m.delete(key);
+    return false;
+  }
+  return true;
+}
+
+function deduped<T>(key: string, run: () => Promise<T>): Promise<T> {
+  const existing = inflight.get(key);
+  if (existing) return existing as Promise<T>;
+  const p = run().finally(() => {
+    if (inflight.get(key) === p) inflight.delete(key);
+  });
+  inflight.set(key, p);
+  return p;
+}
+
 interface JoinedRow extends ProductRow {
   product_images?: ProductImageRow[];
   product_variants?: ProductVariantRow[];
@@ -42,6 +94,19 @@ const SELECT =
 export async function fetchProducts(filters: ProductFilters = {}): Promise<PagedResult<Product>> {
   const page = Math.max(1, filters.page ?? 1);
   const limit = filters.limit ?? CATALOG_PAGE_LIMIT;
+  const cacheKey = `list:${JSON.stringify({ ...filters, page, limit })}`;
+  const hit = cacheGet(listCache, cacheKey, LIST_TTL_MS);
+  if (hit) return hit;
+  return deduped(cacheKey, async () => {
+    const recheck = cacheGet(listCache, cacheKey, LIST_TTL_MS);
+    if (recheck) return recheck;
+    const val = await fetchProductsUncached(filters, page, limit);
+    cacheSet(listCache, cacheKey, val);
+    return val;
+  });
+}
+
+async function fetchProductsUncached(filters: ProductFilters, page: number, limit: number): Promise<PagedResult<Product>> {
   const from = (page - 1) * limit;
   const to = from + limit - 1;
   const sb = getSupabase();
@@ -98,6 +163,17 @@ export async function fetchProducts(filters: ProductFilters = {}): Promise<Paged
 }
 
 export async function fetchProductBySlug(slug: string): Promise<Product | null> {
+  const key = `slug:${slug}`;
+  if (cacheFresh(detailCache, key, DETAIL_TTL_MS)) return detailCache.get(key)?.val ?? null;
+  return deduped(key, async () => {
+    if (cacheFresh(detailCache, key, DETAIL_TTL_MS)) return detailCache.get(key)?.val ?? null;
+    const val = await fetchProductBySlugUncached(slug);
+    cacheSet(detailCache, key, val);
+    return val;
+  });
+}
+
+async function fetchProductBySlugUncached(slug: string): Promise<Product | null> {
   const sb = getSupabase();
   if (!sb) return productsData.find((p) => p.slug === slug) ?? null;
   try {
@@ -114,6 +190,17 @@ export async function fetchProductBySlug(slug: string): Promise<Product | null> 
 export async function searchProducts(term: string, limit = CATALOG_PAGE_LIMIT): Promise<Product[]> {
   const q = term.trim().replace(/[%_]/g, '');
   if (!q) return [];
+  const key = `search:${q.toLowerCase()}:${limit}`;
+  if (cacheFresh(searchCache, key, SEARCH_TTL_MS)) return searchCache.get(key)?.val ?? [];
+  return deduped(key, async () => {
+    if (cacheFresh(searchCache, key, SEARCH_TTL_MS)) return searchCache.get(key)?.val ?? [];
+    const val = await searchProductsUncached(q, limit);
+    cacheSet(searchCache, key, val);
+    return val;
+  });
+}
+
+async function searchProductsUncached(q: string, limit: number): Promise<Product[]> {
   const sb = getSupabase();
   if (!sb) {
     const needle = q.toLowerCase();

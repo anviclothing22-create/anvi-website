@@ -42,6 +42,17 @@ export interface StoreSyncEvent {
 // In-memory subscribers
 const subscribers = new Set<(event: StoreSyncEvent) => void>();
 
+// Hoisted: rebuilt on every storage event before (array alloc + object alloc per event).
+const STORAGE_KEY_SET = new Set<string>(Object.values(STORAGE_KEYS));
+const STORAGE_KEY_TO_EVENT: Record<string, StoreSyncEvent['type']> = {
+  [STORAGE_KEYS.PRODUCTS]: 'PRODUCTS_UPDATED',
+  [STORAGE_KEYS.ORDERS]: 'ORDER_UPDATED',
+  [STORAGE_KEYS.COUPONS]: 'COUPONS_UPDATED',
+  [STORAGE_KEYS.CMS]: 'CMS_UPDATED',
+  [STORAGE_KEYS.CATEGORIES]: 'CATEGORIES_UPDATED',
+  [STORAGE_KEYS.LEADS]: 'LEADS_UPDATED',
+};
+
 // Native BroadcastChannel instance (same-origin)
 let localChannel: BroadcastChannel | null = null;
 try {
@@ -161,18 +172,9 @@ export const subscribeToStoreUpdates = (callback: (event: StoreSyncEvent) => voi
   subscribers.add(callback);
 
   const handleStorageEvent = (e: StorageEvent) => {
-    if (Object.values(STORAGE_KEYS).includes(e.key as (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS])) {
-      const typeMap: Record<string, StoreSyncEvent['type']> = {
-        [STORAGE_KEYS.PRODUCTS]: 'PRODUCTS_UPDATED',
-        [STORAGE_KEYS.ORDERS]: 'ORDER_UPDATED',
-        [STORAGE_KEYS.COUPONS]: 'COUPONS_UPDATED',
-        [STORAGE_KEYS.CMS]: 'CMS_UPDATED',
-        [STORAGE_KEYS.CATEGORIES]: 'CATEGORIES_UPDATED',
-        [STORAGE_KEYS.LEADS]: 'LEADS_UPDATED',
-      };
-      const mappedType = e.key ? typeMap[e.key] || 'PRODUCTS_UPDATED' : 'PRODUCTS_UPDATED';
+    if (e.key && STORAGE_KEY_SET.has(e.key)) {
       callback({
-        type: mappedType,
+        type: STORAGE_KEY_TO_EVENT[e.key] || 'PRODUCTS_UPDATED',
         timestamp: Date.now(),
         key: e.key || undefined,
       });
