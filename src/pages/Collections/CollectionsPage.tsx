@@ -18,19 +18,9 @@ interface CollectionCapsule {
 
 const CAPSULES: CollectionCapsule[] = [
   {
-    id: 'capsule-new-arrivals',
-    slug: 'new-arrivals',
-    capsuleNum: 'Capsule 01',
-    title: 'New Arrivals',
-    tagline: 'Fresh Off the Looms',
-    craftTag: 'Organic Mulmul · Handloom Linen · Limited Batch',
-    image: '/images/hero/anvi_editorial_hero_1788956439054.jpg',
-    collectionField: 'New Arrivals',
-  },
-  {
     id: 'capsule-bestsellers',
     slug: 'bestsellers',
-    capsuleNum: 'Capsule 02',
+    capsuleNum: 'Capsule 01',
     title: 'Bestsellers',
     tagline: 'Patron Favorites',
     craftTag: 'Chanderi Silk · Breathable Drape · Timeless Classics',
@@ -40,7 +30,7 @@ const CAPSULES: CollectionCapsule[] = [
   {
     id: 'capsule-anvi-edit',
     slug: 'the-anvi-edit',
-    capsuleNum: 'Capsule 03',
+    capsuleNum: 'Capsule 02',
     title: 'The ANVI Edit',
     tagline: 'Foundational Handlooms',
     craftTag: 'Ajrakh Mud-Resist · Natural Indigo · Kutch & Bagru',
@@ -50,7 +40,7 @@ const CAPSULES: CollectionCapsule[] = [
   {
     id: 'capsule-festive',
     slug: 'festive',
-    capsuleNum: 'Capsule 04',
+    capsuleNum: 'Capsule 03',
     title: 'Festive Edit',
     tagline: 'Luminous Heirlooms',
     craftTag: 'Mulberry Silk · Banarasi Zari · Varanasi & Coimbatore',
@@ -60,7 +50,7 @@ const CAPSULES: CollectionCapsule[] = [
   {
     id: 'capsule-premium',
     slug: 'premium',
-    capsuleNum: 'Capsule 05',
+    capsuleNum: 'Capsule 04',
     title: 'Premium',
     tagline: 'Couture Masterpieces',
     craftTag: 'Pure Mulberry Silk · Hand-woven Zardozi · Museum Heirlooms',
